@@ -16,6 +16,7 @@ import {
 import './Header.css';
 import { connect } from 'react-redux';
 import { changeTabValue } from './redux/actions';
+import Button from '@material-ui/core/Button';
 
 const mapStateToProps = state => ({
     currentTab: state.currentTab
@@ -26,13 +27,18 @@ function Header(props) {
         <header>
             <Router>
                 <div className="non-sticky-header">
-                    <div className="logo-and-text" onClick={() => props.changeTabValue(0)}>
+                    <Link to='/' onClick={() => props.changeTabValue(0)}>
                         <img id="mascot" src={mascot} alt="Spoons & Ladles mascot"/>
                         <img id="company-name" src={text} alt="Spoons & Ladles text" />
+                    </Link>
+                    <div className="header-right">
+                        <Button variant="contained">Log In</Button>
                     </div>
                 </div>
                 <div className="sticky-nav-bar">
-                    <HomeIcon htmlColor="white" fontSize="large" onClick={() => props.changeTabValue(0)} style={{cursor: "pointer"}}/>
+                    <Link to='/' onClick={() => props.changeTabValue(0)}>
+                        <HomeIcon htmlColor="white" fontSize="large"/>
+                    </Link>
                     <Tabs
                         className="mui-tabs"
                         value={props.currentTab}
