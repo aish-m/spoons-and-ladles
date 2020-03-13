@@ -1,0 +1,32 @@
+.non-sticky-header {
+    padding: 0 10px;
+}
+
+.logo-and-text {
+    cursor: pointer;
+    display: inline-block;
+}
+
+#mascot {
+    height: 150px;
+}
+
+#company-name {
+    height: 150px;
+    padding-left: 10px;
+}
+
+.sticky-nav-bar {
+    height: 50px;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 65px;
+}
+
+.MuiTabs-root {
+    color: white;
+}
