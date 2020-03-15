@@ -1,17 +1,30 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import Header from "./Header";
+import { connect } from 'react-redux';
+import IngredientSelection from './IngredientSelection';
+import SubmitRecipe from "./SubmitRecipe";
+import EvaluateRecipe from "./EvaluateRecipe";
 
+const mapStateToProps = state => ({
+    currentTab: state.currentTab
+});
 
-function App() {
-    const [currentTab, setCurrentTab] = useState(0);
-    console.log(currentTab);
+function App(props) {
+    const content = function () {
+        switch (props.currentTab) {
+            case 0: return <IngredientSelection />;
+            case 1: return <SubmitRecipe/>;
+            case 2: return <EvaluateRecipe/>;
+        }
+    };
 
       return (
           <div className="app">
-            <Header currentTab={currentTab} tabHandler={setCurrentTab}/>
+            <Header/>
+              { content() }
           </div>
       );
 }
 
-export default App;
+export default connect(mapStateToProps, null)(App);

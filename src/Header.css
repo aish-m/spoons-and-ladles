@@ -16,6 +16,10 @@
     padding-left: 10px;
 }
 
+.header-left {
+    cursor: pointer;
+}
+
 .header-right {
     display: flex;
     flex-direction: row;
@@ -81,6 +85,6 @@ input[type=search]:focus {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 2px solid white;
+    border: 1px solid white;
     margin: 0 20px;
 }
