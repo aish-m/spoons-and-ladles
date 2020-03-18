@@ -1,10 +1,11 @@
-import { CHANGE_CURRENT_TAB, SELECT_INGREDIENT, REMOVE_INGREDIENT, CLEAR_ALL_INGREDIENTS } from './actionTypes';
+import { CHANGE_CURRENT_TAB, SELECT_INGREDIENT, REMOVE_INGREDIENT, CLEAR_ALL_INGREDIENTS, TOGGLE_INF_MODAL } from './actionTypes';
 
 const initialState = {
     currentTab: 0,
     recipesList: [],
     loggedIn: false,
-    selectedIngredients: []
+    selectedIngredients: [],
+    isIngredientNotFoundModalOpen: false
 };
 
 function reducers(state = initialState, action) {
@@ -32,6 +33,13 @@ function reducers(state = initialState, action) {
         case CLEAR_ALL_INGREDIENTS: {
             return Object.assign({}, state, {
                 selectedIngredients: []
+            });
+        }
+        case TOGGLE_INF_MODAL: {
+            const isOpen = !state.isIngredientNotFoundModalOpen;
+
+            return Object.assign({}, state, {
+                isIngredientNotFoundModalOpen: isOpen
             });
         }
         default:

@@ -1,4 +1,4 @@
-import { CHANGE_CURRENT_TAB, SELECT_INGREDIENT, REMOVE_INGREDIENT, CLEAR_ALL_INGREDIENTS } from './actionTypes'
+import { CHANGE_CURRENT_TAB, SELECT_INGREDIENT, REMOVE_INGREDIENT, CLEAR_ALL_INGREDIENTS, TOGGLE_INF_MODAL } from './actionTypes'
 
 export const changeTabValue = newTabId => ({
     type: CHANGE_CURRENT_TAB,
@@ -24,4 +24,8 @@ export const removeIngredient = ingredientId => ({
 
 export const clearAllIngredients = () => ({
     type: CLEAR_ALL_INGREDIENTS
+});
+
+export const toggleInfModal = () => ({
+    type: TOGGLE_INF_MODAL
 });

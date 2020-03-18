@@ -20,3 +20,33 @@ div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBa
     background-color: #8bcf32;
     color: black;
 }
+
+.modal-div {
+    background-color: white;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid black;
+    margin: 100px auto;
+}
+
+.modal-div img {
+    width: 300px;
+    margin: auto;
+}
+
+.modal-div .ok-button {
+    width: 200px;
+    margin: 20px 0;
+    background-color: #b6e64f;
+}
+
+.modal-div .ok-button:hover {
+    width: 200px;
+    margin: 20px 0;
+    background-color: #8bcf32;
+}
+
+

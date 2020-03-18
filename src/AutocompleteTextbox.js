@@ -3,11 +3,14 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import './AutocompleteTextbox.css';
 import Button from "@material-ui/core/Button";
-import { selectIngredient } from './redux/actionCreators';
+import { selectIngredient, toggleInfModal } from './redux/actionCreators';
 import { connect } from 'react-redux';
+import Modal from '@material-ui/core/Modal';
+import notFound from './images/ingredient-not-found.png';
 
 const mapStateToProps = state => ({
-    addedIngredients: state.selectedIngredients
+    addedIngredients: state.selectedIngredients,
+    isModalOpen: state.isIngredientNotFoundModalOpen
 });
 
 function AutocompleteTextbox(props) {
@@ -30,7 +33,7 @@ function AutocompleteTextbox(props) {
                 }
             });
             if(selectedIngredientObject.ingredientName === undefined)
-                console.log('TO DO: handle this scenario!'); // Add modal
+                props.toggleInfModal();
             else
                 props.selectIngredient(selectedIngredientObject);
         }
@@ -55,8 +58,17 @@ function AutocompleteTextbox(props) {
                 )}
             />
             <Button variant="contained" id="select-ingredient-button" onClick={() => submitIngredient(selectedIngredientName)}>ADD</Button>
+            <Modal
+                open={props.isModalOpen}
+                onClose={props.toggleInfModal}
+            >
+                <div className="modal-div">
+                    <img src={notFound} alt="Input ingredient not found" />
+                    <Button className="ok-button" variant="contained" onClick={props.toggleInfModal}>OK</Button>
+                </div>
+            </Modal>
         </div>
     )
 }
 
-export default connect(mapStateToProps, { selectIngredient })(AutocompleteTextbox);
+export default connect(mapStateToProps, { selectIngredient, toggleInfModal })(AutocompleteTextbox);
