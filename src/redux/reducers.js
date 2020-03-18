@@ -1,4 +1,4 @@
-import { CHANGE_CURRENT_TAB, SELECT_INGREDIENT, REMOVE_INGREDIENT } from './actionTypes';
+import { CHANGE_CURRENT_TAB, SELECT_INGREDIENT, REMOVE_INGREDIENT, CLEAR_ALL_INGREDIENTS } from './actionTypes';
 
 const initialState = {
     currentTab: 0,
@@ -27,6 +27,11 @@ function reducers(state = initialState, action) {
 
             return Object.assign({}, state, {
                 selectedIngredients: newIngredientsList
+            });
+        }
+        case CLEAR_ALL_INGREDIENTS: {
+            return Object.assign({}, state, {
+                selectedIngredients: []
             });
         }
         default:

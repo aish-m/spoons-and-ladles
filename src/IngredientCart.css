@@ -46,11 +46,30 @@
     color: white;
 }
 
+.ingredient-options {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 .submit-ingredients {
     background-color: #b6e64f;
     border: 3px solid #228c22;
     padding: 15px 0;
-    width: 65%;
+    width: 60%;
+    text-align: center;
+    margin: 20px auto 0;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.clear-cart {
+    background-color: #dc2a27;
+    border: 3px solid #8b0000;
+    color: white;
+    padding: 15px 0;
+    width: 30%;
     text-align: center;
     margin: 20px auto 0;
     font-size: 15px;
