@@ -1,0 +1,45 @@
+.picker-div {
+    background-color: #1c1c1c;
+    color: white;
+    margin: 20px 0 10px 10px;
+    padding-bottom: 20px;;
+    font-family: Roboto, serif;
+}
+
+.picker-title {
+    font-size: 20px;
+    padding: 20px 0;
+}
+
+.image-picker {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.ingredient-info {
+    margin: 20px 20px;
+    font-size: 18px;
+    position: relative;
+}
+
+.ingredient-images {
+    width: 180px;
+    border: 3px solid white;
+    cursor: pointer;
+}
+
+.checked-icon {
+    width: 40px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: none;
+}
+
+.checked-icon.checked {
+    display: inline;
+}
+

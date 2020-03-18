@@ -4,10 +4,6 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import reducers from './redux/reducers';
 import './index.css';
-import {
-    BrowserRouter as Router,
-    Route,
-} from "react-router-dom";
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

@@ -1,0 +1,52 @@
+.ingredient-cart {
+    font-family: Roboto, serif;
+    margin: 10px 30px;
+    padding: 20px;
+    border: 3px solid black;
+}
+
+.cart-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.no-ingredients{
+    text-align: center;
+}
+
+.no-ingredients img {
+    width: 65%;
+}
+
+.cart-item {
+    text-align: center;
+    margin: 15px auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 85%;
+    border: 2px solid #8bcf32;
+}
+
+.cart-item p {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+#delete-ingredient {
+    margin-right: 20px;
+    background-color: #dc2a27;
+    color: white;
+}
+
+.submit-ingredients {
+    background-color: #8bcf32;
+    padding: 15px 0;
+    width: 65%;
+    text-align: center;
+    margin: 20px auto 0;
+    font-size: 15px;
+    cursor: pointer;
+}

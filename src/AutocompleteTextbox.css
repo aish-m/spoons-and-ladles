@@ -1,0 +1,22 @@
+.autocomplete-ingredients {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+div.MuiAutocomplete-root.MuiAutocomplete-hasClearIcon {
+    display: inline-block;
+}
+
+div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {
+    width: 400px;
+}
+
+#select-ingredient-button {
+    margin: 0 20px;
+    background-color: #8bcf32;
+    color: black;
+}

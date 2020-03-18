@@ -16,6 +16,7 @@ function App(props) {
             case 0: return <IngredientSelection />;
             case 1: return <SubmitRecipe/>;
             case 2: return <EvaluateRecipe/>;
+            default: return <IngredientSelection />;
         }
     };
 

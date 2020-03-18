@@ -1,0 +1,14 @@
+.main-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.ingredient-selection-div {
+    width: 70%;
+    text-align: center;
+}
+
+.ingredient-display-div {
+    width: 30%;
+}
