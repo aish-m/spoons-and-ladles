@@ -2,7 +2,7 @@ import React from "react";
 import './IngredientCart.css';
 import { connect } from 'react-redux';
 import Button from "@material-ui/core/Button";
-import noIngredients from './images/no-ingredient.png';
+import noIngredients from './images/no-ingredients.png';
 import { removeIngredient } from './redux/actionCreators';
 
 function mapStateToProps(state) {
@@ -14,7 +14,6 @@ function IngredientCart(props) {
     const content = (props.ingredients.length === 0) ?
         <div  className="no-ingredients">
             <img src={noIngredients} alt="No ingredients added"/>
-            <p> No ingredients added yet! </p>
         </div> :
         <div>
             {props.ingredients.map(function(ingredient, i) {

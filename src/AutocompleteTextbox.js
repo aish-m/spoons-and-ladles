@@ -14,7 +14,6 @@ function AutocompleteTextbox(props) {
     let selectedIngredientName;
 
     function submitIngredient(ingredientName) {
-
         let isAlreadyAdded = false;
         props.addedIngredients.map(ing => {
            if(ing.name === ingredientName)

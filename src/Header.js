@@ -1,6 +1,6 @@
 import React from "react";
 import mascot from "./images/mascot.png";
-import text from "./images/text.png";
+import text from "./images/snl-text.png";
 import HomeIcon from '@material-ui/icons/Home';
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
