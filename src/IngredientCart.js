@@ -37,7 +37,7 @@ function IngredientCart(props) {
 
     return (
         <div className="ingredient-cart">
-            <div className="cart-title"> Selected Ingredients </div>
+            <div className="cart-title"> Ingredient Cart </div>
             { content }
         </div>
     )

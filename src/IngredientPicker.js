@@ -2,13 +2,20 @@ import React from "react";
 import './IngredientCart.css';
 import './IngredientPicker.css';
 import { connect } from 'react-redux';
-import { selectIngredient } from './redux/actionCreators';
+import { selectIngredient, removeIngredient } from './redux/actionCreators';
 
 function IngredientPicker(props) {
 
     function addIngredient(ingredient) {
-        document.getElementById("checked-icon-" + ingredient.ingredientName).classList.add("checked");
-        props.selectIngredient(ingredient);
+        const node = document.getElementById("checked-icon-" + ingredient.ingredientName);
+        if(!node.classList.contains("checked")) {
+            node.classList.add("checked");
+            props.selectIngredient(ingredient);
+        }
+        else {
+            node.classList.remove("checked");
+            props.removeIngredient(ingredient.ingredientId);
+        }
     }
 
     return (
@@ -40,4 +47,4 @@ function IngredientPicker(props) {
     )
 }
 
-export default connect(null, { selectIngredient })(IngredientPicker);
+export default connect(null, { selectIngredient, removeIngredient })(IngredientPicker);

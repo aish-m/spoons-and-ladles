@@ -1,6 +1,6 @@
 .ingredient-cart {
     font-family: Roboto, serif;
-    margin: 10px 30px;
+    margin: 30px;
     padding: 20px;
     border: 3px solid black;
 }
@@ -13,6 +13,9 @@
 
 .no-ingredients{
     text-align: center;
+    color: #8bcf32;
+    text-shadow: 1px 1px #228c22;
+    font-size: 20px;
 }
 
 .no-ingredients img {
@@ -27,7 +30,8 @@
     align-items: center;
     justify-content: space-between;
     width: 85%;
-    border: 2px solid #8bcf32;
+    background-color: #1c1c1c;
+    color: white;
 }
 
 .cart-item p {
@@ -42,7 +46,8 @@
 }
 
 .submit-ingredients {
-    background-color: #8bcf32;
+    background-color: #b6e64f;
+    border: 3px solid #228c22;
     padding: 15px 0;
     width: 65%;
     text-align: center;
