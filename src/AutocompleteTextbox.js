@@ -6,23 +6,35 @@ import Button from "@material-ui/core/Button";
 import { selectIngredient } from './redux/actionCreators';
 import { connect } from 'react-redux';
 
+const mapStateToProps = state => ({
+    addedIngredients: state.selectedIngredients
+});
+
 function AutocompleteTextbox(props) {
     let selectedIngredientName;
 
     function submitIngredient(ingredientName) {
-        let selectedIngredientObject = {
-            ingredientName: ingredientName
-        };
-        props.ingredients.map(option => {
-            if (option.ingredientName === ingredientName) {
-                selectedIngredientObject.ingredientId =  option.ingredientId;
-            }
-        });
-        if(selectedIngredientObject.ingredientName === undefined)
-            console.log('TO DO: handle this scenario!'); // Add modal
-        else
-            props.selectIngredient(selectedIngredientObject);
 
+        let isAlreadyAdded = false;
+        props.addedIngredients.map(ing => {
+           if(ing.name === ingredientName)
+               isAlreadyAdded = true;
+        });
+
+        if(!isAlreadyAdded) {
+            let selectedIngredientObject = {
+                ingredientName: ingredientName
+            };
+            props.ingredients.map(option => {
+                if (option.ingredientName === ingredientName) {
+                    selectedIngredientObject.ingredientId =  option.ingredientId;
+                }
+            });
+            if(selectedIngredientObject.ingredientName === undefined)
+                console.log('TO DO: handle this scenario!'); // Add modal
+            else
+                props.selectIngredient(selectedIngredientObject);
+        }
         clearText();
     }
 
@@ -48,4 +60,4 @@ function AutocompleteTextbox(props) {
     )
 }
 
-export default connect(null, { selectIngredient })(AutocompleteTextbox);
+export default connect(mapStateToProps, { selectIngredient })(AutocompleteTextbox);
