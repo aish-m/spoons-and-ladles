@@ -4,18 +4,30 @@ import './IngredientPicker.css';
 import { connect } from 'react-redux';
 import { selectIngredient, removeIngredient } from './redux/actionCreators';
 
+const mapStateToProps = state => ({
+    selectedIngredients: state.selectedIngredients
+});
+
 function IngredientPicker(props) {
 
-    function addIngredient(ingredient) {
-        const node = document.getElementById("checked-icon-" + ingredient.ingredientName);
-        if(!node.classList.contains("checked")) {
-            node.classList.add("checked");
-            props.selectIngredient(ingredient);
-        }
-        else {
-            node.classList.remove("checked");
-            props.removeIngredient(ingredient.ingredientId);
-        }
+    function addOrRemoveIngredient(ingredient) {
+        let isAdded = false;
+        props.selectedIngredients.map(ing => {
+            if(ing.id === ingredient.ingredientId) {
+                isAdded = true;
+            }
+        });
+        isAdded ? props.removeIngredient(ingredient.ingredientId) : props.selectIngredient(ingredient);
+    }
+
+    function computeClassName(ingredient) {
+        let matches = false;
+        props.selectedIngredients.map(ing => {
+            if(ing.id === ingredient.ingredientId)
+                matches = true;
+        });
+
+        return matches ? "checked-icon checked" : "checked-icon";
     }
 
     return (
@@ -30,12 +42,12 @@ function IngredientPicker(props) {
                             src={require("./images/Ingredients/" + ingredient.pictureLink)}
                             alt={ingredient.ingredientName}
                             className="ingredient-images"
-                            onClick={() => addIngredient(ingredient)}
+                            onClick={() => addOrRemoveIngredient(ingredient)}
                         />
                         <img
                             src={require("./images/Ingredients/checked.png")}
                             alt="Check mark"
-                            className="checked-icon"
+                            className={computeClassName(ingredient)}
                             id={"checked-icon-" + ingredient.ingredientName}
                         />
                         <div> { ingredient.ingredientName } </div>
@@ -47,4 +59,4 @@ function IngredientPicker(props) {
     )
 }
 
-export default connect(null, { selectIngredient, removeIngredient })(IngredientPicker);
+export default connect(mapStateToProps, { selectIngredient, removeIngredient })(IngredientPicker);
