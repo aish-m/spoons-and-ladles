@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 
 function AutocompleteTextbox(props) {
     let selectedIngredientName;
-    let inputFieldElement;
 
     function submitIngredient(ingredientName) {
         let selectedIngredientObject = {
@@ -19,19 +18,17 @@ function AutocompleteTextbox(props) {
                 selectedIngredientObject.ingredientId =  option.ingredientId;
             }
         });
-        // console.log('selectedIngredientId: ' + selectedIngredientObject.ingredientId);
-        // console.log('selectedIngredientName: ' + selectedIngredientObject.ingredientName);
         if(selectedIngredientObject.ingredientName === undefined)
-            console.log('TO DO: handle this scenario!');
+            console.log('TO DO: handle this scenario!'); // Add modal
         else
             props.selectIngredient(selectedIngredientObject);
-        let inputNode = document.getElementById('ingredient-autocomplete-field');
-        inputNode.value = '';
+
+        clearText();
     }
 
     function clearText() {
-        let inputNode = document.getElementById('ingredient-autocomplete-field');
-        inputNode.value = '';
+        const nodes = document.getElementsByClassName("MuiButtonBase-root MuiIconButton-root MuiAutocomplete-clearIndicator");
+        nodes[0].click();
     }
 
     return (
@@ -40,10 +37,10 @@ function AutocompleteTextbox(props) {
                 id="ingredient-autocomplete-field"
                 freeSolo
                 options={props.ingredients.map(option => option.ingredientName)}
-                onChange={(event, value) => {selectedIngredientName = value; inputFieldElement = event.target;}}
+                onChange={(event, value) => {selectedIngredientName = value}}
                 onFocus={() => clearText()}
                 renderInput={params => (
-                    <TextField {...params} label="Enter Ingredient Name" margin="normal" variant="outlined" fullWidth={false}/>
+                    <TextField {...params} onFocus={() => clearText()} label="Enter Ingredient Name" margin="normal" variant="outlined" fullWidth={false}/>
                 )}
             />
             <Button variant="contained" id="select-ingredient-button" onClick={() => submitIngredient(selectedIngredientName)}>ADD</Button>
