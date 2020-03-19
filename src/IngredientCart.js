@@ -46,7 +46,7 @@ function IngredientCart(props) {
 
     return (
         <div className="ingredient-cart">
-            <div className="cart-title"> Ingredient Cart </div>
+            <div className="cart-title"> Ingredients Added To Basket </div>
             { content }
         </div>
     )

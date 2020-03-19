@@ -12,7 +12,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import user from './images/user-icon.png';
 
 const mapStateToProps = state => ({
-    currentTab: state.currentTab
+    currentTab: state.currentTab,
+    loggedIn: state.loggedIn,
+    isExpert: state.isUserExpert
 });
 
 function Header(props) {
@@ -46,11 +48,14 @@ function Header(props) {
                             }
                         }}
                     >
-                        <Tab label="Look Up Recipes" onClick={() => props.changeTabValue(0)}/>
-                        <Tab label="Submit A Recipe" onClick={() => props.changeTabValue(1)}/>
-                        <Tab label="Evaluate Recipes" onClick={() => props.changeTabValue(2)}/>
+                        <Tab id="look-up-recipes-tab" label="input ingredients" onClick={() => props.changeTabValue(0)}/>
+                        <Tab id="recipes-tab" label="recipes" onClick={() => props.changeTabValue(1)}/>
+                        <Tab id="submit-a-recipe-tab" label="Submit A Recipe" onClick={() => props.changeTabValue(2)}/>
+                        {(props.loggedIn && props.isExpert) ?
+                        <Tab id="evaluate-recipes-tab" label="Evaluate Recipes" onClick={() => props.changeTabValue(3)}/>:
+                            null }
                     </Tabs>
-                    <img className="user-icon" src={user} alt="user profile"/>
+                        {props.loggedIn ? <img className="user-icon" src={user} alt="user profile"/> : null }
                     </div>
                 </div>
         </header>

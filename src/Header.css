@@ -61,7 +61,11 @@ input[type=search]:focus {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+
     padding: 0 65px;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
 }
 
 .sticky-right {

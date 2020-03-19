@@ -4,6 +4,7 @@ const initialState = {
     currentTab: 0,
     recipesList: [],
     loggedIn: false,
+    isUserExpert: false,
     selectedIngredients: [],
     isIngredientNotFoundModalOpen: false
 };
