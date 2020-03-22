@@ -39,7 +39,7 @@ function Header(props) {
                     </div>
                     <div className="sticky-right">
                     <Tabs
-                        value={props.currentTab}
+                        value={props.currentTab - 1}
                         aria-label="tabs for home page"
                         TabIndicatorProps={{
                             style: {
@@ -48,11 +48,11 @@ function Header(props) {
                             }
                         }}
                     >
-                        <Tab id="look-up-recipes-tab" label="input ingredients" onClick={() => props.changeTabValue(0)}/>
-                        <Tab id="recipes-tab" label="recipes" onClick={() => props.changeTabValue(1)}/>
-                        <Tab id="submit-a-recipe-tab" label="Submit A Recipe" onClick={() => props.changeTabValue(2)}/>
+                        <Tab id="look-up-recipes-tab" label="input ingredients" onClick={() => props.changeTabValue(1)}/>
+                        <Tab id="recipes-tab" label="recipes" onClick={() => props.changeTabValue(2)}/>
+                        <Tab id="submit-a-recipe-tab" label="Submit A Recipe" onClick={() => props.changeTabValue(3)}/>
                         {(props.loggedIn && props.isExpert) ?
-                        <Tab id="evaluate-recipes-tab" label="Evaluate Recipes" onClick={() => props.changeTabValue(3)}/>:
+                        <Tab id="evaluate-recipes-tab" label="Evaluate Recipes" onClick={() => props.changeTabValue(4)}/>:
                             null }
                     </Tabs>
                         {props.loggedIn ? <img className="user-icon" src={user} alt="user profile"/> : null }

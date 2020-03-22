@@ -3,8 +3,8 @@ import { CHANGE_CURRENT_TAB, SELECT_INGREDIENT, REMOVE_INGREDIENT, CLEAR_ALL_ING
 const initialState = {
     currentTab: 0,
     recipesList: [],
-    loggedIn: false,
-    isUserExpert: false,
+    loggedIn: true,
+    isUserExpert: true,
     selectedIngredients: [],
     isIngredientNotFoundModalOpen: false
 };
