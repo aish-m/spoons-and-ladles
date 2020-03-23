@@ -7,6 +7,7 @@ import SubmitRecipe from "./SubmitRecipe";
 import EvaluateRecipe from "./EvaluateRecipe";
 import RecipesPage from './RecipesPage';
 import ImageCarousel from './Carousel';
+import Footer from "./Footer";
 
 const mapStateToProps = state => ({
     currentTab: state.currentTab
@@ -28,6 +29,7 @@ function App(props) {
           <div className="app">
             <Header/>
               { content() }
+             <Footer />
           </div>
       );
 }

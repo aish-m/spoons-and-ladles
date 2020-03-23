@@ -1,0 +1,23 @@
+.footer {
+    background-color: black;
+    text-align: center;
+    font-family: 'Gentium Basic', serif;
+    border-top: 3px solid black;
+    color: #b6e64f;
+}
+
+#snl {
+    padding-top: 10px;
+    font-size: 22px;
+}
+
+#blue-mango {
+    font-size: 12px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+#team8 {
+    font-size: 16px;
+    padding-bottom: 15px;
+}

@@ -1,3 +1,7 @@
+header {
+    font-family: 'Gentium Basic', serif;
+}
+
 .non-sticky-header {
     padding: 0 10px;
     display: flex;

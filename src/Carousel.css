@@ -5,3 +5,23 @@
 .carousel-image {
     width: 100%;
 }
+
+#mobile-image-grid {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktop-carousel {
+        display: none;
+    }
+
+    #mobile-image-grid {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .mobile-carousel-image {
+        width: 100%;
+    }
+}
