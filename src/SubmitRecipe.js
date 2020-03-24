@@ -69,7 +69,7 @@ class SubmitForm extends Component{
     render(){
         return(
             <form className="createRecipe">
-            <div>
+            <div className="overallDiv">
             <div className="generic"> 
                 <div className="forImage">
                     <label className="custom-file-upload">  
