@@ -1,0 +1,28 @@
+.grid-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #dfe5d0;
+
+}
+
+.card-img{
+    width: 100%;
+
+}
+
+.content{
+    height: 100px;
+    overflow: hidden;
+}
+.content-text{
+    height: 65%;
+    overflow: hidden;
+}
+
+.content-head{
+    
+    height: 32%;
+    overflow: hidden;
+}

@@ -1,9 +1,20 @@
-import React from "react";
+import React from 'react';
+import RecipesGrid from './RecipesGrid';
+import { makeStyles } from '@material-ui/core/styles';
 
-function RecipesPage() {
+const useStyles = makeStyles({
+    grid:{
+
+    },
+
+})
+
+function RecipesPage(){
+    const classes = useStyles();
     return(
-        <h1> Recipes page </h1>
+        <RecipesGrid className = {classes.grid}/>
     )
 }
+
 
 export default RecipesPage;
