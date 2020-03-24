@@ -59,7 +59,7 @@ input[type=search]:focus {
 
 .sticky-nav-bar {
     height: 50px;
-    background-color: black;
+    background-color: #1c1c1c;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -103,7 +103,7 @@ input[type=search]:focus {
     cursor: pointer;
 }
 
-#hamburger-icon, #mobile-search-icon, #mobile-cart-icon {
+#hamburger-icon, #mobile-search-icon, #ingredient-cart-div {
     display: none;
 }
 
@@ -129,6 +129,7 @@ input[type=search]:focus {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        position: relative;
     }
 
     #home-icon {
@@ -139,9 +140,29 @@ input[type=search]:focus {
         display: none;
     }
 
-    #hamburger-icon, #mobile-search-icon, #mobile-cart-icon {
+    #hamburger-icon, #mobile-search-icon {
         display: inline-block;
         cursor: pointer;
+    }
+
+    #ingredient-cart-div {
+        display: inline-block;
+        cursor: pointer;
+        /*position: relative;*/
+    }
+
+    #cart-count {
+        display: inline-block;
+        background-color: red;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        text-align: center;
+        color: white;
+        position: absolute;
+        right: 15%;
+        top: 4px;
     }
 }
 
@@ -163,6 +184,7 @@ input[type=search]:focus {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        position: relative;
     }
 
     #home-icon {
@@ -173,11 +195,33 @@ input[type=search]:focus {
         display: none;
     }
 
-    #hamburger-icon, #mobile-search-icon, #mobile-cart-icon {
+    #hamburger-icon, #mobile-search-icon {
         display: inline-block;
         cursor: pointer;
     }
+
+    #ingredient-cart-div {
+        display: inline-block;
+        cursor: pointer;
+        /*position: relative;*/
+    }
+
+    #cart-count {
+        display: inline-block;
+        background-color: red;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        text-align: center;
+        color: white;
+        position: absolute;
+        right: 10%;
+        top: 4px;
+    }
 }
+
+/* TO DO: Fix cart-count position wrt cart icon in mobile */
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .sticky-nav-bar {

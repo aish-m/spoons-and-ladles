@@ -1,77 +1,37 @@
 .ingredient-cart {
-    font-family: Roboto, serif;
-    margin: 30px;
-    padding: 20px;
-    border: 3px solid black;
+    margin-top: 60px;
+    border-top: 2px solid darkgrey;
+    border-left: 2px solid darkgrey;
+    border-bottom: 1px solid darkgrey;
+    cursor: pointer;
+    font-family: 'Gentium Basic', serif;
 }
 
 .cart-title {
-    text-align: center;
-    font-weight: bold;
+    background-color: #b6e64f;
     font-size: 20px;
-    color: #228c22;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid darkgrey;
 }
 
-.no-ingredients{
-    text-align: center;
-    text-shadow: 1px 1px #228c22;
-    font-size: 20px;
-}
-
-.no-ingredients img {
-    padding-top: 10px;
-    width: 100%;
+.cart-content {
 }
 
 .cart-item {
+    /*background-color: lightgrey;*/
+    color: black;
     text-align: center;
-    margin: 15px auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 85%;
-    background-color: #1c1c1c;
-    color: white;
-}
-
-.cart-item p {
-    display: inline-block;
-    margin-left: 20px;
-}
-
-#delete-ingredient {
-    margin-right: 20px;
-    background-color: #dc2a27;
-    color: white;
-}
-
-.ingredient-options {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.submit-ingredients {
-    background-color: #b6e64f;
-    border: 3px solid #228c22;
+    justify-content: center;
     padding: 15px 0;
-    width: 60%;
-    text-align: center;
-    margin: 20px auto 0;
-    font-size: 15px;
-    cursor: pointer;
+    border-bottom: 1px solid lightgrey;
 }
 
-.clear-cart {
-    background-color: #dc2a27;
-    border: 3px solid #8b0000;
-    color: white;
-    padding: 15px 0;
-    width: 30%;
-    text-align: center;
-    margin: 20px auto 0;
-    font-size: 15px;
-    cursor: pointer;
+@media (max-width: 768px) {
+    .cart-title {
+        font-size: 15px;
+    }
 }

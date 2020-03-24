@@ -1,0 +1,48 @@
+.ingredient-cart-details {
+    margin-top: 60px;
+    border: 3px solid darkgrey;
+    font-family: 'Gentium Basic', serif;
+}
+
+.cart-details-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #b6e64f;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.cart-details-title #forward-arrow {
+    padding: 0 10px;
+}
+
+.cart-details-item {
+    margin: 0 auto;
+    width: 75%;
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart-details-item p {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.cancel-icon {
+    cursor: pointer;
+}
+
+.clear-cart {
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}

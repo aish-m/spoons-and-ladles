@@ -5,10 +5,30 @@
 }
 
 .ingredient-selection-div {
-    width: 70%;
+    width: 100%;
     text-align: center;
 }
 
-.ingredient-display-div {
-    width: 30%;
+.ingredient-selection-div.cart-open {
+    width: 90%;
+    text-align: center;
+}
+
+.ingredient-selection-div.cart-details-open {
+    width: 80%;
+    text-align: center;
+}
+
+.ingredient-display-div.cart-open {
+    width: 10%;
+}
+
+.ingredient-display-div.cart-details-open {
+    width: 20%;
+}
+
+@media (max-width: 768px) {
+    #picker {
+        width: 100%;
+    }
 }

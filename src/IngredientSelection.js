@@ -1,8 +1,8 @@
 import React from "react";
-import AutocompleteTextbox from "./AutocompleteTextbox";
 import IngredientPicker from "./IngredientPicker";
-import IngredientCart from "./IngredientCart";
 import './IngredientSelection.css';
+import IngredientCartToggle from "./IngredientCartToggle";
+import { connect } from 'react-redux';
 
 class IngredientSelection extends React.Component {
 
@@ -49,24 +49,56 @@ class IngredientSelection extends React.Component {
                     });
                 }
             );
+
+        // Needed when component is re-loaded after switching tabs
+        if(this.props.count !== 0) {
+            document.getElementById("picker").classList.add("cart-open");
+            document.getElementById("cart").classList.add("cart-open");
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.count === 0 && this.props.count !== 0) {
+            document.getElementById("picker").classList.add("cart-open");
+            document.getElementById("cart").classList.add("cart-open");
+        }
+        if(prevProps.count !== 0 && this.props.count === 0) {
+            if(document.getElementById("picker").classList.contains("cart-open")) {
+                document.getElementById("picker").classList.remove("cart-open");
+                document.getElementById("cart").classList.remove("cart-open");
+            }
+            else if(document.getElementById("picker").classList.contains("cart-details-open")) {
+                document.getElementById("picker").classList.remove("cart-details-open");
+                document.getElementById("cart").classList.remove("cart-details-open");
+            }
+        }
+    }
+
+    static mapStateToProps(state) {
+        return {
+            count: state.selectedIngredients.length
+        }
     }
 
     render() {
         return (
             <div  className="main-div">
-                <div className="ingredient-selection-div">
-                    <AutocompleteTextbox ingredients = {this.state.ingredients} />
-                    OR
+                <div className="ingredient-selection-div" id="picker">
                     <IngredientPicker
+                        ingredients = {this.state.ingredients}
                         topIngredients = {this.state.topIngredients}
                     />
                 </div>
-                <div  className="ingredient-display-div">
-                    <IngredientCart />
+                <div  className="ingredient-display-div" id="cart">
+                    {
+                        this.props.count !== 0 ?
+                        <IngredientCartToggle/> :
+                        null
+                    }
                 </div>
             </div>
         )
     }
 }
 
-export default IngredientSelection;
+export default connect(IngredientSelection.mapStateToProps, null)(IngredientSelection);

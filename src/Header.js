@@ -15,7 +15,8 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 const mapStateToProps = state => ({
     currentTab: state.currentTab,
     loggedIn: state.loggedIn,
-    isExpert: state.isUserExpert
+    isExpert: state.isUserExpert,
+    selectedIngredientsCount: state.selectedIngredients.length
 });
 
 function Header(props) {
@@ -38,28 +39,31 @@ function Header(props) {
                         <HomeIcon htmlColor="white" fontSize="large"/>
                     </div>
                     <div className="material-ui-tabs">
-                    <Tabs
-                        value={props.currentTab - 1}
-                        aria-label="tabs for home page"
-                        TabIndicatorProps={{
-                            style: {
-                                backgroundColor: '#b6e64f',
-                                height: '3px'
-                            }
-                        }}
-                    >
-                        <Tab id="look-up-recipes-tab" label="add ingredients" onClick={() => props.changeTabValue(1)}/>
-                        <Tab id="recipes-tab" label="recipes" onClick={() => props.changeTabValue(2)}/>
-                        <Tab id="submit-a-recipe-tab" label="Submit A Recipe" onClick={() => props.changeTabValue(3)}/>
-                        {(props.loggedIn && props.isExpert) ?
-                        <Tab id="evaluate-recipes-tab" label="Evaluate Recipes" onClick={() => props.changeTabValue(4)}/>:
-                            null }
-                    </Tabs>
+                        <Tabs
+                            value={props.currentTab - 1}
+                            aria-label="tabs for home page"
+                            TabIndicatorProps={{
+                                style: {
+                                    backgroundColor: '#b6e64f',
+                                    height: '3px'
+                                }
+                            }}
+                        >
+                            <Tab id="look-up-recipes-tab" label="add ingredients" onClick={() => props.changeTabValue(1)}/>
+                            <Tab id="recipes-tab" label="recipes" onClick={() => props.changeTabValue(2)}/>
+                            <Tab id="submit-a-recipe-tab" label="Submit A Recipe" onClick={() => props.changeTabValue(3)}/>
+                            {(props.loggedIn && props.isExpert) ?
+                            <Tab id="evaluate-recipes-tab" label="Evaluate Recipes" onClick={() => props.changeTabValue(4)}/>:
+                                null }
+                        </Tabs>
                     </div>
                     <MenuIcon id="hamburger-icon" htmlColor="white" fontSize="large"/>
                     <SearchIcon fontSize="large" onClick={() => console.log("Search mobile..")} id="mobile-search-icon" htmlColor="white"/>
                     {props.loggedIn ? <img className="user-icon" src={user} alt="user profile" onClick={() => console.log("User options mobile")}/> : null }
-                    <ShoppingCartIcon fontSize="large" onClick={() => console.log("Cart mobile")} id="mobile-cart-icon" htmlColor="white"/>
+                    <div id="ingredient-cart-div">
+                        <ShoppingCartIcon fontSize="large" onClick={() => console.log("Cart mobile")} id="mobile-cart-icon" htmlColor="white"/>
+                        <div id="cart-count"> { props.selectedIngredientsCount } </div>
+                    </div>
                 </div>
         </header>
     )

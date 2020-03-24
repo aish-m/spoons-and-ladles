@@ -1,8 +1,9 @@
 import React from "react";
-import './IngredientCart.css';
+import './IngredientCartDetails.css';
 import './IngredientPicker.css';
 import { connect } from 'react-redux';
 import { selectIngredient, removeIngredient } from './redux/actionCreators';
+import AutocompleteTextbox from "./AutocompleteTextbox";
 
 const mapStateToProps = state => ({
     selectedIngredients: state.selectedIngredients
@@ -13,9 +14,7 @@ function IngredientPicker(props) {
     function addOrRemoveIngredient(ingredient) {
         let isAdded = false;
         props.selectedIngredients.map(ing => {
-            if(ing.id === ingredient.ingredientId) {
-                isAdded = true;
-            }
+            if (ing.id === ingredient.ingredientId) isAdded = true;
         });
         isAdded ? props.removeIngredient(ingredient.ingredientId) : props.selectIngredient(ingredient);
     }
@@ -23,8 +22,7 @@ function IngredientPicker(props) {
     function computeClassName(ingredient) {
         let matches = false;
         props.selectedIngredients.map(ing => {
-            if(ing.id === ingredient.ingredientId)
-                matches = true;
+            if(ing.id === ingredient.ingredientId) matches = true;
         });
 
         return matches ? "checked-icon checked" : "checked-icon";
@@ -33,6 +31,7 @@ function IngredientPicker(props) {
     return (
         <div className="picker-div">
             <div className="picker-title"> Pick Ingredients </div>
+            <AutocompleteTextbox ingredients={props.ingredients}/>
             <div className="image-picker">
                 { props.topIngredients === undefined ?
                     <p> Loading... </p> :

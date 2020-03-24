@@ -13,6 +13,17 @@ div.MuiAutocomplete-root.MuiAutocomplete-hasClearIcon {
 
 div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {
     width: 400px;
+    border: 2px solid #b6e64f;
+}
+
+div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd input {
+    color: white
+}
+
+.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined {
+    color: white;
+    background-color: #1c1c1c;
+    padding: 0 5px;
 }
 
 #select-ingredient-button {
@@ -47,6 +58,32 @@ div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBa
     width: 200px;
     margin: 20px 0;
     background-color: #8bcf32;
+}
+
+@media (max-width: 480px) {
+    .autocomplete-ingredients {
+        width: 100%;
+        text-align: center;
+    }
+
+    #select-ingredient-button {
+        margin-right: 0;
+    }
+
+    div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {
+        width: 250px;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .autocomplete-ingredients {
+        width: 100%;
+        text-align: center;
+    }
+
+    #select-ingredient-button {
+        margin-right: 0;
+    }
 }
 
 
