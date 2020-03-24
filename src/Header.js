@@ -9,6 +9,8 @@ import { connect } from 'react-redux';
 import { changeTabValue } from './redux/actionCreators';
 import SearchIcon from '@material-ui/icons/Search';
 import user from './images/user-icon.png';
+import andy from './images/andy-samberg.jpg';
+import boyle from './images/boyle.jpeg';
 import MenuIcon from '@material-ui/icons/Menu';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
