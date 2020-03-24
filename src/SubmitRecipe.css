@@ -1,4 +1,4 @@
-.getRecipeDataTitle,.getRecipeDataDesc,.getRecipeDataIngredients,.getRecipeDataProcedure,.forServings,.forPrepTime{
+.getRecipeDataTitle,.getRecipeDataDesc,.getRecipeDataIngredients,.getRecipeDataProcedure,.forServings,.forPrepTime {
     color: blue;
     padding-top: 1%;
     padding-bottom: 1%;
@@ -15,11 +15,17 @@
 }
 .forImage{
     text-align: center;
-    padding: 2% 0%;
+    padding: 2% 0;
 }
 .MuiInputLabel-outlined {
     font-family: Gentium Basic  !important;
 }
+
+.overallDiv .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined {
+    color: black;
+    background-color: white;
+}
+
 .getRecipeDataTime{
     color: blue;
     padding-top: 2%;
@@ -34,6 +40,7 @@
 
 .createRecipe{
     display: flex;
+    margin: 30px auto;
 }
 
 #submit-recipe{
@@ -95,6 +102,10 @@
 .forButtons{
     text-align: unset;
     margin: 2%;
+}
+
+#recipeImage {
+    width: 100px;
 }
 
 @media (max-width: 750px) { 
