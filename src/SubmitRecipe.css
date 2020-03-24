@@ -1,0 +1,121 @@
+.getRecipeDataTitle,.getRecipeDataDesc,.getRecipeDataIngredients,.getRecipeDataProcedure,.forServings,.forPrepTime{
+    color: blue;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.recipeTitle,.recipeDesc,.recipeIngredients,.recipeProcedure{
+    width: 75%;
+    padding-right: 2.5%;
+}
+
+.MuiOutlinedInput-input
+{
+    font-family: Gentium Basic !important;
+}
+.forImage{
+    text-align: center;
+    padding: 2% 0%;
+}
+.MuiInputLabel-outlined {
+    font-family: Gentium Basic  !important;
+}
+.getRecipeDataTime{
+    color: blue;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    font-family: Gentium Basic  !important;
+}
+
+.forPrepTime,.forServings{
+    padding: 2%;
+    display: inline-block;
+}
+
+.createRecipe{
+    display: flex;
+}
+
+#submit-recipe{
+    text-align: center;
+}
+
+.getDishDetails{
+    text-align: center;
+    padding-top: 3%;
+}
+
+.forSubmit,.forCancel{
+    display: inline;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.generic{
+  width: 30%;
+  left: 0;
+  position: absolute;
+  text-align: -webkit-center;
+}
+#specific{
+  width: 70%;
+  right: 0; 
+  position: absolute;
+}
+
+.recipeProcedure{
+    margin: auto;
+}
+
+#inp{
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.MuiButton-label{
+    color: black;
+}
+
+#submit-recipe, #cancel-recipe{
+    background-color: #8bcf32;
+}
+
+.forButtons{
+    text-align: unset;
+}
+
+@media (max-width: 750px) { 
+	.generic{
+        position: unset;
+        width: unset;
+    }
+    .recipeProcedure{
+        padding: 5%;
+    }
+    #specific{
+        position: unset;
+        width: unset;
+    }
+    .createRecipe{
+        display: contents;
+    }
+    .MuiFormControl-root, .MuiTextField-root {
+        width: inherit;
+    }
+    .recipeTitle,.recipeDesc,.recipeIngredients,.recipeProcedure{
+        width: -webkit-fill-available;
+    }
+    .forButtons{
+        text-align: center;
+        padding-top: inherit;
+    }
+} 
+
+
+
