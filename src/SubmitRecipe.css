@@ -92,7 +92,7 @@
 }
 
 .MuiButton-label{
-    color: black;
+    color: primary;
 }
 
 #submit-recipe, #cancel-recipe{
