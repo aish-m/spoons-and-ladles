@@ -1,10 +1,7 @@
 .grid-container{
-    display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     background-color: #dfe5d0;
-
 }
 
 .card-img{
@@ -25,4 +22,8 @@
     
     height: 32%;
     overflow: hidden;
+}
+
+.openrecipe label{
+    color: blue;
 }

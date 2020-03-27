@@ -117,7 +117,7 @@ import './RecipePage.css';
 }*/
 function RecipesGrid(){
     return(
-        <Grid container className = "grid-container" spacing = {24}>
+        <Grid container className = "grid-container" spacing = {5}>
             <Grid item md = {3}>            
                 <RecipeCard
                     imgurl = "mutton-biryani.jpg"
