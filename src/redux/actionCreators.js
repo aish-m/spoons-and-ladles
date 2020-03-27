@@ -4,8 +4,8 @@ import {
     REMOVE_INGREDIENT,
     CLEAR_ALL_INGREDIENTS,
     TOGGLE_INF_MODAL,
-    OPEN_CART_EMPTY_MODAL,
-    CLOSE_CART_EMPTY_MODAL
+    OPEN_MOBILE_CART_MODAL,
+    CLOSE_MOBILE_CART_MODAL
 } from './actionTypes'
 
 export const changeTabValue = newTabId => ({
@@ -38,10 +38,10 @@ export const toggleInfModal = () => ({
     type: TOGGLE_INF_MODAL
 });
 
-export const openCartEmptyModal = () => ({
-    type: OPEN_CART_EMPTY_MODAL
+export const openMobileCartModal = () => ({
+    type: OPEN_MOBILE_CART_MODAL
 });
 
-export const closeCartEmptyModal = () => ({
-    type: CLOSE_CART_EMPTY_MODAL
+export const closeMobileCartModal = () => ({
+    type: CLOSE_MOBILE_CART_MODAL
 });

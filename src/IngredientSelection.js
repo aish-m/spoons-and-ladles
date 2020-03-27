@@ -3,10 +3,6 @@ import IngredientPicker from "./IngredientPicker";
 import './IngredientSelection.css';
 import IngredientCartToggle from "./IngredientCartToggle";
 import { connect } from 'react-redux';
-import Modal from "@material-ui/core/Modal";
-import notFound from "./images/ingredient-not-found.png";
-import noIngredients from "./images/no-ingredients.png";
-import Button from "@material-ui/core/Button";
 
 class IngredientSelection extends React.Component {
 

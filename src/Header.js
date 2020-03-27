@@ -6,7 +6,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import './Header.css';
 import { connect } from 'react-redux';
-import { changeTabValue, openCartEmptyModal, closeCartEmptyModal } from './redux/actionCreators';
+import { changeTabValue, openMobileCartModal, closeMobileCartModal } from './redux/actionCreators';
 import SearchIcon from '@material-ui/icons/Search';
 import user from './images/user-icon.png';
 import andy from './images/andy-samberg.jpg';
@@ -16,13 +16,14 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Modal from "@material-ui/core/Modal";
 import noIngredients from "./images/no-ingredients.png";
 import Button from "@material-ui/core/Button";
+import IngredientCartDetails from "./IngredientCartDetails";
 
 const mapStateToProps = state => ({
     currentTab: state.currentTab,
     loggedIn: state.loggedIn,
     isExpert: state.isUserExpert,
     selectedIngredientsCount: state.selectedIngredients.length,
-    isCartEmptyModalOpen: state.isCartEmptyModalOpen
+    isMobileCartModalOpen: state.isMobileCartModalOpen
 });
 
 function Header(props) {
@@ -35,13 +36,6 @@ function Header(props) {
         else if(document.getElementById("mobileMenu").classList.contains("mobile")) {
             document.getElementById("mobileMenu").classList.remove("mobile");
             document.getElementById("mobileMenu").classList.add("desktop");
-        }
-    }
-
-    function openIngredientCart() {
-        if(props.selectedIngredientsCount === 0) {
-            console.log('cart open clicked!');
-            props.openCartEmptyModal();
         }
     }
 
@@ -85,7 +79,7 @@ function Header(props) {
                     <MenuIcon id="hamburgerIcon" htmlColor="white" fontSize="large" onClick={() => toggleHamburgerIcon()}/>
                     <SearchIcon fontSize="large" onClick={() => console.log("Search mobile..")} id="mobileSearchIcon" htmlColor="white"/>
                     {props.loggedIn ? <img className="user-icon" src={user} alt="user profile" onClick={() => console.log("User options mobile")}/> : null }
-                    <div id="cartDiv" onClick={openIngredientCart}>
+                    <div id="cartDiv" onClick={props.openMobileCartModal}>
                         <img src={cartIcon} alt="Ingredient cart" id="cartIcon"/>
                         <div id="cartCount"> { props.selectedIngredientsCount } </div>
                     </div>
@@ -101,16 +95,33 @@ function Header(props) {
                     </ul>
                 </div>
                 <Modal
-                    open={props.isCartEmptyModalOpen}
-                    onClose={props.closeCartEmptyModal}
+                    open={props.isMobileCartModalOpen}
+                    onClose={props.closeMobileCartModal}
                 >
-                    <div className="cart-empty-modal">
-                        <img src={noIngredients} alt="No ingredients added to cart" />
-                        <Button className="ok-button" variant="contained" onClick={props.closeCartEmptyModal}>OK</Button>
-                    </div>
+                    {
+                        props.selectedIngredientsCount === 0 ?
+                            <div className="cart-empty-div">
+                                <img src={noIngredients} alt="No ingredients added to cart" />
+                                <Button className="ok-button" variant="contained"
+                                        onClick={() => {
+                                            props.closeMobileCartModal();
+                                            props.changeTabValue(1);
+                                            if(document.getElementById("mobileMenu").classList.contains("mobile")) {
+                                                document.getElementById("mobileMenu").classList.remove("mobile");
+                                                document.getElementById("mobileMenu").classList.add("desktop");
+                                            }                                        }}>
+                                    OK
+                                </Button>
+                            </div> :
+                            <div className="cart-full-div">
+                                <IngredientCartDetails
+                                    toggleHandler = {props.closeMobileCartModal}
+                                />
+                            </div>
+                    }
                 </Modal>
         </header>
     )
 }
 
-export default connect(mapStateToProps, { changeTabValue, openCartEmptyModal, closeCartEmptyModal })(Header);
+export default connect(mapStateToProps, { changeTabValue, openMobileCartModal, closeMobileCartModal })(Header);

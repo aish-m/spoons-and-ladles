@@ -4,8 +4,8 @@ import {
     REMOVE_INGREDIENT,
     CLEAR_ALL_INGREDIENTS,
     TOGGLE_INF_MODAL,
-    OPEN_CART_EMPTY_MODAL,
-    CLOSE_CART_EMPTY_MODAL
+    OPEN_MOBILE_CART_MODAL,
+    CLOSE_MOBILE_CART_MODAL
 } from './actionTypes';
 
 const initialState = {
@@ -15,7 +15,7 @@ const initialState = {
     isUserExpert: true,
     selectedIngredients: [],
     isIngredientNotFoundModalOpen: false,
-    isCartEmptyModalOpen: false
+    isMobileCartModalOpen: false
 };
 
 function reducers(state = initialState, action) {
@@ -52,14 +52,14 @@ function reducers(state = initialState, action) {
                 isIngredientNotFoundModalOpen: isOpen
             });
         }
-        case OPEN_CART_EMPTY_MODAL: {
+        case OPEN_MOBILE_CART_MODAL: {
             return Object.assign({}, state, {
-                isCartEmptyModalOpen: true
+                isMobileCartModalOpen: true
             });
         }
-        case CLOSE_CART_EMPTY_MODAL: {
+        case CLOSE_MOBILE_CART_MODAL: {
             return Object.assign({}, state, {
-                isCartEmptyModalOpen: false
+                isMobileCartModalOpen: false
             });
         }
         default:

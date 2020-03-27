@@ -3,7 +3,7 @@ import './IngredientCartDetails.css';
 import { connect } from 'react-redux';
 import CancelIcon from '@material-ui/icons/Cancel';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import { removeIngredient, clearAllIngredients } from './redux/actionCreators';
+import { removeIngredient, clearAllIngredients, closeMobileCartModal } from './redux/actionCreators';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -16,6 +16,7 @@ function IngredientCartDetails(props) {
 
     function clearCart() {
         props.clearAllIngredients();
+        props.closeMobileCartModal();
     }
 
     return (
@@ -38,14 +39,15 @@ function IngredientCartDetails(props) {
                         </Tooltip>
                     </div>;
                 })}
-                <div className="clear-cart" onClick={() => clearCart()}>
+                <div className="clear-cart" onClick={clearCart}>
                     <Tooltip title="Clear all cart items">
                         <DeleteIcon fontSize="large"/>
                     </Tooltip>
+                    Clear cart
                 </div>
             </div>
         </div>
     )
 }
 
-export default connect(mapStateToProps, { removeIngredient, clearAllIngredients })(IngredientCartDetails);
+export default connect(mapStateToProps, { removeIngredient, clearAllIngredients, closeMobileCartModal })(IngredientCartDetails);
