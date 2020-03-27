@@ -34,48 +34,47 @@ div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBa
 
 .modal-div {
     background-color: white;
-    width: 30%;
+    width: 40%;
+    border: 3px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 3px solid black;
-    margin: 100px auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .modal-div img {
-    width: 300px;
+    width: 400px;
     margin: auto;
 }
 
 .modal-div .ok-button {
-    width: 200px;
+    width: 150px;
     margin: 20px 0;
     background-color: #b6e64f;
 }
 
 .modal-div .ok-button:hover {
-    width: 200px;
+    width: 150px;
     margin: 20px 0;
     background-color: #8bcf32;
 }
 
-@media (max-width: 480px) {
-    .autocomplete-ingredients {
-        width: 100%;
-        text-align: center;
+@media (min-width: 769px) and (max-width: 1024px) {
+    .modal-div {
+        width: 50%;
     }
 
-    #select-ingredient-button {
-        margin-right: 0;
-    }
-
-    div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {
-        width: 250px;
+    .modal-div img {
+        width: 350px;
     }
 }
 
-@media (min-width: 481px) and (max-width: 768px) {
+@media (max-width: 768px) {
     .autocomplete-ingredients {
         width: 100%;
         text-align: center;
@@ -83,6 +82,20 @@ div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBa
 
     #select-ingredient-button {
         margin-right: 0;
+    }
+
+    .modal-div {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {
+        width: 250px;
+    }
+
+    .modal-div img {
+        width: 300px;
     }
 }
 

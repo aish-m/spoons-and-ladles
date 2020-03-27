@@ -1,4 +1,12 @@
-import { CHANGE_CURRENT_TAB, SELECT_INGREDIENT, REMOVE_INGREDIENT, CLEAR_ALL_INGREDIENTS, TOGGLE_INF_MODAL } from './actionTypes'
+import {
+    CHANGE_CURRENT_TAB,
+    SELECT_INGREDIENT,
+    REMOVE_INGREDIENT,
+    CLEAR_ALL_INGREDIENTS,
+    TOGGLE_INF_MODAL,
+    OPEN_CART_EMPTY_MODAL,
+    CLOSE_CART_EMPTY_MODAL
+} from './actionTypes'
 
 export const changeTabValue = newTabId => ({
     type: CHANGE_CURRENT_TAB,
@@ -28,4 +36,12 @@ export const clearAllIngredients = () => ({
 
 export const toggleInfModal = () => ({
     type: TOGGLE_INF_MODAL
+});
+
+export const openCartEmptyModal = () => ({
+    type: OPEN_CART_EMPTY_MODAL
+});
+
+export const closeCartEmptyModal = () => ({
+    type: CLOSE_CART_EMPTY_MODAL
 });

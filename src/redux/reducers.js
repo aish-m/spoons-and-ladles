@@ -1,4 +1,12 @@
-import { CHANGE_CURRENT_TAB, SELECT_INGREDIENT, REMOVE_INGREDIENT, CLEAR_ALL_INGREDIENTS, TOGGLE_INF_MODAL } from './actionTypes';
+import {
+    CHANGE_CURRENT_TAB,
+    SELECT_INGREDIENT,
+    REMOVE_INGREDIENT,
+    CLEAR_ALL_INGREDIENTS,
+    TOGGLE_INF_MODAL,
+    OPEN_CART_EMPTY_MODAL,
+    CLOSE_CART_EMPTY_MODAL
+} from './actionTypes';
 
 const initialState = {
     currentTab: 0,
@@ -6,7 +14,8 @@ const initialState = {
     loggedIn: true,
     isUserExpert: true,
     selectedIngredients: [],
-    isIngredientNotFoundModalOpen: false
+    isIngredientNotFoundModalOpen: false,
+    isCartEmptyModalOpen: false
 };
 
 function reducers(state = initialState, action) {
@@ -41,6 +50,16 @@ function reducers(state = initialState, action) {
 
             return Object.assign({}, state, {
                 isIngredientNotFoundModalOpen: isOpen
+            });
+        }
+        case OPEN_CART_EMPTY_MODAL: {
+            return Object.assign({}, state, {
+                isCartEmptyModalOpen: true
+            });
+        }
+        case CLOSE_CART_EMPTY_MODAL: {
+            return Object.assign({}, state, {
+                isCartEmptyModalOpen: false
             });
         }
         default:

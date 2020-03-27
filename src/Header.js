@@ -6,28 +6,51 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import './Header.css';
 import { connect } from 'react-redux';
-import { changeTabValue } from './redux/actionCreators';
+import { changeTabValue, openCartEmptyModal, closeCartEmptyModal } from './redux/actionCreators';
 import SearchIcon from '@material-ui/icons/Search';
 import user from './images/user-icon.png';
 import andy from './images/andy-samberg.jpg';
 import boyle from './images/boyle.jpeg';
+import cartIcon from './images/cart-icon.png';
 import MenuIcon from '@material-ui/icons/Menu';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Modal from "@material-ui/core/Modal";
+import noIngredients from "./images/no-ingredients.png";
+import Button from "@material-ui/core/Button";
 
 const mapStateToProps = state => ({
     currentTab: state.currentTab,
     loggedIn: state.loggedIn,
     isExpert: state.isUserExpert,
-    selectedIngredientsCount: state.selectedIngredients.length
+    selectedIngredientsCount: state.selectedIngredients.length,
+    isCartEmptyModalOpen: state.isCartEmptyModalOpen
 });
 
 function Header(props) {
+
+    function toggleHamburgerIcon() {
+        if(document.getElementById("mobileMenu").classList.contains("desktop")) {
+            document.getElementById("mobileMenu").classList.remove("desktop");
+            document.getElementById("mobileMenu").classList.add("mobile");
+        }
+        else if(document.getElementById("mobileMenu").classList.contains("mobile")) {
+            document.getElementById("mobileMenu").classList.remove("mobile");
+            document.getElementById("mobileMenu").classList.add("desktop");
+        }
+    }
+
+    function openIngredientCart() {
+        if(props.selectedIngredientsCount === 0) {
+            console.log('cart open clicked!');
+            props.openCartEmptyModal();
+        }
+    }
+
     return (
         <header>
                 <div className="non-sticky-header">
                     <div onClick={() => props.changeTabValue(0)} className="header-left">
                         <img id="mascot" src={mascot} alt="Spoons & Ladles mascot"/>
-                        <img id="company-name" src={text} alt="Spoons & Ladles text" />
+                        <img id="companyName" src={text} alt="Spoons & Ladles text" />
                     </div>
                     <div className="header-right">
                         <div className="search-bar">
@@ -37,7 +60,7 @@ function Header(props) {
                     </div>
                 </div>
                 <div className="sticky-nav-bar">
-                    <div onClick={() => props.changeTabValue(0)} id="home-icon">
+                    <div onClick={() => props.changeTabValue(0)} id="homeIcon">
                         <HomeIcon htmlColor="white" fontSize="large"/>
                     </div>
                     <div className="material-ui-tabs">
@@ -51,24 +74,43 @@ function Header(props) {
                                 }
                             }}
                         >
-                            <Tab id="look-up-recipes-tab" label="add ingredients" onClick={() => props.changeTabValue(1)}/>
-                            <Tab id="recipes-tab" label="recipes" onClick={() => props.changeTabValue(2)}/>
-                            <Tab id="submit-a-recipe-tab" label="Submit A Recipe" onClick={() => props.changeTabValue(3)}/>
+                            <Tab id="addIngredientsTab" label="add ingredients" onClick={() => props.changeTabValue(1)}/>
+                            <Tab id="recipesTab" label="recipes" onClick={() => props.changeTabValue(2)}/>
+                            <Tab id="submitRecipeTab" label="Submit A Recipe" onClick={() => props.changeTabValue(3)}/>
                             {(props.loggedIn && props.isExpert) ?
-                            <Tab id="evaluate-recipes-tab" label="Evaluate Recipes" onClick={() => props.changeTabValue(4)}/>:
+                            <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(4)}/> :
                                 null }
                         </Tabs>
                     </div>
-                    <MenuIcon id="hamburger-icon" htmlColor="white" fontSize="large"/>
-                    <SearchIcon fontSize="large" onClick={() => console.log("Search mobile..")} id="mobile-search-icon" htmlColor="white"/>
+                    <MenuIcon id="hamburgerIcon" htmlColor="white" fontSize="large" onClick={() => toggleHamburgerIcon()}/>
+                    <SearchIcon fontSize="large" onClick={() => console.log("Search mobile..")} id="mobileSearchIcon" htmlColor="white"/>
                     {props.loggedIn ? <img className="user-icon" src={user} alt="user profile" onClick={() => console.log("User options mobile")}/> : null }
-                    <div id="ingredient-cart-div">
-                        <ShoppingCartIcon fontSize="large" onClick={() => console.log("Cart mobile")} id="mobile-cart-icon" htmlColor="white"/>
-                        <div id="cart-count"> { props.selectedIngredientsCount } </div>
+                    <div id="cartDiv" onClick={openIngredientCart}>
+                        <img src={cartIcon} alt="Ingredient cart" id="cartIcon"/>
+                        <div id="cartCount"> { props.selectedIngredientsCount } </div>
                     </div>
                 </div>
+                <div id="mobileMenu" className="mobile-nav-bar desktop">
+                    <ul>
+                        <li onClick={() => props.changeTabValue(1)}> ADD INGREDIENTS </li>
+                        <li onClick={() => props.changeTabValue(2)}> RECIPES </li>
+                        <li onClick={() => props.changeTabValue(3)}> SUBMIT A RECIPE </li>
+                        {(props.loggedIn && props.isExpert) ?
+                            <li onClick={() => props.changeTabValue(4)}> EVALUATE RECIPES </li> : null
+                        }
+                    </ul>
+                </div>
+                <Modal
+                    open={props.isCartEmptyModalOpen}
+                    onClose={props.closeCartEmptyModal}
+                >
+                    <div className="cart-empty-modal">
+                        <img src={noIngredients} alt="No ingredients added to cart" />
+                        <Button className="ok-button" variant="contained" onClick={props.closeCartEmptyModal}>OK</Button>
+                    </div>
+                </Modal>
         </header>
     )
 }
 
-export default connect(mapStateToProps, { changeTabValue })(Header);
+export default connect(mapStateToProps, { changeTabValue, openCartEmptyModal, closeCartEmptyModal })(Header);
