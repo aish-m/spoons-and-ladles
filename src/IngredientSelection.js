@@ -16,7 +16,7 @@ class IngredientSelection extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/api/ingredients/getAll")
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/ingredients/getAll")
             .then(res => res.json())
             .then(
                 (result) => {
@@ -33,7 +33,7 @@ class IngredientSelection extends React.Component {
                 }
             );
 
-        fetch("http://localhost:8080/api/ingredients/getTopTwelve")
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/ingredients/getTopTwelve")
             .then(res => res.json())
             .then(
                 (result) => {
