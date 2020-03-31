@@ -17,7 +17,8 @@
     }
 
     #mobile-image-grid {
-        display: block;
+        display: flex;
+        flex-direction: column;
     }
 
     .mobile-carousel-image {
