@@ -5,7 +5,9 @@ import {
     CLEAR_ALL_INGREDIENTS,
     TOGGLE_INF_MODAL,
     OPEN_MOBILE_CART_MODAL,
-    CLOSE_MOBILE_CART_MODAL
+    CLOSE_MOBILE_CART_MODAL,
+    LOOKUP_RECIPES,
+    NEW_SEARCH,
 } from './actionTypes'
 
 export const changeTabValue = newTabId => ({
@@ -44,4 +46,8 @@ export const openMobileCartModal = () => ({
 
 export const closeMobileCartModal = () => ({
     type: CLOSE_MOBILE_CART_MODAL
+});
+
+export const lookupRecipes = () => ({
+    type: LOOKUP_RECIPES
 });

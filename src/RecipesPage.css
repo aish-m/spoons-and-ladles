@@ -2,6 +2,7 @@
     flex-direction: row;
     justify-content: space-around;
     background-color: #dfe5d0;
+    width: 100%;
 }
 
 .card-img{
@@ -19,11 +20,17 @@
 }
 
 .content-head{
-    
     height: 32%;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-.openrecipe label{
-    color: blue;
+.content-head:hover{
+    overflow: visible; 
+    white-space: normal; 
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    background-color:#FFF;
 }

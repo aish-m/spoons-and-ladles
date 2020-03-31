@@ -5,7 +5,9 @@ import {
     CLEAR_ALL_INGREDIENTS,
     TOGGLE_INF_MODAL,
     OPEN_MOBILE_CART_MODAL,
-    CLOSE_MOBILE_CART_MODAL
+    CLOSE_MOBILE_CART_MODAL,
+    LOOKUP_RECIPES,
+    NEW_SEARCH,
 } from './actionTypes';
 
 const initialState = {
@@ -14,8 +16,9 @@ const initialState = {
     loggedIn: true,
     isUserExpert: true,
     selectedIngredients: [],
+    showAllRecipes: true,
     isIngredientNotFoundModalOpen: false,
-    isMobileCartModalOpen: false
+    isMobileCartModalOpen: false,
 };
 
 function reducers(state = initialState, action) {
@@ -62,6 +65,30 @@ function reducers(state = initialState, action) {
                 isMobileCartModalOpen: false
             });
         }
+        case LOOKUP_RECIPES: {
+            let recipesFound = action.payload.map(recipe =>
+                recipesFound.add({
+                recipeId: recipe.recipeId,
+                instructions: recipe.instructions,
+                pictureLink: recipe.pictureLink,
+                keywords: recipe.keywords,
+                prepTime: recipe.prepTime,
+                userId: recipe.userId,
+                numberOfReviewers: recipe.numberOfReviewers,
+                servings: recipe.servings,
+                rating: recipe.rating,
+            }));
+            return Object.assign({}, state, {
+                recipesList: recipesFound
+            });
+        }
+
+        case NEW_SEARCH: {
+            return Object.assign({}, state, {
+                recipesFound: []
+            });
+        }
+
         default:
             return state
     }
