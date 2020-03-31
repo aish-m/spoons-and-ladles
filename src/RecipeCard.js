@@ -6,7 +6,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import './RecipePage.css';
+import ScheduleIcon from '@material-ui/icons/Schedule';
+import './RecipesPage.css';
 
 const useStyles = makeStyles({
     root: {
@@ -44,6 +45,10 @@ function RecipeCard(recipes) {
                 <Button size = "small" color = "primary">
                     Open
                 </Button>
+                <ScheduleIcon></ScheduleIcon>
+                <Typography className = "content-text" variant="body2" color="textSecondary" component="p">
+                    {recipes.recipeTime}
+                </Typography>
             </CardActions>
         </Card>
     );

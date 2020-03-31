@@ -2,200 +2,70 @@ import React from 'react';
 import { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import RecipeCard from './RecipeCard';
-import './RecipePage.css';
+import './RecipesPage.css';
+import { connect } from 'react-redux';
 
-/*class RecipesGrid extends Component{
-
-    /*constructor(props){
+class RecipesGrid extends React.Component {
+    
+        
+    constructor(props) {
         super(props);
         this.state = {
-            recipes: [],
-        }
+            recipesList:[],
+            isLoading: false,
+            error: null,
+        };
     }
+
     
 
-    componentDidMount() {
+    componentDidMount(){
+
+        this.setState({isLoading: true});
+
         fetch("http://localhost:8080/api/recipes/getAll")
-        .then(res => res.json()
-        )
-        .then(
-            (data) => {
-                console.log(data)
-                let recipeList = data;
-                this.setState({recipes: recipeList})
-                console.log(this.state.recipes)
-            }
-        )
-        .catch(console.log("check"));
+            .then(res => {
+                if(res.ok) return res.json();
+                else throw new Error ("Oops, something went wrong...");
+            })
+            .then((data) => this.setState({
+                isLoading: false,
+                recipesList: data,
+            }))
+            .catch((error) => this.setState({
+                error,
+                isLoading: false,
+            }))
     }
 
-    render() {
-        return(
-            <Grid container className = "grid-container" spacing = {24}>
-                <Grid item md = {3}>
-                    <RecipeCard
-                        recipes = {this.state.recipes}
-                    />
-                </Grid>
-                <Grid item md = {3}>            
-                    <RecipeCard
-                        imgurl = "mutton-biryani.jpg"
-                        recipeName = "Mutton Biryani"
-                        recipeDesc = "Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur 
-                        adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua."
-                    />
-                </Grid>
-                <Grid item md = {3}>            
-                    <RecipeCard
-                        imgurl = "trifle.jpg"
-                        recipeName = "Trifle"
-                        recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                        adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua."
-                    />
-                </Grid>
-                <Grid item md = {3}>            
-                    <RecipeCard
-                        imgurl = "gyro-salad.jpg"
-                        recipeName = "Gyro Salad"
-                        recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                        adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua."
-                    />
-                </Grid>
-                <Grid item md = {3}>            
-                    <RecipeCard
-                        imgurl = "instant-pot-ramen.jpg"
-                        recipeName = "Instant Pot Ramen"
-                        recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                        adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua."
-                    />
-                </Grid>
-                <Grid item md = {3}>            
-                    <RecipeCard
-                        imgurl = "pesto-pasta.jpg"
-                        recipeName = "Pesto Pasta"
-                        recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                        adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua."
-                    />
-                </Grid>
-                <Grid item md = {3}>            
-                    <RecipeCard
-                        imgurl = "sushi.jpg"
-                        recipeName = "Sushi"
-                        recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                        adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua."
-                    />
-                </Grid>
-                <Grid item md = {3}>            
-                    <RecipeCard
-                        imgurl = "thai-fried-rice.jpg"
-                        recipeName = "Thai Fried Rice"
-                        recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                        adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua."
-                    />
-                </Grid>
-                <Grid item md = {3}>            
-                    <RecipeCard
-                        imgurl = "boba-tea.jpg"
-                        recipeName = "Boba Tea"
-                        recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                        adipiscing elit, sed do eiusmod tempor incididunt ut 
-                        labore et dolore magna aliqua."
-                    />
-                </Grid>
+    render(){
+        const recipesList = this.state.recipesList;
+        const isLoading = this.state.isLoading;
+        const error = this.state.error;
+
+        if(error){
+            return <h1>{error.message}</h1>
+        }
+        if(isLoading){
+            return <h1>Working, hold on...</h1>
+        }
+
+        return (
+
+            <Grid container className = "grid-container" spacing = {0}>
+                {recipesList.map(recipe => 
+                    <Grid item md = {3}>
+                        <RecipeCard
+                            imgurl = {recipe.pictureLink}
+                            recipeName = {recipe.recipeName}
+                            recipeDesc = {recipe.instructions}
+                            recipeTime = {recipe.prepTime}
+                        />
+                    </Grid>
+                )}
             </Grid>
-        )
+        );
     }
-}*/
-function RecipesGrid(){
-    return(
-        <Grid container className = "grid-container" spacing = {5}>
-            <Grid item md = {3}>            
-                <RecipeCard
-                    imgurl = "mutton-biryani.jpg"
-                    recipeName = "Mutton Biryani"
-                    recipeDesc = "Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua."
-                />
-            </Grid>
-            <Grid item md = {3}>            
-                <RecipeCard
-                    imgurl = "trifle.jpg"
-                    recipeName = "Trifle"
-                    recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua."
-                />
-            </Grid>
-            <Grid item md = {3}>            
-                <RecipeCard
-                    imgurl = "gyro-salad.jpg"
-                    recipeName = "Gyro Salad"
-                    recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua."
-                />
-            </Grid>
-            <Grid item md = {3}>            
-                <RecipeCard
-                    imgurl = "instant-pot-ramen.jpg"
-                    recipeName = "Instant Pot Ramen"
-                    recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua."
-                />
-            </Grid>
-            <Grid item md = {3}>            
-                <RecipeCard
-                    imgurl = "pesto-pasta.jpg"
-                    recipeName = "Pesto Pasta"
-                    recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua."
-                />
-            </Grid>
-            <Grid item md = {3}>            
-                <RecipeCard
-                    imgurl = "sushi.jpg"
-                    recipeName = "Sushi"
-                    recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua."
-                />
-            </Grid>
-            <Grid item md = {3}>            
-                <RecipeCard
-                    imgurl = "thai-fried-rice.jpg"
-                    recipeName = "Thai Fried Rice"
-                    recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua."
-                />
-            </Grid>
-            <Grid item md = {3}>            
-                <RecipeCard
-                    imgurl = "boba-tea.jpg"
-                    recipeName = "Boba Tea"
-                    recipeDesc = "Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua."
-                />
-            </Grid>
-        </Grid>
-    )
-
-
 }
 
-export default RecipesGrid;
+export default connect(RecipesGrid.mapStateToProps, null) (RecipesGrid);
