@@ -4,6 +4,7 @@
 
 .carousel-image {
     width: 100%;
+    height: auto;
 }
 
 #mobile-image-grid {
@@ -23,5 +24,6 @@
 
     .mobile-carousel-image {
         width: 100%;
+        height: auto;
     }
 }
