@@ -9,6 +9,16 @@
     padding-right: 2.5%;
 }
 
+.MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
+    width: 75%;
+    border-color: rgba(0, 0, 0, 0.23) !important;
+    border-style: solid;
+    border-width: 1px;
+}
+.MuiPaper-elevation2{
+    box-shadow: none !important;
+}
+
 .MuiOutlinedInput-input
 {
     font-family: Gentium Basic !important;
@@ -91,6 +101,10 @@
     cursor: pointer;
 }
 
+.MuiTableCell-root, .MuiTypography-root, .MuiTablePagination-select{
+    font-family: Gentium Basic !important;
+}
+
 .MuiButton-label{
     color: primary;
 }
@@ -122,6 +136,9 @@
     }
     .createRecipe{
         display: contents;
+    }
+    .MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
+        width: inherit;
     }
     .MuiFormControl-root, .MuiTextField-root {
         width: inherit;
