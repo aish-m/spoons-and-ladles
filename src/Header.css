@@ -103,6 +103,14 @@ input[type=search]:focus {
     cursor: pointer;
 }
 
+#headerLoginSignupButton {
+    background-color: #8bcf32;
+}
+
+#helloUserText {
+    color: white;
+}
+
 #hamburgerIcon, #mobileSearchIcon, #cartDiv, .mobile-nav-bar {
     display: none;
 }

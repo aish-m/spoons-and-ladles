@@ -8,13 +8,17 @@ import {
     CLOSE_MOBILE_CART_MODAL,
     LOOKUP_RECIPES,
     NEW_SEARCH,
+    TOGGLE_LOGGED_IN_FLAG,
+    LOG_USER_IN,
+    SET_EXPERT_CHEF_FLAG
 } from './actionTypes';
 
 const initialState = {
     currentTab: 0,
     recipesList: [],
-    loggedIn: true,
-    isUserExpert: true,
+    loggedIn: false,
+    loggedInUser: {},
+    isUserExpert: false,
     selectedIngredients: [],
     showAllRecipes: true,
     isIngredientNotFoundModalOpen: false,
@@ -86,6 +90,25 @@ function reducers(state = initialState, action) {
         case NEW_SEARCH: {
             return Object.assign({}, state, {
                 recipesFound: []
+            });
+        }
+
+        case TOGGLE_LOGGED_IN_FLAG: {
+            const toggledState = !state.loggedIn;
+            return Object.assign({}, state, {
+                loggedIn: toggledState
+            });
+        }
+
+        case LOG_USER_IN: {
+            return Object.assign({}, state, {
+                loggedInUser: action.payload
+            });
+        }
+
+        case SET_EXPERT_CHEF_FLAG: {
+            return Object.assign({}, state, {
+                isUserExpert: action.payload
             });
         }
 

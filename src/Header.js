@@ -9,8 +9,6 @@ import { connect } from 'react-redux';
 import { changeTabValue, openMobileCartModal, closeMobileCartModal } from './redux/actionCreators';
 import SearchIcon from '@material-ui/icons/Search';
 import user from './images/user-icon.png';
-import andy from './images/andy-samberg.jpg';
-import boyle from './images/boyle.jpeg';
 import cartIcon from './images/cart-icon.png';
 import MenuIcon from '@material-ui/icons/Menu';
 import Modal from "@material-ui/core/Modal";
@@ -23,7 +21,8 @@ const mapStateToProps = state => ({
     loggedIn: state.loggedIn,
     isExpert: state.isUserExpert,
     selectedIngredientsCount: state.selectedIngredients.length,
-    isMobileCartModalOpen: state.isMobileCartModalOpen
+    isMobileCartModalOpen: state.isMobileCartModalOpen,
+    user: state.loggedInUser
 });
 
 function Header(props) {
@@ -37,6 +36,11 @@ function Header(props) {
             document.getElementById("mobileMenu").classList.remove("mobile");
             document.getElementById("mobileMenu").classList.add("desktop");
         }
+    }
+
+    function renderLoginComponent() {
+        document.getElementById("appMainContent").classList.add("login");
+        document.getElementById("loginComponent").classList.add("login");
     }
 
     return (
@@ -59,7 +63,7 @@ function Header(props) {
                     </div>
                     <div className="material-ui-tabs">
                         <Tabs
-                            value={props.currentTab - 1}
+                            value={() => {if(props.currentTab<=4 && props.currentTab>=1) return props.currentTab - 1}}
                             aria-label="tabs for home page"
                             TabIndicatorProps={{
                                 style: {
@@ -78,7 +82,16 @@ function Header(props) {
                     </div>
                     <MenuIcon id="hamburgerIcon" htmlColor="white" fontSize="large" onClick={() => toggleHamburgerIcon()}/>
                     <SearchIcon fontSize="large" onClick={() => console.log("Search mobile..")} id="mobileSearchIcon" htmlColor="white"/>
-                    {props.loggedIn ? <img className="user-icon" src={user} alt="user profile" onClick={() => console.log("User options mobile")}/> : null }
+                    {
+                        props.loggedIn ?
+                        <p id="helloUserText"> Hello, {props.user.firstName} </p> :
+                        <Button variant="contained"
+                                id="headerLoginSignupButton"
+                                onClick={renderLoginComponent}
+                        >
+                            Log In/Sign up
+                        </Button>
+                    }
                     <div id="cartDiv" onClick={props.openMobileCartModal}>
                         <img src={cartIcon} alt="Ingredient cart" id="cartIcon"/>
                         <div id="cartCount"> { props.selectedIngredientsCount } </div>

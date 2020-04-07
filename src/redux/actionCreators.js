@@ -7,7 +7,9 @@ import {
     OPEN_MOBILE_CART_MODAL,
     CLOSE_MOBILE_CART_MODAL,
     LOOKUP_RECIPES,
-    NEW_SEARCH,
+    TOGGLE_LOGGED_IN_FLAG,
+    LOG_USER_IN,
+    SET_EXPERT_CHEF_FLAG
 } from './actionTypes'
 
 export const changeTabValue = newTabId => ({
@@ -50,4 +52,18 @@ export const closeMobileCartModal = () => ({
 
 export const lookupRecipes = () => ({
     type: LOOKUP_RECIPES
+});
+
+export const toggleUserLogin = () => ({
+   type: TOGGLE_LOGGED_IN_FLAG
+});
+
+export const logUserIn = userDetails => ({
+    type: LOG_USER_IN,
+    payload: userDetails
+});
+
+export const setExpertChefFlag = isExpert => ({
+    type: SET_EXPERT_CHEF_FLAG,
+    payload: isExpert
 });
