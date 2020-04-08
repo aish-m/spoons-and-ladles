@@ -1,10 +1,10 @@
 import React from 'react';
-import { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import RecipeCard from './RecipeCard';
 import './RecipesPage.css';
 import { connect } from 'react-redux';
-import { updateRecipes } from './redux/actionCreators.js'; 
+import { updateRecipes } from './redux/actionCreators.js';
+import './RecipeGrid.css';
 
 function mapStateToProps(state) {
     return { ingredientsList: state.selectedIngredients,
@@ -88,18 +88,20 @@ class RecipesGrid extends React.Component {
         }
 
         return (
-            <Grid container className = "grid-container" spacing = {0}>
-                {recipesList.map(recipe => 
-                    <Grid item md = {3}>
-                        <RecipeCard
-                            imgurl = {recipe.pictureLink}
-                            recipeName = {recipe.recipeName}
-                            recipeDesc = {recipe.instructions}
-                            recipeTime = {recipe.prepTime}
-                        />
-                    </Grid>
-                )}
-            </Grid>
+            <div className="recipe-grid-div">
+                <Grid container className = "grid-container" spacing = {0}>
+                    {recipesList.map(recipe =>
+                        <Grid item md = {3}>
+                            <RecipeCard
+                                imgurl = {recipe.pictureLink}
+                                recipeName = {recipe.recipeName}
+                                recipeDesc = {recipe.instructions}
+                                recipeTime = {recipe.prepTime}
+                            />
+                        </Grid>
+                    )}
+                </Grid>
+            </div>
         );
     }
 }

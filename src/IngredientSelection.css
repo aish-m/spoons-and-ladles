@@ -27,6 +27,14 @@
     width: 20%;
 }
 
+#lookup-recipes-button {
+    width: 100%;
+    margin-top: 15px;
+    background-color: forestgreen;
+    color: white;
+    font-size: 16px;
+}
+
 @media (max-width: 768px) {
     #picker {
         width: 100%;

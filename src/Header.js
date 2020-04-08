@@ -167,6 +167,7 @@ function Header(props) {
                                 <IngredientCartDetails
                                     toggleHandler = {props.closeMobileCartModal}
                                 />
+                                <Button variant="contained" id="lookup-recipes-button" onClick={() => props.changeTabValue(2)}>Lookup Recipes</Button>
                             </div>
                     }
                 </Modal>
