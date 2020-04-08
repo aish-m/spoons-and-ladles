@@ -7,6 +7,10 @@
     height: auto;
 }
 
+.img-div {
+    cursor: pointer;
+}
+
 #mobile-image-grid {
     display: none;
 }
@@ -18,8 +22,7 @@
 
     #mobile-image-grid {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: column;
     }
 
     .mobile-carousel-image {

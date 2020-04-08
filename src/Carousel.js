@@ -10,8 +10,10 @@ import fourMobile from './images/mobile-carousel/4.png';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import './Carousel.css';
+import { connect } from 'react-redux';
+import { changeTabValue } from './redux/actionCreators';
 
-function ImageCarousel() {
+function ImageCarousel(props) {
     return(
         <div className="carousel-div">
             <Carousel
@@ -24,13 +26,13 @@ function ImageCarousel() {
                 transitionTime={1000}
                 className="desktop-carousel"
             >
-                <div>
+                <div className="img-div" onClick={() => props.changeTabValue(1)}>
                     <img src={one} alt="Carousel 1" className="carousel-image"/>
                 </div>
-                <div>
+                <div className="img-div" onClick={() => props.changeTabValue(2)}>
                     <img src={two} alt="Carousel 2" className="carousel-image"/>
                 </div>
-                <div>
+                <div className="img-div" onClick={() => props.changeTabValue(3)}>
                     <img src={three} alt="Carousel 3" className="carousel-image"/>
                 </div>
                 <div>
@@ -48,4 +50,4 @@ function ImageCarousel() {
     )
 }
 
-export default ImageCarousel;
+export default connect(null, { changeTabValue })(ImageCarousel);

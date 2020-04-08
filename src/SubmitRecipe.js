@@ -3,6 +3,43 @@ import './SubmitRecipe.css';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import addRecipeImage from './images/add-recipe.png';
+import { forwardRef } from 'react';
+import AddBox from '@material-ui/icons/AddBox';
+import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import Check from '@material-ui/icons/Check';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
+import Clear from '@material-ui/icons/Clear';
+import DeleteOutline from '@material-ui/icons/DeleteOutline';
+import Edit from '@material-ui/icons/Edit';
+import FilterList from '@material-ui/icons/FilterList';
+import FirstPage from '@material-ui/icons/FirstPage';
+import LastPage from '@material-ui/icons/LastPage';
+import Remove from '@material-ui/icons/Remove';
+import SaveAlt from '@material-ui/icons/SaveAlt';
+import Search from '@material-ui/icons/Search';
+import ViewColumn from '@material-ui/icons/ViewColumn';
+import MaterialTable from 'material-table';
+const tableIcons = {
+    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+    DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref} />),
+    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+  };
+  
 
 class SubmitForm extends Component{
 
@@ -16,7 +53,14 @@ class SubmitForm extends Component{
         imageUpdateSpan : {display: 'none'},
         addRecipeStyle : {display: 'block',height: '250px',width: '250px'},
         title: '',prepTime: '', numOfServings: '',description: '',ingredients:'',procedure:'', imageCaptured: null,
-        imageFileType: null }
+        imageFileType: null,
+        columns: [
+            { title: 'Ingredient', field: 'ingredient' },
+            { title: 'Quantity', field: 'quantity' }
+          ],
+          data: [
+            
+          ] }
     } 
 
     
@@ -101,8 +145,79 @@ class SubmitForm extends Component{
                     </div>
                     
                     <div className="getRecipeDataIngredients">
-                        <TextField className="recipeIngredients" value={this.state.ingredients} name="ingredients" required label="Ingredients" multiline rows="5"  onChange={this.contentChange}
-                        placeholder="Put each ingredient on its own line." variant="outlined" />
+                        {/* <TextField className="recipeIngredients" value={this.state.ingredients} name="ingredients" required label="Ingredients" multiline rows="5"  onChange={this.contentChange}
+                        placeholder="Put each ingredient on its own line." variant="outlined" /> */}
+
+                        <MaterialTable
+                            
+                            options={{
+                                rowStyle: {
+                                //backgroundColor: '#EEE',
+                                fontFamily: 'Gentium Basic !important'
+                                },
+                                headerStyle: {
+                                //backgroundColor: '#01579b',
+                                //color: '#FFF',
+                                fontFamily: 'Gentium Basic'
+                                },
+                                searchFieldStyle: {
+                                //backgroundColor: '#AAA',
+                                fontFamily: 'Gentium Basic'
+                                }
+                            }}
+
+                            column={{
+                                cellStyle: {
+                                backgroundColor: '#EEE',
+                                fontFamily: 'Gentium Basic'
+                                }
+                            }}
+
+                            stickyHeader aria-label="sticky table"
+                            className="recipeIngredients"
+                            icons={tableIcons}
+                            title="Ingredients"
+                            columns={this.state.columns}
+                            data={this.state.data}
+                            editable={{
+                                onRowAdd: (newData) =>
+                                new Promise((resolve) => {
+                                    setTimeout(() => {
+                                    resolve();
+                                    this.setState((prevState) => {
+                                        const data = [...prevState.data];
+                                        data.push(newData);
+                                        return { ...prevState, data };
+                                    });
+                                    }, 600);
+                                }),
+                                onRowUpdate: (newData, oldData) =>
+                                new Promise((resolve) => {
+                                    setTimeout(() => {
+                                    resolve();
+                                    if (oldData) {
+                                        this.setState((prevState) => {
+                                        const data = [...prevState.data];
+                                        data[data.indexOf(oldData)] = newData;
+                                        return { ...prevState, data };
+                                        });
+                                    }
+                                    }, 600);
+                                }),
+                                onRowDelete: (oldData) =>
+                                new Promise((resolve) => {
+                                    setTimeout(() => {
+                                    resolve();
+                                    this.setState((prevState) => {
+                                        const data = [...prevState.data];
+                                        data.splice(data.indexOf(oldData), 1);
+                                        return { ...prevState, data };
+                                    });
+                                    }, 600);
+                                }),
+                            }}
+                            />
+
                     </div>
                     <div className="getRecipeDataProcedure">
                         <TextField className="recipeProcedure" value={this.state.procedure} name="procedure"  required label="Procedure" multiline rows="5"  onChange={this.contentChange}
@@ -127,7 +242,9 @@ class SubmitForm extends Component{
 
 function SubmitRecipe() {
     return (    
+        <div>
         <SubmitForm ></SubmitForm>
+        </div>
     )
 }
 

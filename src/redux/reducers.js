@@ -11,13 +11,17 @@ import {
     UPDATE_RECIPES,
     SHOW_ING_ALERT,
     STOP_ING_ALERT,
+    TOGGLE_LOGGED_IN_FLAG,
+    LOG_USER_IN,
+    SET_EXPERT_CHEF_FLAG,
 } from './actionTypes';
 
 const initialState = {
     currentTab: 0,
     recipesList: [],
-    loggedIn: true,
-    isUserExpert: true,
+    loggedIn: false,
+    loggedInUser: {},
+    isUserExpert: false,
     selectedIngredients: [],
     showAllRecipes: false,
     isIngredientNotFoundModalOpen: false,
@@ -89,6 +93,7 @@ function reducers(state = initialState, action) {
             });
         }
 
+
         case SHOW_ING_ALERT: {
             return Object.assign({}, state, {
                 showIngAlert: true,
@@ -99,6 +104,25 @@ function reducers(state = initialState, action) {
             return Object.assign({}, state, {
                 showIngAlert: false,
             })
+        }
+
+        case TOGGLE_LOGGED_IN_FLAG: {
+            const toggledState = !state.loggedIn;
+            return Object.assign({}, state, {
+                loggedIn: toggledState
+            });
+        }
+
+        case LOG_USER_IN: {
+            return Object.assign({}, state, {
+                loggedInUser: action.payload
+            });
+        }
+
+        case SET_EXPERT_CHEF_FLAG: {
+            return Object.assign({}, state, {
+                isUserExpert: action.payload
+            }); 
         }
 
         default:

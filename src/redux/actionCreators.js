@@ -11,6 +11,9 @@ import {
     UPDATE_RECIPES,
     SHOW_ING_ALERT,
     STOP_ING_ALERT,
+    TOGGLE_LOGGED_IN_FLAG,
+    LOG_USER_IN,
+    SET_EXPERT_CHEF_FLAG,
 } from './actionTypes'
 
 export const changeTabValue = newTabId => ({
@@ -67,10 +70,22 @@ export const stopIngAlert = () => ({
     type: STOP_ING_ALERT
 });
 
-
 export const updateRecipes = recipesList => ({
     type: UPDATE_RECIPES,
     payload: recipesList,
 });
 
+export const toggleUserLogin = () => ({
+   type: TOGGLE_LOGGED_IN_FLAG
+});
+
+export const logUserIn = userDetails => ({
+    type: LOG_USER_IN,
+    payload: userDetails
+});
+
+export const setExpertChefFlag = isExpert => ({
+    type: SET_EXPERT_CHEF_FLAG,
+    payload: isExpert
+});
 
