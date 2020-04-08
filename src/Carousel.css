@@ -7,6 +7,10 @@
     height: auto;
 }
 
+.img-div {
+    cursor: pointer;
+}
+
 #mobile-image-grid {
     display: none;
 }

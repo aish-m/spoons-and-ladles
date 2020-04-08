@@ -84,12 +84,13 @@ function Header(props) {
                     <SearchIcon fontSize="large" onClick={() => console.log("Search mobile..")} id="mobileSearchIcon" htmlColor="white"/>
                     {
                         props.loggedIn ?
-                        <p id="helloUserText"> Hello, {props.user.firstName} </p> :
+                        <p id="helloUserText"> Hello, user </p> :
                         <Button variant="contained"
                                 id="headerLoginSignupButton"
-                                onClick={renderLoginComponent}
+                                // onClick={renderLoginComponent}
+                                onClick={() => console.log('Log in component')}
                         >
-                            Log In/Sign up
+                            Log In
                         </Button>
                     }
                     <div id="cartDiv" onClick={props.openMobileCartModal}>
