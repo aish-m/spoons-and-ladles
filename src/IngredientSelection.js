@@ -94,11 +94,13 @@ class IngredientSelection extends React.Component {
                 <div  className="ingredient-display-div" id="cart">
                     {
                         this.props.count !== 0 ?
-                        <IngredientCartToggle/> :
-                        null
+                            <div>
+                                <IngredientCartToggle/>
+                                <Button variant="contained" id="lookup-recipes-button"
+                                onClick={() => this.props.changeTabValue(2)}>Lookup Recipes</Button>
+                            </div> :
+                            null
                     }
-                    
-                    <Button variant="contained" id="lookup-recipes-button" onClick={() => this.props.changeTabValue(2)}>Lookup Recipes</Button>
                 </div>
             </div>
         )
