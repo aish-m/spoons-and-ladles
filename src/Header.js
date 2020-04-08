@@ -27,13 +27,10 @@ const mapStateToProps = state => ({
     isExpert: state.isUserExpert,
     selectedIngredientsCount: state.selectedIngredients.length,
     isMobileCartModalOpen: state.isMobileCartModalOpen,
-<<<<<<< HEAD
     ingredientsList: state.IngredientsList,
     selectedIngredients: state.selectedIngredients,
     showIngAlert: state.showIngAlert,
-=======
     user: state.loggedInUser
->>>>>>> 041a4d87aeb9523dd7d2470dcf4def414625a1d8
 });
 
 function Header(props) {
