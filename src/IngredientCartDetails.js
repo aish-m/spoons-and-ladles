@@ -3,7 +3,7 @@ import './IngredientCartDetails.css';
 import { connect } from 'react-redux';
 import CancelIcon from '@material-ui/icons/Cancel';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import { removeIngredient, clearAllIngredients, closeMobileCartModal, lookupRecipes } from './redux/actionCreators';
+import { removeIngredient, clearAllIngredients, closeMobileCartModal, recipesWithIng, changeTabValue } from './redux/actionCreators';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
 import SearchIcon from '@material-ui/icons/Search';
@@ -21,21 +21,7 @@ function IngredientCartDetails(props) {
     }
 
     function lookupRecipes() {
-
-        fetch("http://localhost:8080/api/recipes/getAll")
-            .then(res => {
-                if(res.ok) return res.json();
-                else throw new Error ("Oops, something went wrong...");
-            })
-            .then((data) => this.setState({
-                isLoading: false,
-                recipesList: data,
-            }))
-            .catch((error) => this.setState({
-                error,
-                isLoading: false,
-            }));
-        props.lookupRecipes();
+        props.recipesWithIng();
     }
 
     return (
@@ -64,15 +50,6 @@ function IngredientCartDetails(props) {
                     </Tooltip>
                     Clear cart
                 </div>
-                <div className="find-recipes" onClick={props.lookupRecipes}>
-                    <Tooltip title="Lookup Recipes">
-                        <SearchIcon
-                                fontSize="large"
-                                className="lookup-icon"
-                        />
-                    </Tooltip>
-                    Lookup Recipes
-                </div>
             </div>
         </div>
     )
@@ -82,6 +59,7 @@ export default connect(mapStateToProps, {
     removeIngredient, 
     clearAllIngredients, 
     closeMobileCartModal,
-    lookupRecipes,
+    recipesWithIng,
+    changeTabValue,
 })
 (IngredientCartDetails);

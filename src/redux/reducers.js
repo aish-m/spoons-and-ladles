@@ -6,8 +6,11 @@ import {
     TOGGLE_INF_MODAL,
     OPEN_MOBILE_CART_MODAL,
     CLOSE_MOBILE_CART_MODAL,
-    LOOKUP_RECIPES,
-    NEW_SEARCH,
+    RECIPES_WITH_ING,
+    RECIPES_WITHOUT_ING,
+    UPDATE_RECIPES,
+    SHOW_ING_ALERT,
+    STOP_ING_ALERT,
 } from './actionTypes';
 
 const initialState = {
@@ -16,9 +19,10 @@ const initialState = {
     loggedIn: true,
     isUserExpert: true,
     selectedIngredients: [],
-    showAllRecipes: true,
+    showAllRecipes: false,
     isIngredientNotFoundModalOpen: false,
     isMobileCartModalOpen: false,
+    showIngAlert: false,
 };
 
 function reducers(state = initialState, action) {
@@ -32,6 +36,7 @@ function reducers(state = initialState, action) {
                 id: action.payload.ingredientId,
                 name: action.payload.ingredientName
             }];
+            
             return Object.assign({}, state, {
                 selectedIngredients: selectedIngredientsList
             });
@@ -65,32 +70,39 @@ function reducers(state = initialState, action) {
                 isMobileCartModalOpen: false
             });
         }
-        case LOOKUP_RECIPES: {
-            let recipesFound = action.payload.map(recipe =>
-                recipesFound.add({
-                recipeId: recipe.recipeId,
-                instructions: recipe.instructions,
-                pictureLink: recipe.pictureLink,
-                keywords: recipe.keywords,
-                prepTime: recipe.prepTime,
-                userId: recipe.userId,
-                numberOfReviewers: recipe.numberOfReviewers,
-                servings: recipe.servings,
-                rating: recipe.rating,
-            }));
+        
+        case RECIPES_WITH_ING: {
             return Object.assign({}, state, {
-                recipesList: recipesFound
+                showAllRecipes: false,
             });
         }
 
-        case NEW_SEARCH: {
+        case RECIPES_WITHOUT_ING: {
             return Object.assign({}, state, {
-                recipesFound: []
+                showAllRecipes: true,
+            })
+        }
+
+        case UPDATE_RECIPES: {
+            return Object.assign({}, state, {
+                recipesList: action.payload,
             });
+        }
+
+        case SHOW_ING_ALERT: {
+            return Object.assign({}, state, {
+                showIngAlert: true,
+            })
+        }
+
+        case STOP_ING_ALERT: {
+            return Object.assign({}, state, {
+                showIngAlert: false,
+            })
         }
 
         default:
-            return state
+            return state;
     }
 }
 

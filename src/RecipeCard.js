@@ -41,11 +41,12 @@ function RecipeCard(recipes) {
                     </Typography>
                 </CardContent>               
             </CardActionArea>
-            <CardActions>
+            <CardActions className = "card-bottom">
                 <Button size = "small" color = "primary">
                     Open
                 </Button>
-                <ScheduleIcon></ScheduleIcon>
+                
+                <ScheduleIcon className = "clock-icon"></ScheduleIcon>
                 <Typography className = "content-text" variant="body2" color="textSecondary" component="p">
                     {recipes.recipeTime}
                 </Typography>

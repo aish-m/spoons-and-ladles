@@ -6,8 +6,11 @@ import {
     TOGGLE_INF_MODAL,
     OPEN_MOBILE_CART_MODAL,
     CLOSE_MOBILE_CART_MODAL,
-    LOOKUP_RECIPES,
-    NEW_SEARCH,
+    RECIPES_WITH_ING,
+    RECIPES_WITHOUT_ING,
+    UPDATE_RECIPES,
+    SHOW_ING_ALERT,
+    STOP_ING_ALERT,
 } from './actionTypes'
 
 export const changeTabValue = newTabId => ({
@@ -48,6 +51,26 @@ export const closeMobileCartModal = () => ({
     type: CLOSE_MOBILE_CART_MODAL
 });
 
-export const lookupRecipes = () => ({
-    type: LOOKUP_RECIPES
+export const recipesWithIng = () => ({
+    type: RECIPES_WITH_ING
 });
+
+export const recipesWithoutIng = () => ({
+    type: RECIPES_WITHOUT_ING
+});
+
+export const showIngAlert = () => ({
+    type: SHOW_ING_ALERT
+});
+
+export const stopIngAlert = () => ({
+    type: STOP_ING_ALERT
+});
+
+
+export const updateRecipes = recipesList => ({
+    type: UPDATE_RECIPES,
+    payload: recipesList,
+});
+
+

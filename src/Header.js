@@ -6,7 +6,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import './Header.css';
 import { connect } from 'react-redux';
-import { changeTabValue, openMobileCartModal, closeMobileCartModal } from './redux/actionCreators';
+import { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert, stopIngAlert, recipesWithIng, recipesWithoutIng } from './redux/actionCreators';
 import SearchIcon from '@material-ui/icons/Search';
 import user from './images/user-icon.png';
 import andy from './images/andy-samberg.jpg';
@@ -17,13 +17,21 @@ import Modal from "@material-ui/core/Modal";
 import noIngredients from "./images/no-ingredients.png";
 import Button from "@material-ui/core/Button";
 import IngredientCartDetails from "./IngredientCartDetails";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const mapStateToProps = state => ({
     currentTab: state.currentTab,
     loggedIn: state.loggedIn,
     isExpert: state.isUserExpert,
     selectedIngredientsCount: state.selectedIngredients.length,
-    isMobileCartModalOpen: state.isMobileCartModalOpen
+    isMobileCartModalOpen: state.isMobileCartModalOpen,
+    ingredientsList: state.IngredientsList,
+    selectedIngredients: state.selectedIngredients,
+    showIngAlert: state.showIngAlert,
 });
 
 function Header(props) {
@@ -69,7 +77,35 @@ function Header(props) {
                             }}
                         >
                             <Tab id="addIngredientsTab" label="add ingredients" onClick={() => props.changeTabValue(1)}/>
-                            <Tab id="recipesTab" label="recipes" onClick={() => props.changeTabValue(2)}/>
+                            <Tab id="recipesTab" label="recipes" onClick={() => {
+                                if(props.selectedIngredientsCount > 0) props.changeTabValue(2);/*props.showIngAlert();*/
+                                else props.changeTabValue(2);
+                                }       
+                            }/>
+                            
+                                <Dialog 
+                                    open = {false}
+                                    aria-labelledby="dialog-title"
+                                    aria-describedby="dialog-description"
+                                >
+                                        <DialogTitle id = "dialog-title">
+                                            Psst... Search with Ingredients?
+                                        </DialogTitle>
+                                        <DialogContent>
+                                            <DialogContentText id="dialog-description">
+                                                We noticed you added some ingredients. 
+                                                Do you want to find recipes with ingredients?
+                                            </DialogContentText>
+                                        </DialogContent>
+                                        <DialogActions>
+                                            <Button color = "primary" onClick = {props.stopIngAlert()}>
+                                                Yes, search with Ingredients
+                                            </Button>
+                                            <Button color = "primary" onClick = {props.stopIngAlert()}>
+                                                Nah, hit me with everything you got!
+                                            </Button>
+                                        </DialogActions>
+                                    </Dialog>
                             <Tab id="submitRecipeTab" label="Submit A Recipe" onClick={() => props.changeTabValue(3)}/>
                             {(props.loggedIn && props.isExpert) ?
                             <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(4)}/> :
@@ -124,4 +160,4 @@ function Header(props) {
     )
 }
 
-export default connect(mapStateToProps, { changeTabValue, openMobileCartModal, closeMobileCartModal })(Header);
+export default connect(mapStateToProps, { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert, stopIngAlert, recipesWithIng, recipesWithoutIng })(Header);

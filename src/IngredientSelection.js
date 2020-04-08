@@ -3,6 +3,8 @@ import IngredientPicker from "./IngredientPicker";
 import './IngredientSelection.css';
 import IngredientCartToggle from "./IngredientCartToggle";
 import { connect } from 'react-redux';
+import Button from "@material-ui/core/Button";
+import { changeTabValue } from './redux/actionCreators';
 
 class IngredientSelection extends React.Component {
 
@@ -95,10 +97,12 @@ class IngredientSelection extends React.Component {
                         <IngredientCartToggle/> :
                         null
                     }
+                    
+                    <Button variant="contained" id="lookup-recipes-button" onClick={() => this.props.changeTabValue(2)}>Lookup Recipes</Button>
                 </div>
             </div>
         )
     }
 }
 
-export default connect(IngredientSelection.mapStateToProps, null)(IngredientSelection);
+export default connect(IngredientSelection.mapStateToProps, { changeTabValue })(IngredientSelection);
