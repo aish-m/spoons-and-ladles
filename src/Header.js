@@ -71,7 +71,7 @@ function Header(props) {
                     </div>
                     <div className="material-ui-tabs">
                         <Tabs
-                            value={() => {if(props.currentTab<=4 && props.currentTab>=1) return props.currentTab - 1}}
+                            value={props.currentTab - 1}
                             aria-label="tabs for home page"
                             TabIndicatorProps={{
                                 style: {
@@ -81,35 +81,31 @@ function Header(props) {
                             }}
                         >
                             <Tab id="addIngredientsTab" label="add ingredients" onClick={() => props.changeTabValue(1)}/>
-                            <Tab id="recipesTab" label="recipes" onClick={() => {
-                                if(props.selectedIngredientsCount > 0) props.changeTabValue(2);/*props.showIngAlert();*/
-                                else props.changeTabValue(2);
-                                }       
-                            }/>
+                            <Tab id="recipesTab" label="recipes" onClick={() => props.changeTabValue(2)} />
                             
-                                <Dialog 
-                                    open = {false}
-                                    aria-labelledby="dialog-title"
-                                    aria-describedby="dialog-description"
-                                >
-                                        <DialogTitle id = "dialog-title">
-                                            Psst... Search with Ingredients?
-                                        </DialogTitle>
-                                        <DialogContent>
-                                            <DialogContentText id="dialog-description">
-                                                We noticed you added some ingredients. 
-                                                Do you want to find recipes with ingredients?
-                                            </DialogContentText>
-                                        </DialogContent>
-                                        <DialogActions>
-                                            <Button color = "primary" onClick = {props.stopIngAlert()}>
-                                                Yes, search with Ingredients
-                                            </Button>
-                                            <Button color = "primary" onClick = {props.stopIngAlert()}>
-                                                Nah, hit me with everything you got!
-                                            </Button>
-                                        </DialogActions>
-                                    </Dialog>
+                                {/*<Dialog */}
+                                {/*    open = {false}*/}
+                                {/*    aria-labelledby="dialog-title"*/}
+                                {/*    aria-describedby="dialog-description"*/}
+                                {/*>*/}
+                                {/*        <DialogTitle id = "dialog-title">*/}
+                                {/*            Psst... Search with Ingredients?*/}
+                                {/*        </DialogTitle>*/}
+                                {/*        <DialogContent>*/}
+                                {/*            <DialogContentText id="dialog-description">*/}
+                                {/*                We noticed you added some ingredients. */}
+                                {/*                Do you want to find recipes with ingredients?*/}
+                                {/*            </DialogContentText>*/}
+                                {/*        </DialogContent>*/}
+                                {/*        <DialogActions>*/}
+                                {/*            <Button color = "primary" onClick = {props.stopIngAlert()}>*/}
+                                {/*                Yes, search with Ingredients*/}
+                                {/*            </Button>*/}
+                                {/*            <Button color = "primary" onClick = {props.stopIngAlert()}>*/}
+                                {/*                Nah, hit me with everything you got!*/}
+                                {/*            </Button>*/}
+                                {/*        </DialogActions>*/}
+                                {/*    </Dialog>*/}
                             <Tab id="submitRecipeTab" label="Submit A Recipe" onClick={() => props.changeTabValue(3)}/>
                             {(props.loggedIn && props.isExpert) ?
                             <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(4)}/> :
