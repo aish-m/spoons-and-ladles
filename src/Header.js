@@ -8,18 +8,15 @@ import './Header.css';
 import { connect } from 'react-redux';
 import { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert, stopIngAlert, recipesWithIng, recipesWithoutIng } from './redux/actionCreators';
 import SearchIcon from '@material-ui/icons/Search';
-import user from './images/user-icon.png';
 import cartIcon from './images/cart-icon.png';
 import MenuIcon from '@material-ui/icons/Menu';
 import Modal from "@material-ui/core/Modal";
 import noIngredients from "./images/no-ingredients.png";
 import Button from "@material-ui/core/Button";
 import IngredientCartDetails from "./IngredientCartDetails";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import {
+    NavLink
+} from "react-router-dom";
 
 const mapStateToProps = state => ({
     currentTab: state.currentTab,
@@ -55,8 +52,10 @@ function Header(props) {
         <header>
                 <div className="non-sticky-header">
                     <div onClick={() => props.changeTabValue(0)} className="header-left">
-                        <img id="mascot" src={mascot} alt="Spoons & Ladles mascot"/>
-                        <img id="companyName" src={text} alt="Spoons & Ladles text" />
+                        <NavLink to="/">
+                            <img id="mascot" src={mascot} alt="Spoons & Ladles mascot"/>
+                            <img id="companyName" src={text} alt="Spoons & Ladles text" />
+                        </NavLink>
                     </div>
                     <div className="header-right">
                         <div className="search-bar">
@@ -67,7 +66,9 @@ function Header(props) {
                 </div>
                 <div className="sticky-nav-bar">
                     <div onClick={() => props.changeTabValue(0)} id="homeIcon">
-                        <HomeIcon htmlColor="white" fontSize="large"/>
+                        <NavLink to="/">
+                            <HomeIcon htmlColor="white" fontSize="large"/>
+                        </NavLink>
                     </div>
                     <div className="material-ui-tabs">
                         <Tabs
@@ -80,35 +81,19 @@ function Header(props) {
                                 }
                             }}
                         >
-                            <Tab id="addIngredientsTab" label="add ingredients" onClick={() => props.changeTabValue(1)}/>
-                            <Tab id="recipesTab" label="recipes" onClick={() => props.changeTabValue(2)} />
-                            
-                                {/*<Dialog */}
-                                {/*    open = {false}*/}
-                                {/*    aria-labelledby="dialog-title"*/}
-                                {/*    aria-describedby="dialog-description"*/}
-                                {/*>*/}
-                                {/*        <DialogTitle id = "dialog-title">*/}
-                                {/*            Psst... Search with Ingredients?*/}
-                                {/*        </DialogTitle>*/}
-                                {/*        <DialogContent>*/}
-                                {/*            <DialogContentText id="dialog-description">*/}
-                                {/*                We noticed you added some ingredients. */}
-                                {/*                Do you want to find recipes with ingredients?*/}
-                                {/*            </DialogContentText>*/}
-                                {/*        </DialogContent>*/}
-                                {/*        <DialogActions>*/}
-                                {/*            <Button color = "primary" onClick = {props.stopIngAlert()}>*/}
-                                {/*                Yes, search with Ingredients*/}
-                                {/*            </Button>*/}
-                                {/*            <Button color = "primary" onClick = {props.stopIngAlert()}>*/}
-                                {/*                Nah, hit me with everything you got!*/}
-                                {/*            </Button>*/}
-                                {/*        </DialogActions>*/}
-                                {/*    </Dialog>*/}
-                            <Tab id="submitRecipeTab" label="Submit A Recipe" onClick={() => props.changeTabValue(3)}/>
+                            <NavLink to="/addIngredients" className="nav-links" activeClassName="active-nav-links">
+                                <Tab id="addIngredientsTab" label="add ingredients" onClick={() => props.changeTabValue(1)}/>
+                            </NavLink>
+                            <NavLink to="/recipes" className="nav-links" activeClassName="active-nav-links">
+                                <Tab id="recipesTab" label="recipes" onClick={() => props.changeTabValue(2)} />
+                            </NavLink>
+                            <NavLink to="/submitRecipe" className="nav-links" activeClassName="active-nav-links">
+                                <Tab id="submitRecipeTab" label="Submit A Recipe" onClick={() => props.changeTabValue(3)}/>
+                            </NavLink>
                             {(props.loggedIn && props.isExpert) ?
-                            <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(4)}/> :
+                                <NavLink to="/evaluateRecipes" className="nav-links" activeClassName="active-nav-links">
+                                    <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(4)}/>
+                                </NavLink>:
                                 null }
                         </Tabs>
                     </div>
@@ -132,11 +117,19 @@ function Header(props) {
                 </div>
                 <div id="mobileMenu" className="mobile-nav-bar desktop">
                     <ul>
-                        <li onClick={() => props.changeTabValue(1)}> ADD INGREDIENTS </li>
-                        <li onClick={() => props.changeTabValue(2)}> RECIPES </li>
-                        <li onClick={() => props.changeTabValue(3)}> SUBMIT A RECIPE </li>
+                        <li onClick={() => props.changeTabValue(1)}>
+                            <NavLink to="/addIngredients" className="nav-links" activeClassName="active-nav-links-mobile"> ADD INGREDIENTS </NavLink>
+                        </li>
+                        <li onClick={() => props.changeTabValue(2)}>
+                            <NavLink to="/recipes" className="nav-links" activeClassName="active-nav-links-mobile"> RECIPES </NavLink>
+                        </li>
+                        <li onClick={() => props.changeTabValue(3)}>
+                            <NavLink to="/submitRecipe" className="nav-links" activeClassName="active-nav-links-mobile"> SUBMIT A RECIPE </NavLink>
+                        </li>
                         {(props.loggedIn && props.isExpert) ?
-                            <li onClick={() => props.changeTabValue(4)}> EVALUATE RECIPES </li> : null
+                            <li onClick={() => props.changeTabValue(4)}>
+                                <NavLink to="/evaluateRecipes" className="nav-links" activeClassName="active-nav-links-mobile"> EVALUATE RECIPES </NavLink>
+                            </li> : null
                         }
                     </ul>
                 </div>
@@ -148,16 +141,18 @@ function Header(props) {
                         props.selectedIngredientsCount === 0 ?
                             <div className="cart-empty-div">
                                 <img src={noIngredients} alt="No ingredients added to cart" />
-                                <Button className="ok-button" variant="contained"
-                                        onClick={() => {
-                                            props.closeMobileCartModal();
-                                            props.changeTabValue(1);
-                                            if(document.getElementById("mobileMenu").classList.contains("mobile")) {
-                                                document.getElementById("mobileMenu").classList.remove("mobile");
-                                                document.getElementById("mobileMenu").classList.add("desktop");
-                                            }                                        }}>
-                                    OK
-                                </Button>
+                                <NavLink to="/addIngredients" className="nav-links">
+                                    <Button className="ok-button" variant="contained"
+                                            onClick={() => {
+                                                props.closeMobileCartModal();
+                                                props.changeTabValue(1);
+                                                if(document.getElementById("mobileMenu").classList.contains("mobile")) {
+                                                    document.getElementById("mobileMenu").classList.remove("mobile");
+                                                    document.getElementById("mobileMenu").classList.add("desktop");
+                                                }                                        }}>
+                                        OK
+                                    </Button>
+                                </NavLink>
                             </div> :
                             <div className="cart-full-div">
                                 <IngredientCartDetails

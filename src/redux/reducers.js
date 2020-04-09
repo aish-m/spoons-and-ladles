@@ -21,7 +21,7 @@ const initialState = {
     recipesList: [],
     loggedIn: false,
     loggedInUser: {},
-    isUserExpert: true,
+    isUserExpert: false,
     selectedIngredients: [],
     showAllRecipes: false,
     isIngredientNotFoundModalOpen: false,

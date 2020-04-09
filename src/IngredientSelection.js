@@ -5,6 +5,7 @@ import IngredientCartToggle from "./IngredientCartToggle";
 import { connect } from 'react-redux';
 import Button from "@material-ui/core/Button";
 import { changeTabValue } from './redux/actionCreators';
+import {NavLink} from "react-router-dom";
 
 class IngredientSelection extends React.Component {
 
@@ -96,8 +97,11 @@ class IngredientSelection extends React.Component {
                         this.props.count !== 0 ?
                             <div>
                                 <IngredientCartToggle/>
-                                <Button variant="contained" id="lookup-recipes-button"
-                                onClick={() => this.props.changeTabValue(2)}>Lookup Recipes</Button>
+                                <NavLink to="/recipes" className="nav-links">
+                                    <Button variant="contained" id="lookup-recipes-button" onClick={() => this.props.changeTabValue(2)}>
+                                        Lookup Recipes
+                                    </Button>
+                                </NavLink>
                             </div> :
                             null
                     }
