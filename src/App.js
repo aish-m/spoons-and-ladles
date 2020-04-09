@@ -15,18 +15,17 @@ import RecipesGrid from "./RecipesGrid";
 function App() {
       return (
           <div className="app">
-              <div id="appMainContent">
-                    <Header/>
-                    <Route exact path="/" component={ImageCarousel} />
-                    <Route path="/addIngredients" component={IngredientSelection} />
-                    <Route path="/recipes" component={RecipesGrid} />
-                    <Route path="/submitRecipe" component={SubmitRecipe} />
-                    <Route path="/evaluateRecipes" component={EvaluateRecipe} />
-                    <Footer />
-              </div>
-              <div id="loginComponent">
-                  <LoginOrSignupPage />
-              </div>
+              <Header/>
+              <Route exact path="/" component={ImageCarousel} />
+              <Route path="/addIngredients" component={IngredientSelection} />
+              <Route path="/recipes" component={RecipesGrid} />
+              <Route path="/submitRecipe" component={SubmitRecipe} />
+              <Route path="/evaluateRecipes" component={EvaluateRecipe} />
+              <Route path="/login" component={LoginOrSignupPage} />
+              <Route path="/signup" component={LoginOrSignupPage} />
+              {/*<Route path="*" component={Error404Page} />*/}
+              {/* TODO: Create a component for 404 page */}
+              <Footer />
           </div>
       );
 }

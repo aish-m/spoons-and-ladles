@@ -6,6 +6,10 @@
     color: #b6e64f;
 }
 
+.footer.loginMode {
+    display: none;
+}
+
 #snl {
     padding-top: 10px;
     font-size: 22px;

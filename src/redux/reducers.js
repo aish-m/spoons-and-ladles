@@ -14,6 +14,7 @@ import {
     TOGGLE_LOGGED_IN_FLAG,
     LOG_USER_IN,
     SET_EXPERT_CHEF_FLAG,
+    SET_LOGIN_SIGNUP_MODE
 } from './actionTypes';
 
 const initialState = {
@@ -27,6 +28,7 @@ const initialState = {
     isIngredientNotFoundModalOpen: false,
     isMobileCartModalOpen: false,
     showIngAlert: false,
+    loginMode: true
 };
 
 function reducers(state = initialState, action) {
@@ -123,6 +125,12 @@ function reducers(state = initialState, action) {
             return Object.assign({}, state, {
                 isUserExpert: action.payload
             }); 
+        }
+
+        case SET_LOGIN_SIGNUP_MODE: {
+            return Object.assign({}, state, {
+                loginMode: action.payload
+            });
         }
 
         default:

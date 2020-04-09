@@ -2,6 +2,10 @@ header {
     font-family: 'Gentium Basic', serif;
 }
 
+header.loginMode {
+    display: none;
+}
+
 .non-sticky-header {
     padding: 0 10px;
     display: flex;
@@ -103,8 +107,20 @@ input[type=search]:focus {
     cursor: pointer;
 }
 
-#headerLoginSignupButton {
+.header-login-buttons {
+
+}
+
+#headerLoginButton, #headerSignupButton {
     background-color: #8bcf32;
+}
+
+#headerLoginButton {
+    margin-right: 10px;
+ }
+
+#headerSignupButton {
+    margin-left: 10px;
 }
 
 #helloUserText {

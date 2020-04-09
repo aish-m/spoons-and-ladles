@@ -6,7 +6,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import './Header.css';
 import { connect } from 'react-redux';
-import { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert, stopIngAlert, recipesWithIng, recipesWithoutIng } from './redux/actionCreators';
+import { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert,
+    stopIngAlert, recipesWithIng, recipesWithoutIng, setLoginMode } from './redux/actionCreators';
 import SearchIcon from '@material-ui/icons/Search';
 import cartIcon from './images/cart-icon.png';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -43,13 +44,8 @@ function Header(props) {
         }
     }
 
-    function renderLoginComponent() {
-        document.getElementById("appMainContent").classList.add("login");
-        document.getElementById("loginComponent").classList.add("login");
-    }
-
     return (
-        <header>
+        <header id="pageHeader">
                 <div className="non-sticky-header">
                     <div onClick={() => props.changeTabValue(0)} className="header-left">
                         <NavLink to="/">
@@ -102,13 +98,24 @@ function Header(props) {
                     {
                         props.loggedIn ?
                         <p id="helloUserText"> Hello, user </p> :
-                        <Button variant="contained"
-                                id="headerLoginSignupButton"
-                                // onClick={renderLoginComponent}
-                                onClick={() => console.log('Log in component')}
-                        >
-                            Log In
-                        </Button>
+                            <div className="header-login-buttons">
+                                <NavLink to="/login" className="nav-links">
+                                    <Button variant="contained"
+                                            id="headerLoginButton"
+                                            onClick={() => props.setLoginMode(true)}
+                                    >
+                                        Log In
+                                    </Button>
+                                </NavLink>
+                                <NavLink to="/signup" className="nav-links">
+                                    <Button variant="contained"
+                                            id="headerSignupButton"
+                                            onClick={() => props.setLoginMode(false)}
+                                    >
+                                        Sign Up
+                                    </Button>
+                                </NavLink>
+                            </div>
                     }
                     <div id="cartDiv" onClick={props.openMobileCartModal}>
                         <img src={cartIcon} alt="Ingredient cart" id="cartIcon"/>
@@ -166,4 +173,4 @@ function Header(props) {
     )
 }
 
-export default connect(mapStateToProps, { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert, stopIngAlert, recipesWithIng, recipesWithoutIng })(Header);
+export default connect(mapStateToProps, { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert, stopIngAlert, recipesWithIng, recipesWithoutIng, setLoginMode })(Header);

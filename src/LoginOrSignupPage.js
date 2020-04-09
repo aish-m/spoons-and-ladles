@@ -9,6 +9,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import {TextField} from "@material-ui/core";
 import { connect } from 'react-redux';
 import { toggleUserLogin, logUserIn, setExpertChefFlag } from './redux/actionCreators';
+import {NavLink} from "react-router-dom";
 
 var styles = {
     backgroundImage: `url(${background})`,
@@ -19,9 +20,13 @@ var styles = {
 };
 
 function closeComponent() {
-    document.getElementById("appMainContent").classList.remove("login");
-    document.getElementById("loginComponent").classList.remove("login");
+    document.getElementById("pageHeader").classList.remove("loginMode");
+    document.getElementById("pageFooter").classList.remove("loginMode");
 }
+
+const mapStateToProps = state => ({
+    isLogin: state.loginMode
+});
 
 class LoginOrSignupPage extends React.Component {
 
@@ -31,6 +36,11 @@ class LoginOrSignupPage extends React.Component {
             username: '',
             password: ''
         };
+    }
+
+    componentDidMount() {
+        document.getElementById("pageHeader").classList.add("loginMode");
+        document.getElementById("pageFooter").classList.add("loginMode");
     }
 
     contentChange = event => this.setState({ [event.target.name]: event.target.value });
@@ -77,44 +87,50 @@ class LoginOrSignupPage extends React.Component {
 
     render() {
         return (
-            <div className="login-component" style={styles}>
-                <div className="header-logo">
-                    <img src={mascot} alt="Mascot" id="loginPageMascotImage"/>
-                    <img src={snlText} alt="Spoons & Ladles text" id="loginPageSnlText"/>
-                </div>
-                    <form className="login-or-signup-form" noValidate autoComplete="off">
-                        <div className="form-title">
-                            <h1> Welcome back! </h1>
-                            <p> Log in with your email and password </p>
+                this.props.isLogin ?
+                     <div className="login-component" style={styles}>
+                        <div className="header-logo">
+                            <img src={mascot} alt="Mascot" id="loginPageMascotImage"/>
+                            <img src={snlText} alt="Spoons & Ladles text" id="loginPageSnlText"/>
                         </div>
-                        <TextField id="emailField" label="Email" variant="outlined" name="username" onChange={this.contentChange}/>
-                        <TextField id="passwordField" label="Password" variant="outlined" name="password" onChange={this.contentChange}/>
-                        <div id="incorrectCredentials">
-                            Incorrect email or password. Please try again!
-                        </div>
-                        <Button
-                            variant="contained"
-                            id="loginButton"
-                            onClick={() => this.validateLogin(this.state.username, this.state.password)}
-                            size="large"
-                        >
-                            Log In
-                        </Button>
+                        <form className="login-or-signup-form" noValidate autoComplete="off">
+                            <div className="form-title">
+                                <h1> Welcome back! </h1>
+                                <p> Log in with your email and password </p>
+                            </div>
+                            <TextField id="emailField" label="Email" variant="outlined" name="username"
+                                       onChange={this.contentChange}/>
+                            <TextField id="passwordField" label="Password" variant="outlined" name="password"
+                                       onChange={this.contentChange}/>
+                            <div id="incorrectCredentials">
+                                Incorrect email or password. Please try again!
+                            </div>
+                            <Button
+                                variant="contained"
+                                id="loginButton"
+                                onClick={() => this.validateLogin(this.state.username, this.state.password)}
+                                size="large"
+                            >
+                                Log In
+                            </Button>
 
-                        <Button
-                            variant="contained"
-                            id="createAccountButton"
-                            onClick={() => console.log('Sign up')}
-                        >
-                            Create account
-                        </Button>
-                    </form>
-                <Tooltip title="Go back">
-                    <ArrowBackIcon onClick={closeComponent} id="backButton" fontSize="large"/>
-                </Tooltip>
-            </div>
+                            <Button
+                                variant="contained"
+                                id="createAccountButton"
+                                onClick={() => console.log('Sign up')}
+                            >
+                                Create account
+                            </Button>
+                        </form>
+                        <Tooltip title="Go back">
+                            <NavLink to="/">
+                                <ArrowBackIcon onClick={closeComponent} id="backButton" fontSize="large"/>
+                            </NavLink>
+                        </Tooltip>
+                    </div> :
+                    <div> Sign up!</div>
         )
     }
 }
 
-export default connect(null, { toggleUserLogin, logUserIn, setExpertChefFlag })(LoginOrSignupPage);
+export default connect(mapStateToProps, { toggleUserLogin, logUserIn, setExpertChefFlag })(LoginOrSignupPage);

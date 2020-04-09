@@ -14,6 +14,7 @@ import {
     TOGGLE_LOGGED_IN_FLAG,
     LOG_USER_IN,
     SET_EXPERT_CHEF_FLAG,
+    SET_LOGIN_SIGNUP_MODE
 } from './actionTypes'
 
 export const changeTabValue = newTabId => ({
@@ -88,4 +89,11 @@ export const setExpertChefFlag = isExpert => ({
     type: SET_EXPERT_CHEF_FLAG,
     payload: isExpert
 });
+
+export const setLoginMode = isLogin => ({
+    type: SET_LOGIN_SIGNUP_MODE,
+    payload: isLogin
+});
+
+
 
