@@ -40,7 +40,8 @@ class RecipesGrid extends React.Component {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ ingredientList: ingSend }),
             };
-            fetch("https://spoons-and-ladles-backend.herokuapp.com/api/recipes/fetch", requestOptions)
+            // fetch("https://spoons-and-ladles-backend.herokuapp.com/api/recipes/fetch", requestOptions)
+            fetch("http://localhost:8080/api/recipes/fetch", requestOptions)
                 .then(res => {
                     if(res.ok) return res.json();
                     else throw new Error ("Oops, something went wrong...");
@@ -52,7 +53,8 @@ class RecipesGrid extends React.Component {
                     if(this.state.isLoading) this.setState({ isLoading: false, error });
                 });
         } else {//if (this.props.showAllRecipes){
-            fetch("https://spoons-and-ladles-backend.herokuapp.com/api/recipes/getAll")
+            // fetch("https://spoons-and-ladles-backend.herokuapp.com/api/recipes/getAll")
+            fetch("http://localhost:8080/api/recipes/getAll")
             .then(res => {
                 if(res.ok) return res.json();
                 else throw new Error ("Oops, something went wrong...");

@@ -54,7 +54,13 @@ function AutocompleteTextbox(props) {
                 onChange={(event, value) => {selectedIngredientName = value}}
                 onFocus={() => clearText()}
                 renderInput={params => (
-                    <TextField {...params} onFocus={() => clearText()} label="Enter Ingredient Name" margin="normal" variant="outlined" fullWidth={false}/>
+                    <TextField {...params}
+                               onFocus={() => clearText()}
+                               label="Enter Ingredient Name"
+                               margin="normal"
+                               variant="outlined"
+                               fullWidth={false}
+                    />
                 )}
             />
             <Button variant="contained" id="select-ingredient-button" onClick={() => submitIngredient(selectedIngredientName)}>ADD</Button>

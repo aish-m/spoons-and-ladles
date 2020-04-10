@@ -1,9 +1,13 @@
 .footer {
-    background-color: black;
-    text-align: center;
-    font-family: 'Gentium Basic', serif;
-    border-top: 3px solid black;
-    color: #b6e64f;
+     background-color: black;
+     text-align: center;
+     font-family: 'Gentium Basic', serif;
+     border-top: 3px solid black;
+     color: #b6e64f;
+ }
+
+#pageFooter.loginMode {
+    display: none;
 }
 
 .footer.loginMode {

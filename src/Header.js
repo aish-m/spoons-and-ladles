@@ -97,7 +97,7 @@ function Header(props) {
                     <SearchIcon fontSize="large" onClick={() => console.log("Search mobile..")} id="mobileSearchIcon" htmlColor="white"/>
                     {
                         props.loggedIn ?
-                        <p id="helloUserText"> Hello, user </p> :
+                        <p id="helloUserText"> Hello, { props.user.firstName } </p> :
                             <div className="header-login-buttons">
                                 <NavLink to="/login" className="nav-links">
                                     <Button variant="contained"
