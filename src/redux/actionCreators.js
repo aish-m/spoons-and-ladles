@@ -12,9 +12,11 @@ import {
     SHOW_ING_ALERT,
     STOP_ING_ALERT,
     TOGGLE_LOGGED_IN_FLAG,
-    LOG_USER_IN,
+    SET_USER,
+    RESET_USER,
     SET_EXPERT_CHEF_FLAG,
-    SET_LOGIN_SIGNUP_MODE
+    SET_LOGIN_SIGNUP_MODE,
+    SET_REDIRECT_URL
 } from './actionTypes'
 
 export const changeTabValue = newTabId => ({
@@ -80,9 +82,13 @@ export const toggleUserLogin = () => ({
    type: TOGGLE_LOGGED_IN_FLAG
 });
 
-export const logUserIn = userDetails => ({
-    type: LOG_USER_IN,
+export const setUser = userDetails => ({
+    type: SET_USER,
     payload: userDetails
+});
+
+export const resetUser = () => ({
+    type: RESET_USER
 });
 
 export const setExpertChefFlag = isExpert => ({
@@ -93,6 +99,11 @@ export const setExpertChefFlag = isExpert => ({
 export const setLoginMode = isLogin => ({
     type: SET_LOGIN_SIGNUP_MODE,
     payload: isLogin
+});
+
+export const setRedirectUrl = pathname => ({
+    type: SET_REDIRECT_URL,
+    payload: pathname
 });
 
 

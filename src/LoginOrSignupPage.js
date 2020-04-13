@@ -8,8 +8,9 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Tooltip from "@material-ui/core/Tooltip";
 import {TextField} from "@material-ui/core";
 import { connect } from 'react-redux';
-import { toggleUserLogin, logUserIn, setExpertChefFlag, setLoginMode } from './redux/actionCreators';
+import { toggleUserLogin, setUser, setExpertChefFlag, setLoginMode } from './redux/actionCreators';
 import {NavLink} from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 
 const styles = {
     backgroundImage: `url(${background})`,
@@ -20,7 +21,8 @@ const styles = {
 };
 
 const mapStateToProps = state => ({
-    isLogin: state.loginMode
+    isLogin: state.loginMode,
+    redirectUrl: state.redirectUrl
 });
 
 class LoginOrSignupPage extends React.Component {
@@ -55,24 +57,41 @@ class LoginOrSignupPage extends React.Component {
         else {
             document.getElementById("signupForm").reset();
         }
-
-        document.getElementById("errorMessage").innerHtml = "";
+        document.getElementById("errorMessage").innerHTML = '';
         document.getElementById("pageHeader").classList.remove("loginMode");
         document.getElementById("pageFooter").classList.remove("loginMode");
     }
 
     contentChange = event => this.setState({[event.target.name]: event.target.value});
 
-    validateLogin(username, password) {
+    validateLoginForm(username, password) {
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
         if (username === null || username === '') {
             console.log('username: ' + username);
             document.getElementById("emailField").classList.add("error");
             document.getElementById("errorMessage").innerHTML = "Email is a required field!"
-        } else if (password === null || password === '') {
+            return;
+        }
+
+        if (password === null || password === '') {
             console.log('password: ' + password);
             document.getElementById("passwordField").classList.add("error");
             document.getElementById("errorMessage").innerHTML = "Password is a required field!"
-        } else {
+            return;
+        }
+
+        if(!emailPattern.test(username)) {
+            console.log('Validation is happening');
+            document.getElementById("emailField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = 'Email should follow format user@example.com';
+            return;
+        }
+
+        this.validateLogin(username, password);
+    }
+
+    validateLogin(username, password) {
             fetch("http://localhost:8080/api/users/login", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -87,7 +106,6 @@ class LoginOrSignupPage extends React.Component {
                         console.log("Please try back again")
                     }
                 );
-        }
     }
 
     handleLoginFailure() {
@@ -97,6 +115,7 @@ class LoginOrSignupPage extends React.Component {
     handleLoginSuccess(loggedInUsersId) {
         this.closeComponent();
         this.props.toggleUserLogin();
+        this.props.history.push(this.props.redirectUrl);
 
         fetch("http://localhost:8080/api/users/getInfo/" + loggedInUsersId)
             .then(res => res.json())
@@ -131,6 +150,7 @@ class LoginOrSignupPage extends React.Component {
                                        onFocus={(event) => event.target.classList.remove("error")}
                             />
                             <TextField id="passwordField" label="Password" variant="outlined" name="password"
+                                       type="password"
                                        onChange={this.contentChange}
                                        onFocus={(event) => event.target.classList.remove("error")}
                             />
@@ -138,7 +158,7 @@ class LoginOrSignupPage extends React.Component {
                             <Button
                                 variant="contained"
                                 id="loginButton"
-                                onClick={() => this.validateLogin(this.state.username, this.state.password)}
+                                onClick={() => this.validateLoginForm(this.state.username, this.state.password)}
                                 size="large"
                             >
                                 Log In
@@ -215,4 +235,4 @@ class LoginOrSignupPage extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, { toggleUserLogin, logUserIn, setExpertChefFlag, setLoginMode })(LoginOrSignupPage);
+export default connect(mapStateToProps, { toggleUserLogin, logUserIn: setUser, setExpertChefFlag, setLoginMode })(withRouter(LoginOrSignupPage));

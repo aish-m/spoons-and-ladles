@@ -1,5 +1,5 @@
 .carousel-div {
-
+    z-index: -1;
 }
 
 .carousel-image {

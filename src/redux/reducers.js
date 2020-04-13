@@ -12,7 +12,8 @@ import {
     SHOW_ING_ALERT,
     STOP_ING_ALERT,
     TOGGLE_LOGGED_IN_FLAG,
-    LOG_USER_IN,
+    SET_USER,
+    RESET_USER,
     SET_EXPERT_CHEF_FLAG,
     SET_LOGIN_SIGNUP_MODE
 } from './actionTypes';
@@ -21,14 +22,18 @@ const initialState = {
     currentTab: 0,
     recipesList: [],
     loggedIn: false,
-    loggedInUser: {},
+    loggedInUser: {
+        firstName: 'User',
+        pictureLink: 'user-icon.png'
+    },
     isUserExpert: false,
     selectedIngredients: [],
     showAllRecipes: false,
     isIngredientNotFoundModalOpen: false,
     isMobileCartModalOpen: false,
     showIngAlert: false,
-    loginMode: true
+    loginMode: true,
+    redirectUrl: ""
 };
 
 function reducers(state = initialState, action) {
@@ -115,9 +120,18 @@ function reducers(state = initialState, action) {
             });
         }
 
-        case LOG_USER_IN: {
+        case SET_USER: {
             return Object.assign({}, state, {
                 loggedInUser: action.payload
+            });
+        }
+
+        case RESET_USER: {
+            return Object.assign({}, state, {
+                loggedInUser: {
+                    firstName: 'User',
+                    pictureLink: 'user-icon.png'
+                }
             });
         }
 

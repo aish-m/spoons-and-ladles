@@ -70,9 +70,6 @@ input[type=search]:focus {
     justify-content: space-between;
     align-items: center;
     padding: 0 4.5%;
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 0;
 }
 
 #homeIcon {
@@ -103,7 +100,7 @@ input[type=search]:focus {
     height: 30px;
     border-radius: 50%;
     border: 1px solid white;
-    margin: 0 20px;
+    margin: 0 12%;
     cursor: pointer;
 }
 
@@ -124,10 +121,61 @@ input[type=search]:focus {
 }
 
 #helloUserText {
-    color: white;
+    color: #b6e64f;
 }
 
 #hamburgerIcon, #mobileSearchIcon, #cartDiv, .mobile-nav-bar {
+    display: none;
+}
+
+.user-profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+    cursor: pointer;
+    padding: 0 15px;
+}
+
+.user-options-div {
+    display: none;
+}
+
+.user-options-div.open {
+    display: block;
+    background-color: #b6e64f;
+    color: black;
+    z-index: 999;
+}
+
+.user-options-div ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+.user-options-div li {
+    width: inherit;
+    list-style: none;
+    padding: 10px 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+.user-options-div li:hover {
+    background-color: white;
+}
+
+#expandMoreIcon, #expandLessIcon {
+    color: white;
+    padding: 0 0 0 1%;
+}
+
+#expandMoreIcon.close, #expandLessIcon.close {
     display: none;
 }
 
@@ -276,15 +324,15 @@ input[type=search]:focus {
     .cart-empty-div {
         width: 90%;
     }
+
+    #expandMoreIcon, #expandLessIcon {
+        display: none;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .sticky-nav-bar {
         padding: 0 20px;
-    }
-
-    .user-icon {
-        margin: 0;
     }
 }
 

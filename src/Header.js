@@ -7,7 +7,8 @@ import Tab from "@material-ui/core/Tab";
 import './Header.css';
 import { connect } from 'react-redux';
 import { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert,
-    stopIngAlert, recipesWithIng, recipesWithoutIng, setLoginMode } from './redux/actionCreators';
+    stopIngAlert, recipesWithIng, recipesWithoutIng, setLoginMode, setRedirectUrl,
+    toggleUserLogin, resetUser, setExpertChefFlag } from './redux/actionCreators';
 import SearchIcon from '@material-ui/icons/Search';
 import cartIcon from './images/cart-icon.png';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -18,6 +19,22 @@ import IngredientCartDetails from "./IngredientCartDetails";
 import {
     NavLink
 } from "react-router-dom";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import finalPropsSelectorFactory from "react-redux/es/connect/selectorFactory";
+
+function toggleUserOptionsMenu() {
+    if(document.getElementById("userOptionsDiv").classList.contains("open")) {
+        document.getElementById("userOptionsDiv").classList.remove("open");
+        document.getElementById("expandMoreIcon").classList.remove("close");
+        document.getElementById("expandLessIcon").classList.add("close");
+    }
+else {
+        document.getElementById("userOptionsDiv").classList.add("open");
+        document.getElementById("expandMoreIcon").classList.add("close");
+        document.getElementById("expandLessIcon").classList.remove("close");
+    }
+}
 
 const mapStateToProps = state => ({
     currentTab: state.currentTab,
@@ -31,6 +48,27 @@ const mapStateToProps = state => ({
     user: state.loggedInUser
 });
 
+function styles() {
+    let top = 0;
+    let left = 0;
+    let width = '15%';
+
+    if(document.getElementById("userProfileRectangle") !== null) {
+        const rectangle = document.getElementById("userProfileRectangle").getBoundingClientRect();
+        top = rectangle.bottom;
+        left = rectangle.left;
+        width = document.getElementById("userProfileRectangle").offsetWidth + 40;
+        console.log('width: ' + width);
+    }
+
+    return {
+        position: 'absolute',
+        top: top + 'px',
+        left: left + 'px',
+        width: width
+    }
+}
+
 function Header(props) {
 
     function toggleHamburgerIcon() {
@@ -42,6 +80,14 @@ function Header(props) {
             document.getElementById("mobileMenu").classList.remove("mobile");
             document.getElementById("mobileMenu").classList.add("desktop");
         }
+    }
+
+    function logUserOut() {
+        props.toggleUserLogin();
+        props.resetUser();
+        props.setExpertChefFlag(false);
+        document.getElementById("userOptionsDiv").classList.remove("open");
+
     }
 
     return (
@@ -97,12 +143,25 @@ function Header(props) {
                     <SearchIcon fontSize="large" onClick={() => console.log("Search mobile..")} id="mobileSearchIcon" htmlColor="white"/>
                     {
                         props.loggedIn ?
-                        <p id="helloUserText"> Hello, { props.user.firstName } </p> :
+                            <div className="user-profile"
+                                 id="userProfileRectangle"
+                                 onClick={toggleUserOptionsMenu}
+                            >
+                                    <img
+                                        src = {require("./images/Users/" + props.user.pictureLink)}
+                                        alt="User's profile picture"
+                                        className="user-icon"
+                                    />
+                                    <p id="helloUserText"> { props.user.firstName } </p>
+                                    <ExpandMoreIcon id="expandMoreIcon" fontSize="large"/>
+                                    <ExpandLessIcon id="expandLessIcon" fontSize="large" className="close"/>
+                            </div>
+                            :
                             <div className="header-login-buttons">
                                 <NavLink to="/login" className="nav-links">
                                     <Button variant="contained"
                                             id="headerLoginButton"
-                                            onClick={() => props.setLoginMode(true)}
+                                            onClick={() => { props.setLoginMode(true); props.setRedirectUrl(window.location.pathname) }}
                                     >
                                         Log In
                                     </Button>
@@ -110,7 +169,7 @@ function Header(props) {
                                 <NavLink to="/signup" className="nav-links">
                                     <Button variant="contained"
                                             id="headerSignupButton"
-                                            onClick={() => props.setLoginMode(false)}
+                                            onClick={() => { props.setLoginMode(false); props.setRedirectUrl(window.location.pathname) }}
                                     >
                                         Sign Up
                                     </Button>
@@ -169,8 +228,19 @@ function Header(props) {
                             </div>
                     }
                 </Modal>
+                <div id="userOptionsDiv" className="user-options-div" style={styles()}>
+                    <ul>
+                        <li> My account </li>
+                        <li> My recipes </li>
+                        <li onClick={logUserOut}> Logout </li>
+                    </ul>
+                </div>
         </header>
     )
 }
 
-export default connect(mapStateToProps, { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert, stopIngAlert, recipesWithIng, recipesWithoutIng, setLoginMode })(Header);
+export default connect(mapStateToProps,
+    { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert,
+        stopIngAlert, recipesWithIng, recipesWithoutIng, setLoginMode, setRedirectUrl,
+        toggleUserLogin, resetUser, setExpertChefFlag
+    })(Header);
