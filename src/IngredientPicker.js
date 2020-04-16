@@ -13,7 +13,8 @@ function IngredientPicker(props) {
 
     function addOrRemoveIngredient(ingredient) {
         let isAdded = false;
-        props.selectedIngredients.map(ing => {
+        // eslint-disable-next-line array-callback-return
+        props.selectedIngredients.map(function(ing) {
             if (ing.id === ingredient.ingredientId) isAdded = true;
         });
         isAdded ? props.removeIngredient(ingredient.ingredientId) : props.selectIngredient(ingredient);
@@ -21,7 +22,8 @@ function IngredientPicker(props) {
 
     function computeClassName(ingredient) {
         let matches = false;
-        props.selectedIngredients.map(ing => {
+        // eslint-disable-next-line array-callback-return
+        props.selectedIngredients.map(function(ing) {
             if(ing.id === ingredient.ingredientId) matches = true;
         });
 

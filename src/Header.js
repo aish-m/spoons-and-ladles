@@ -21,7 +21,6 @@ import {
 } from "react-router-dom";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import finalPropsSelectorFactory from "react-redux/es/connect/selectorFactory";
 
 function toggleUserOptionsMenu() {
     if(document.getElementById("userOptionsDiv").classList.contains("open")) {
@@ -149,7 +148,7 @@ function Header(props) {
                             >
                                     <img
                                         src = {require("./images/Users/" + props.user.pictureLink)}
-                                        alt="User's profile picture"
+                                        alt="User's profile"
                                         className="user-icon"
                                     />
                                     <p id="helloUserText"> { props.user.firstName } </p>

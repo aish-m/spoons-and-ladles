@@ -6,7 +6,6 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import { removeIngredient, clearAllIngredients, closeMobileCartModal, recipesWithIng, changeTabValue } from './redux/actionCreators';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
-import SearchIcon from '@material-ui/icons/Search';
 
 function mapStateToProps(state) {
     const { selectedIngredients } = state;
@@ -18,10 +17,6 @@ function IngredientCartDetails(props) {
     function clearCart() {
         props.clearAllIngredients();
         props.closeMobileCartModal();
-    }
-
-    function lookupRecipes() {
-        props.recipesWithIng();
     }
 
     return (

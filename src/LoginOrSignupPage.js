@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import { toggleUserLogin, setUser, setExpertChefFlag } from './redux/actionCreators';
 import {NavLink} from "react-router-dom";
 import { withRouter } from 'react-router-dom';
-import ServerDownErrorPage from "./ServerDownErrorPage";
 
 const styles = {
     backgroundImage: `url(${background})`,

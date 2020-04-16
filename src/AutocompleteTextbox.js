@@ -18,7 +18,8 @@ function AutocompleteTextbox(props) {
 
     function submitIngredient(ingredientName) {
         let isAlreadyAdded = false;
-        props.addedIngredients.map(ing => {
+        // eslint-disable-next-line array-callback-return
+        props.addedIngredients.map(function(ing) {
            if(ing.name === ingredientName)
                isAlreadyAdded = true;
         });
@@ -27,7 +28,8 @@ function AutocompleteTextbox(props) {
             let selectedIngredientObject = {
                 ingredientName: ingredientName
             };
-            props.ingredients.map(option => {
+            // eslint-disable-next-line array-callback-return
+            props.ingredients.map(function(option) {
                 if (option.ingredientName === ingredientName) {
                     selectedIngredientObject.ingredientId =  option.ingredientId;
                 }

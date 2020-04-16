@@ -31,7 +31,8 @@ class RecipesGrid extends React.Component {
         
         if(this.props.ingredientsListLength > 0){//!this.props.showAllRecipes){
             let ingSend = [];
-            this.props.ingredientsList.map(ing => {
+            // eslint-disable-next-line array-callback-return
+            this.props.ingredientsList.map(function(ing) {
                 ingSend.push(ing.id)
             });
             const requestOptions = {
@@ -65,7 +66,7 @@ class RecipesGrid extends React.Component {
                 if(this.state.isLoading) this.setState({ isLoading: false, error });
             });
         }
-    } 
+    };
 
     componentDidMount(){
         this.fetchData();

@@ -38,7 +38,7 @@ function RecipesPage() {
                     setAreIngredientsLoaded(true);
                 }
             );
-    }, []);
+    });
 
     if(error !== null) {
         return <div> Oops! Try back again! </div>

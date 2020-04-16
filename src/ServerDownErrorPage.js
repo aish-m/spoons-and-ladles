@@ -20,7 +20,7 @@ function ServerDownErrorPage() {
                     Don't fret! <br/> <br/>
                     Ms. Sassy Hass' minions are at work to fix the problem and bring Spoons & Ladles back up! <br/>
                     But you know, there’s always the
-                    <a href="https://www.doordash.com/en-US" target="_blank"> easier option </a>.
+                    <a href="https://www.doordash.com/en-US" target="_blank" rel="noopener noreferrer"> easier option </a>.
                 </div>
                 <NavLink to="/" className="nav-links">
                     <Button variant="contained"
