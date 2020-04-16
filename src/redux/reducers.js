@@ -15,7 +15,7 @@ import {
     SET_USER,
     RESET_USER,
     SET_EXPERT_CHEF_FLAG,
-    SET_LOGIN_SIGNUP_MODE
+    SET_REDIRECT_URL
 } from './actionTypes';
 
 const initialState = {
@@ -32,7 +32,6 @@ const initialState = {
     isIngredientNotFoundModalOpen: false,
     isMobileCartModalOpen: false,
     showIngAlert: false,
-    loginMode: true,
     redirectUrl: ""
 };
 
@@ -141,9 +140,9 @@ function reducers(state = initialState, action) {
             }); 
         }
 
-        case SET_LOGIN_SIGNUP_MODE: {
+        case SET_REDIRECT_URL: {
             return Object.assign({}, state, {
-                loginMode: action.payload
+                redirectUrl: action.payload
             });
         }
 

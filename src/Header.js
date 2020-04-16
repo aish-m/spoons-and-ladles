@@ -7,7 +7,7 @@ import Tab from "@material-ui/core/Tab";
 import './Header.css';
 import { connect } from 'react-redux';
 import { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert,
-    stopIngAlert, recipesWithIng, recipesWithoutIng, setLoginMode, setRedirectUrl,
+    stopIngAlert, recipesWithIng, recipesWithoutIng, setRedirectUrl,
     toggleUserLogin, resetUser, setExpertChefFlag } from './redux/actionCreators';
 import SearchIcon from '@material-ui/icons/Search';
 import cartIcon from './images/cart-icon.png';
@@ -161,7 +161,7 @@ function Header(props) {
                                 <NavLink to="/login" className="nav-links">
                                     <Button variant="contained"
                                             id="headerLoginButton"
-                                            onClick={() => { props.setLoginMode(true); props.setRedirectUrl(window.location.pathname) }}
+                                            onClick={() => { props.setRedirectUrl(window.location.pathname) }}
                                     >
                                         Log In
                                     </Button>
@@ -169,7 +169,7 @@ function Header(props) {
                                 <NavLink to="/signup" className="nav-links">
                                     <Button variant="contained"
                                             id="headerSignupButton"
-                                            onClick={() => { props.setLoginMode(false); props.setRedirectUrl(window.location.pathname) }}
+                                            onClick={() => { props.setRedirectUrl(window.location.pathname) }}
                                     >
                                         Sign Up
                                     </Button>
@@ -241,6 +241,6 @@ function Header(props) {
 
 export default connect(mapStateToProps,
     { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert,
-        stopIngAlert, recipesWithIng, recipesWithoutIng, setLoginMode, setRedirectUrl,
+        stopIngAlert, recipesWithIng, recipesWithoutIng, setRedirectUrl,
         toggleUserLogin, resetUser, setExpertChefFlag
     })(Header);

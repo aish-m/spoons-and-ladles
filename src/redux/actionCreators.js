@@ -15,7 +15,6 @@ import {
     SET_USER,
     RESET_USER,
     SET_EXPERT_CHEF_FLAG,
-    SET_LOGIN_SIGNUP_MODE,
     SET_REDIRECT_URL
 } from './actionTypes'
 
@@ -94,11 +93,6 @@ export const resetUser = () => ({
 export const setExpertChefFlag = isExpert => ({
     type: SET_EXPERT_CHEF_FLAG,
     payload: isExpert
-});
-
-export const setLoginMode = isLogin => ({
-    type: SET_LOGIN_SIGNUP_MODE,
-    payload: isLogin
 });
 
 export const setRedirectUrl = pathname => ({

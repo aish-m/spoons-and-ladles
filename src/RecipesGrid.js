@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import RecipeCard from './RecipeCard';
-import './RecipesPage.css';
 import { connect } from 'react-redux';
 import { updateRecipes } from './redux/actionCreators.js';
 import './RecipeGrid.css';
@@ -81,7 +80,6 @@ class RecipesGrid extends React.Component {
         const isLoading = this.state.isLoading;
         const error = this.state.error;
 
-        console.log(recipesList);
         if(error){
             return <h1>{error.message}</h1>
         }
@@ -95,10 +93,7 @@ class RecipesGrid extends React.Component {
                     {recipesList.map(recipe =>
                         <Grid item md = {3}>
                             <RecipeCard
-                                imgurl = {recipe.pictureLink}
-                                recipeName = {recipe.recipeName}
-                                recipeDesc = {recipe.instructions}
-                                recipeTime = {recipe.prepTime}
+                                recipe = {recipe}
                             />
                         </Grid>
                     )}

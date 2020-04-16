@@ -5,3 +5,42 @@
 .MuiPaper-root.MuiCard-root.makeStyles-root-815.MuiPaper-elevation1.MuiPaper-rounded {
      margin: 20px auto;
  }
+
+.grid-container{
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #dfe5d0;
+    width: 100%;
+}
+
+.card-img{
+    width: 100%;
+
+}
+
+.content{
+    height: 100px;
+    overflow: hidden;
+}
+.content-text{
+    height: 65%;
+    overflow: hidden;
+}
+
+.content-head{
+    height: 32%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.content-head:hover{
+    overflow: visible;
+    white-space: normal;
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    background-color:#FFF;
+}
+
+

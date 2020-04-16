@@ -8,9 +8,10 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Tooltip from "@material-ui/core/Tooltip";
 import {TextField} from "@material-ui/core";
 import { connect } from 'react-redux';
-import { toggleUserLogin, setUser, setExpertChefFlag, setLoginMode } from './redux/actionCreators';
+import { toggleUserLogin, setUser, setExpertChefFlag } from './redux/actionCreators';
 import {NavLink} from "react-router-dom";
 import { withRouter } from 'react-router-dom';
+import ServerDownErrorPage from "./ServerDownErrorPage";
 
 const styles = {
     backgroundImage: `url(${background})`,
@@ -21,7 +22,6 @@ const styles = {
 };
 
 const mapStateToProps = state => ({
-    isLogin: state.loginMode,
     redirectUrl: state.redirectUrl
 });
 
@@ -34,11 +34,13 @@ class LoginOrSignupPage extends React.Component {
             firstName: null,
             lastName: null,
             emailAddress: null,
+            phone: null,
             enteredPassword: null,
-            confirmedPassword: null,
-            phone: null
+            confirmedPassword: null
         };
         this.closeComponent = this.closeComponent.bind(this);
+        this.validateSignupForm = this.validateSignupForm.bind(this);
+        this.registerUser = this.registerUser.bind(this);
     }
 
     componentDidMount() {
@@ -47,7 +49,7 @@ class LoginOrSignupPage extends React.Component {
     }
 
     closeComponent() {
-        if(this.props.isLogin) {
+        if(window.location.pathname === '/login') {
             document.getElementById("loginForm").reset();
             if (document.getElementById("emailField").classList.contains("error"))
                 document.getElementById("emailField").classList.remove("error");
@@ -68,30 +70,27 @@ class LoginOrSignupPage extends React.Component {
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
         if (username === null || username === '') {
-            console.log('username: ' + username);
             document.getElementById("emailField").classList.add("error");
             document.getElementById("errorMessage").innerHTML = "Email is a required field!"
             return;
         }
 
         if (password === null || password === '') {
-            console.log('password: ' + password);
             document.getElementById("passwordField").classList.add("error");
             document.getElementById("errorMessage").innerHTML = "Password is a required field!"
             return;
         }
 
         if(!emailPattern.test(username)) {
-            console.log('Validation is happening');
             document.getElementById("emailField").classList.add("error");
             document.getElementById("errorMessage").innerHTML = 'Email should follow format user@example.com';
             return;
         }
 
-        this.validateLogin(username, password);
+        this.validateUser(username, password);
     }
 
-    validateLogin(username, password) {
+    validateUser(username, password) {
             fetch("http://localhost:8080/api/users/login", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -103,7 +102,7 @@ class LoginOrSignupPage extends React.Component {
                         result === 0 ? this.handleLoginFailure() : this.handleLoginSuccess(result);
                     },
                     (error) => {
-                        console.log("Please try back again")
+                        window.location.replace('/serverError');
                     }
                 );
     }
@@ -131,10 +130,119 @@ class LoginOrSignupPage extends React.Component {
             );
     }
 
+    validateSignupForm() {
+        if(this.state.firstName === null || this.state.firstName === '') {
+            document.getElementById("firstNameField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = "First name cannot be left blank!";
+            return;
+        }
+        if(this.state.lastName === null || this.state.lastName === '') {
+            document.getElementById("lastNameField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = "Last name cannot be left blank!";
+            return;
+        }
+        if(this.state.emailAddress === null || this.state.emailAddress === '') {
+            document.getElementById("emailField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = "Email cannot be left blank!";
+            return;
+        }
+        if(this.state.phone === null || this.state.phone === '') {
+            document.getElementById("phoneField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = "Phone number cannot be left blank!";
+            return;
+        }
+        if(this.state.enteredPassword === null || this.state.enteredPassword === '') {
+            document.getElementById("enteredPasswordField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = "Password field cannot be left blank!";
+            return;
+        }
+        if(this.state.confirmedPassword === null || this.state.confirmedPassword === '') {
+            document.getElementById("confirmedPasswordField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = "Confirm password field cannot be left blank!";
+            return;
+        }
+
+        // Validations
+
+        if(this.state.firstName !== null && this.state.firstName.length > 20) {
+            document.getElementById("firstNameField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = "First name cannot exceed 20 characters!";
+            return;
+        }
+
+        if(this.state.lastName !== null && this.state.lastName.length > 20) {
+            document.getElementById("lastNameField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = "Last name cannot exceed 20 characters!";
+            return;
+        }
+
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if(this.state.emailAddress !== null && !emailPattern.test(this.state.emailAddress)) {
+            document.getElementById("emailField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = 'Email should follow format user@example.com';
+            return;
+        }
+
+        const phonePattern = /[0-9]{10}/;
+        if(this.state.phone !== null && !phonePattern.test(this.state.phone)) {
+            document.getElementById("phoneField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = "Phone number should be exactly 10 digits without special characters!";
+            return;
+        }
+
+        if(this.state.enteredPassword !== null && this.state.enteredPassword.length > 20) {
+            document.getElementById("enteredPasswordField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = "Password cannot exceed 20 characters!";
+            return;
+        }
+
+        if(this.state.enteredPassword !== this.state.confirmedPassword) {
+            document.getElementById("enteredPasswordField").classList.add("error");
+            document.getElementById("confirmedPasswordField").classList.add("error");
+            document.getElementById("errorMessage").innerHTML = "Passwords do not match!";
+            return;
+        }
+
+        this.registerUser();
+    }
+
+    registerUser() {
+        const postRequestBody = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.emailAddress,
+            password: this.state.enteredPassword,
+            phone: this.state.phone
+        };
+
+        fetch("http://localhost:8080/api/users/insert", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(postRequestBody)
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    result ? this.handleSignupSuccess() : this.handleSignupFailure();
+                },
+                (error) => {
+                    window.location.replace('/serverError');
+                }
+            );
+    }
+
+    handleSignupSuccess() {
+        window.location.pathname = './login';
+    }
+
+    handleSignupFailure() {
+        document.getElementById("errorMessage").innerHTML="User could not be created! Please try back later.";
+    }
+
     render() {
         return (
             <div className="login-signup-component" style={styles}>
-                {this.props.isLogin ?
+                {window.location.pathname === '/login' ?
                     <div className="login-component">
                         <div className="header-logo">
                             <img src={mascot} alt="Mascot" id="loginPageMascotImage"/>
@@ -145,11 +253,11 @@ class LoginOrSignupPage extends React.Component {
                                 <h1> Welcome back! </h1>
                                 <p> Log in with your email and password </p>
                             </div>
-                            <TextField id="emailField" label="Email" variant="outlined" name="username"
+                            <TextField id="emailField" label="Email" variant="outlined" name="username" required
                                        onChange={this.contentChange}
                                        onFocus={(event) => event.target.classList.remove("error")}
                             />
-                            <TextField id="passwordField" label="Password" variant="outlined" name="password"
+                            <TextField id="passwordField" label="Password" variant="outlined" name="password" required
                                        type="password"
                                        onChange={this.contentChange}
                                        onFocus={(event) => event.target.classList.remove("error")}
@@ -164,13 +272,14 @@ class LoginOrSignupPage extends React.Component {
                                 Log In
                             </Button>
 
-                            <Button
-                                variant="contained"
-                                id="createAccountButton"
-                                onClick={() => this.props.setLoginMode(false)}
-                            >
-                                New user? Create account
-                            </Button>
+                            <NavLink to="/signup" className="nav-links">
+                                <Button
+                                    variant="contained"
+                                    id="createAccountButton"
+                                >
+                                    New user? Create account
+                                </Button>
+                            </NavLink>
                         </form>
                     </div> :
                     <div id="signupDiv">
@@ -181,47 +290,68 @@ class LoginOrSignupPage extends React.Component {
                         <form className="signup-form" noValidate autoComplete="off" id="signupForm">
                             <div className="form-title">
                                 <h1> Register With Us </h1>
-                                <p> Put in your details to get started! </p>
                             </div>
-                            <div className="input-names">
+                            <div className="signup-form-fields">
                                 <TextField required id="firstNameField" label="First Name" variant="outlined"
+                                           placeholder="Maximum 20 characters"
                                            name="firstName"
-                                           onChange={this.contentChange}/>
+                                           onChange={this.contentChange}
+                                           onFocus={(event) => event.target.classList.remove("error")}
+                                />
                                 <TextField required id="lastNameField" label="Last Name" variant="outlined"
+                                           placeholder="Maximum 20 characters"
                                            name="lastName"
-                                           onChange={this.contentChange}/>
+                                           onChange={this.contentChange}
+                                           onFocus={(event) => event.target.classList.remove("error")}
+                                />
                             </div>
-                            <div className="email-and-phone">
+                            <div className="signup-form-fields">
                                 <TextField required id="emailField" label="Email Address" variant="outlined"
+                                           placeholder="user@example.com"
                                            name="emailAddress"
-                                           onChange={this.contentChange}/>
-                                <TextField required id="phoneField" label="Password" variant="outlined" name="phone"
-                                           onChange={this.contentChange}/>
+                                           onChange={this.contentChange}
+                                           onFocus={(event) => event.target.classList.remove("error")}
+                                />
+                                <TextField required id="phoneField" label="Phone" variant="outlined"
+                                           placeholder="Just 10 digits"
+                                           name="phone"
+                                           onChange={this.contentChange}
+                                           onFocus={(event) => event.target.classList.remove("error")}
+                                />
                             </div>
-                            <div className="password-fields">
+                            <div className="signup-form-fields">
                                 <TextField required id="enteredPasswordField" label="Enter a password"
+                                           placeholder="Maximum 20 characters"
+                                           type="password"
                                            variant="outlined" name="enteredPassword"
-                                           onChange={this.contentChange}/>
+                                           onChange={this.contentChange}
+                                           onFocus={(event) => event.target.classList.remove("error")}
+                                />
                                 <TextField required id="confirmedPasswordField" label="Confirm password"
+                                           placeholder="Must match password"
+                                           type="password"
                                            variant="outlined" name="confirmedPassword"
-                                           onChange={this.contentChange}/>
+                                           onChange={this.contentChange}
+                                           onFocus={(event) => event.target.classList.remove("error")}
+                                />
                             </div>
                             <p id="errorMessage"></p>
                             <Button
                                 variant="contained"
                                 id="submitButton"
-                                onClick={() => console.log('Creating user...')}
+                                onClick={() => this.validateSignupForm()}
                                 size="large"
                             >
                                 REGISTER
                             </Button>
-                            <Button
-                                variant="contained"
-                                id="goToLogin"
-                                onClick={() => this.props.setLoginMode(true)}
-                            >
-                                Already have an account? Log in
-                            </Button>
+                            <NavLink to="/login" className="nav-links">
+                                <Button
+                                    variant="contained"
+                                    id="goToLoginButton"
+                                >
+                                    Already have an account? Log in
+                                </Button>
+                            </NavLink>
                         </form>
                     </div>
                 }
@@ -235,4 +365,4 @@ class LoginOrSignupPage extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, { toggleUserLogin, logUserIn: setUser, setExpertChefFlag, setLoginMode })(withRouter(LoginOrSignupPage));
+export default connect(mapStateToProps, { toggleUserLogin, logUserIn: setUser, setExpertChefFlag })(withRouter(LoginOrSignupPage));
