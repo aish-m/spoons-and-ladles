@@ -19,7 +19,7 @@ import {
 } from './actionTypes';
 
 const initialState = {
-    currentTab: 0,
+    currentTab: -1,
     recipesList: [],
     loggedIn: false,
     loggedInUser: {

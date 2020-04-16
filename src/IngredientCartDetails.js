@@ -3,7 +3,7 @@ import './IngredientCartDetails.css';
 import { connect } from 'react-redux';
 import CancelIcon from '@material-ui/icons/Cancel';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import { removeIngredient, clearAllIngredients, closeMobileCartModal, recipesWithIng, changeTabValue } from './redux/actionCreators';
+import { removeIngredient, clearAllIngredients, closeMobileCartModal, recipesWithIng } from './redux/actionCreators';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
 
@@ -54,7 +54,6 @@ export default connect(mapStateToProps, {
     removeIngredient, 
     clearAllIngredients, 
     closeMobileCartModal,
-    recipesWithIng,
-    changeTabValue,
+    recipesWithIng
 })
 (IngredientCartDetails);

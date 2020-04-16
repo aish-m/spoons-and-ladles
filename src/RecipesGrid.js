@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import RecipeCard from './RecipeCard';
 import { connect } from 'react-redux';
-import { updateRecipes } from './redux/actionCreators.js';
+import { updateRecipes, changeTabValue } from './redux/actionCreators.js';
 import './RecipeGrid.css';
 
 function mapStateToProps(state) {
@@ -69,6 +69,7 @@ class RecipesGrid extends React.Component {
     };
 
     componentDidMount(){
+        this.props.changeTabValue(1);
         this.fetchData();
     }
 
@@ -104,4 +105,4 @@ class RecipesGrid extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, { updateRecipes }) (RecipesGrid);
+export default connect(mapStateToProps, { updateRecipes, changeTabValue  }) (RecipesGrid);

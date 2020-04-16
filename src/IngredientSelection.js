@@ -4,8 +4,8 @@ import './IngredientSelection.css';
 import IngredientCartToggle from "./IngredientCartToggle";
 import { connect } from 'react-redux';
 import Button from "@material-ui/core/Button";
-import { changeTabValue } from './redux/actionCreators';
 import {NavLink} from "react-router-dom";
+import { changeTabValue } from './redux/actionCreators';
 
 class IngredientSelection extends React.Component {
 
@@ -19,6 +19,8 @@ class IngredientSelection extends React.Component {
     }
 
     componentDidMount() {
+        this.props.changeTabValue(0);
+
         // fetch("https://spoons-and-ladles-backend.herokuapp.com/api/ingredients/getAll")
         fetch("http://localhost:8080/api/ingredients/getAll")
             .then(res => res.json())
@@ -99,7 +101,7 @@ class IngredientSelection extends React.Component {
                             <div>
                                 <IngredientCartToggle/>
                                 <NavLink to="/recipes" className="nav-links">
-                                    <Button variant="contained" id="lookup-recipes-button" onClick={() => this.props.changeTabValue(2)}>
+                                    <Button variant="contained" id="lookup-recipes-button">
                                         Lookup Recipes
                                     </Button>
                                 </NavLink>

@@ -92,7 +92,7 @@ function Header(props) {
     return (
         <header id="pageHeader">
                 <div className="non-sticky-header">
-                    <div onClick={() => props.changeTabValue(0)} className="header-left">
+                    <div onClick={() => props.changeTabValue(-1)} className="header-left">
                         <NavLink to="/">
                             <img id="mascot" src={mascot} alt="Spoons & Ladles mascot"/>
                             <img id="companyName" src={text} alt="Spoons & Ladles text" />
@@ -106,14 +106,14 @@ function Header(props) {
                     </div>
                 </div>
                 <div className="sticky-nav-bar">
-                    <div onClick={() => props.changeTabValue(0)} id="homeIcon">
+                    <div onClick={() => props.changeTabValue(-1)} id="homeIcon">
                         <NavLink to="/">
                             <HomeIcon htmlColor="white" fontSize="large"/>
                         </NavLink>
                     </div>
                     <div className="material-ui-tabs">
                         <Tabs
-                            value={props.currentTab - 1}
+                            value={props.currentTab}
                             aria-label="tabs for home page"
                             TabIndicatorProps={{
                                 style: {
@@ -123,17 +123,17 @@ function Header(props) {
                             }}
                         >
                             <NavLink to="/addIngredients" className="nav-links" activeClassName="active-nav-links">
-                                <Tab id="addIngredientsTab" label="add ingredients" onClick={() => props.changeTabValue(1)}/>
+                                <Tab id="addIngredientsTab" label="add ingredients" onClick={() => props.changeTabValue(0)}/>
                             </NavLink>
                             <NavLink to="/recipes" className="nav-links" activeClassName="active-nav-links">
-                                <Tab id="recipesTab" label="recipes" onClick={() => props.changeTabValue(2)} />
+                                <Tab id="recipesTab" label="recipes" onClick={() => props.changeTabValue(1)} />
                             </NavLink>
                             <NavLink to="/submitRecipe" className="nav-links" activeClassName="active-nav-links">
-                                <Tab id="submitRecipeTab" label="Submit A Recipe" onClick={() => props.changeTabValue(3)}/>
+                                <Tab id="submitRecipeTab" label="Submit A Recipe" onClick={() => props.changeTabValue(2)}/>
                             </NavLink>
                             {(props.loggedIn && props.isExpert) ?
                                 <NavLink to="/evaluateRecipes" className="nav-links" activeClassName="active-nav-links">
-                                    <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(4)}/>
+                                    <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(3)}/>
                                 </NavLink>:
                                 null }
                         </Tabs>
@@ -182,17 +182,17 @@ function Header(props) {
                 </div>
                 <div id="mobileMenu" className="mobile-nav-bar desktop">
                     <ul>
-                        <li onClick={() => props.changeTabValue(1)}>
+                        <li>
                             <NavLink to="/addIngredients" className="nav-links" activeClassName="active-nav-links-mobile"> ADD INGREDIENTS </NavLink>
                         </li>
-                        <li onClick={() => props.changeTabValue(2)}>
+                        <li>
                             <NavLink to="/recipes" className="nav-links" activeClassName="active-nav-links-mobile"> RECIPES </NavLink>
                         </li>
-                        <li onClick={() => props.changeTabValue(3)}>
+                        <li>
                             <NavLink to="/submitRecipe" className="nav-links" activeClassName="active-nav-links-mobile"> SUBMIT A RECIPE </NavLink>
                         </li>
                         {(props.loggedIn && props.isExpert) ?
-                            <li onClick={() => props.changeTabValue(4)}>
+                            <li>
                                 <NavLink to="/evaluateRecipes" className="nav-links" activeClassName="active-nav-links-mobile"> EVALUATE RECIPES </NavLink>
                             </li> : null
                         }
@@ -210,7 +210,6 @@ function Header(props) {
                                     <Button className="ok-button" variant="contained"
                                             onClick={() => {
                                                 props.closeMobileCartModal();
-                                                props.changeTabValue(1);
                                                 if(document.getElementById("mobileMenu").classList.contains("mobile")) {
                                                     document.getElementById("mobileMenu").classList.remove("mobile");
                                                     document.getElementById("mobileMenu").classList.add("desktop");
@@ -223,7 +222,9 @@ function Header(props) {
                                 <IngredientCartDetails
                                     toggleHandler = {props.closeMobileCartModal}
                                 />
-                                <Button variant="contained" id="lookup-recipes-button" onClick={() => props.changeTabValue(2)}>Lookup Recipes</Button>
+                                <NavLink to='/recipes' className="nav-links">
+                                    <Button variant="contained" id="lookup-recipes-button">Lookup Recipes</Button>
+                                </NavLink>
                             </div>
                     }
                 </Modal>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component, useEffect} from "react";
 import './SubmitRecipe.css';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -20,6 +20,9 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import MaterialTable from 'material-table';
+import { changeTabValue } from "./redux/actionCreators";
+import { connect } from 'react-redux';
+
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -39,9 +42,8 @@ const tableIcons = {
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
   };
-  
 
-class SubmitForm extends Component{
+class SubmitForm extends Component {
 
     constructor(props) {
         super(props);
@@ -61,9 +63,8 @@ class SubmitForm extends Component{
           data: [
             
           ] }
-    } 
+    }
 
-    
     contentChange = event => this.setState({ [event.target.name]: event.target.value })
 
     handleChange(event) {
@@ -97,7 +98,8 @@ class SubmitForm extends Component{
             title: '',prepTime: '', numOfServings: '',description: '',ingredients:'',procedure:'', imageCaptured: null,
             imageFileType: null 
         })
-    }
+    };
+
     post_recipe = e => {
         e.preventDefault();
         const requestOptions = {
@@ -108,7 +110,7 @@ class SubmitForm extends Component{
                 imageCaptured: this.state.imageCaptured })
         };
         console.log(this.state);
-    }
+    };
 
     render(){
         return(
@@ -240,12 +242,16 @@ class SubmitForm extends Component{
     }
 }
 
-function SubmitRecipe() {
+function SubmitRecipe(props) {
+    useEffect(() => {
+        props.changeTabValue(2);
+    });
+
     return (    
         <div>
-        <SubmitForm ></SubmitForm>
+            <SubmitForm />
         </div>
     )
 }
 
-export default SubmitRecipe;
+export default connect(null, { changeTabValue })(SubmitRecipe);
