@@ -22,6 +22,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import MaterialTable from 'material-table';
 import { changeTabValue } from "./redux/actionCreators";
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -56,14 +57,14 @@ class SubmitForm extends Component {
         addRecipeStyle : {display: 'block',height: '250px',width: '250px'},
         title: '',prepTime: '', numOfServings: '',description: '',ingredients:'',procedure:'', imageCaptured: null,
         imageFileType: null,
-        columns: [
-            { title: 'Ingredient', field: 'ingredient' },
-            { title: 'Quantity', field: 'quantity' }
-          ],
-          data: [
-            
-          ] }
-    }
+        columns: [{ title: 'Ingredient', field: 'ingredient' },{ title: 'Quantity', field: 'quantity' }],
+        data: [],
+        pendingid: [],
+        ingids:[],
+        selectedFile:null,
+        measurements: []
+        }
+    } 
 
     contentChange = event => this.setState({ [event.target.name]: event.target.value })
 
@@ -85,7 +86,8 @@ class SubmitForm extends Component {
                 addRecipeStyle: {display: 'none'},
                 imageUpdateSpan : {display: 'block',fontFamily: 'Gentium Basic'},
                 previewStyle : {display: 'block',height: '250px',width: '250px'},
-                previewImageStyle :{height: 'inherit',width: 'inherit',fontFamily: 'Gentium Basic'}
+                previewImageStyle :{height: 'inherit',width: 'inherit',fontFamily: 'Gentium Basic'},
+                selectedFile:event.target.files[0]
               })
         }
       }
@@ -98,19 +100,101 @@ class SubmitForm extends Component {
             title: '',prepTime: '', numOfServings: '',description: '',ingredients:'',procedure:'', imageCaptured: null,
             imageFileType: null 
         })
-    };
+    }
+
+    post_get_recipeid(){
+        fetch("http://localhost:8080/api/pending/insert", {
+            method: "POST", 
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                "recipeName": this.state.title,
+                "prepTime": this.state.prepTime,
+                "servings" : this.state.numOfServings,
+                //description: this.state.description,
+                //ingredients: this.state.data,
+                "userId" : 4,
+                "instructions": this.state.procedure,
+                "pictureLink": this.state.imageCaptured})
+          })
+          .then(res => {console.log(res);return res.json()})
+          .then((data) => {
+            this.setState({
+                ingids: data
+            })
+            this.post_get_ingid();
+            console.log("Request complete! response:", this.state.ingids+"    "+data);
+          })
+          .catch(error => {
+            console.log("error    "+error);
+          });  
+    }
+    
+    post_get_ingid(){
+        const ingnames=[];
+        for(var i=0;i<this.state.data.length;i++){
+            ingnames.push(this.state.data[i].ingredient);
+        }
+        console.log(ingnames);
+        fetch("http://localhost:8080/api/ingredients/insert", {
+            method: "POST", 
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                ingredients: ingnames
+                })
+          })
+          .then(res => {console.log(res);return res.json()})
+          .then((data) => {
+            this.setState({
+                pendingid: data
+            }) 
+            this.post_recipe_ingredient_mapper();
+            console.log("Request complete! response:", data);
+          })
+          .catch(error => {
+            console.log("error    "+error);
+          });  
+    }
+
+    post_recipe_ingredient_mapper(){
+        for(var i=0;i<this.state.data.length;i++){
+            this.state.measurements.push(this.state.data[i].quantity);
+        }
+        console.log(this.state.measurements);
+        fetch("http://localhost:8080/api/recipeingredient/insert", {
+            method: "POST", 
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                    pendingRecipeId : this.state.ingids,
+                    ingredientIds: this.state.pendingid,
+                    measurements :  this.state.measurements
+                })
+          })
+          .then(res => {console.log(res);return res.json()})
+          .then((data) => {
+            console.log("Request complete! response:", data);
+          })
+          .catch(error => {
+            console.log("error    "+error);
+          }); 
+
+
+    }
 
     post_recipe = e => {
         e.preventDefault();
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: this.state.title,prepTime: this.state.prepTime,numOfServings: this.state.numOfServings,
-                description: this.state.description,ingredients: this.state.ingredients,procedure: this.state.procedure,
-                imageCaptured: this.state.imageCaptured })
-        };
-        console.log(this.state);
-    };
+        this.post_get_recipeid();
+        console.log(this.state.pendingid);
+        console.log(this.state.ingids);
+        console.log(this.state.measurements);
+        this.setState9({
+            pendingid: [],
+            ingids:[],
+            measurements: []
+        })
+        // console.log(this.state.imageCaptured);  
+        // console.log(e.target);
+        // console.log(this.state.selectedFile); 
+    }
 
     render(){
         return(
@@ -126,7 +210,7 @@ class SubmitForm extends Component {
                 </div>
 
                 <div className="forPreview" style={this.state.previewStyle}>
-                    <img id="preview" src={this.state.imageCaptured} alt="Add recipe final look" style={this.state.previewImageStyle}/> 
+                    <img id="preview" src={this.state.imageCaptured} alt="Add recipe final look" style={this.state.previewImageStyle} onChange={this.handleChange}/> 
                 </div>
                 <div className="getDishDetails">
                     <div className="forPrepTime">
