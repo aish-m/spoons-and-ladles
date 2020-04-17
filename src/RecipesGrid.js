@@ -91,6 +91,13 @@ class RecipesGrid extends React.Component {
 
         return (
             <div className="recipe-grid-div">
+                <div className="recipes-grid-title">
+                    {
+                        this.props.ingredientsListLength === 0 ?
+                            "All Recipes" :
+                            "Recipes for selected ingredients"
+                    }
+                </div>
                 <Grid container className = "grid-container" spacing = {0}>
                     {recipesList.map(recipe =>
                         <Grid item md = {3}>

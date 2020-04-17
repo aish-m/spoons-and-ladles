@@ -89,6 +89,11 @@ class IngredientSelection extends React.Component {
     render() {
         return (
             <div  className="main-div">
+                <div id="mobileViewLookupButton">
+                    <NavLink to='/recipes' className="nav-links">
+                        <Button variant="contained" id="lookup-recipes-button">Lookup Recipes</Button>
+                    </NavLink>
+                </div>
                 <div className="ingredient-selection-div" id="picker">
                     <IngredientPicker
                         ingredients = {this.state.ingredients}

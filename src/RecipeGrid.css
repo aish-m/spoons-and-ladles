@@ -1,6 +1,7 @@
 .recipe-grid-div {
     margin: 0 auto;
     z-index: -1;
+    font-family: "Roboto", sans-serif;
 }
 .MuiPaper-root.MuiCard-root.makeStyles-root-815.MuiPaper-elevation1.MuiPaper-rounded {
      margin: 20px auto;
@@ -43,4 +44,8 @@
     background-color:#FFF;
 }
 
-
+.recipes-grid-title {
+    text-align: center;
+    font-size: 3em;
+    padding: 15px 0;
+}

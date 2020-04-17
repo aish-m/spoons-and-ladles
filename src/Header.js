@@ -183,17 +183,17 @@ function Header(props) {
                 <div id="mobileMenu" className="mobile-nav-bar desktop">
                     <ul>
                         <li>
-                            <NavLink to="/addIngredients" className="nav-links" activeClassName="active-nav-links-mobile"> ADD INGREDIENTS </NavLink>
+                            <NavLink to="/addIngredients" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> ADD INGREDIENTS </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/recipes" className="nav-links" activeClassName="active-nav-links-mobile"> RECIPES </NavLink>
+                            <NavLink to="/recipes" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> RECIPES </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/submitRecipe" className="nav-links" activeClassName="active-nav-links-mobile"> SUBMIT A RECIPE </NavLink>
+                            <NavLink to="/submitRecipe" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> SUBMIT A RECIPE </NavLink>
                         </li>
                         {(props.loggedIn && props.isExpert) ?
                             <li>
-                                <NavLink to="/evaluateRecipes" className="nav-links" activeClassName="active-nav-links-mobile"> EVALUATE RECIPES </NavLink>
+                                <NavLink to="/evaluateRecipes" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> EVALUATE RECIPES </NavLink>
                             </li> : null
                         }
                     </ul>
@@ -222,9 +222,6 @@ function Header(props) {
                                 <IngredientCartDetails
                                     toggleHandler = {props.closeMobileCartModal}
                                 />
-                                <NavLink to='/recipes' className="nav-links">
-                                    <Button variant="contained" id="lookup-recipes-button">Lookup Recipes</Button>
-                                </NavLink>
                             </div>
                     }
                 </Modal>
