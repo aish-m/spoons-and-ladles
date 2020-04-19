@@ -7,6 +7,7 @@ import { forwardRef } from 'react';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
+import Close from '@material-ui/icons/Close';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import Clear from '@material-ui/icons/Clear';
@@ -44,6 +45,8 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
   };
 
+var formData = new FormData();
+
 class SubmitForm extends Component {
 
     constructor(props) {
@@ -55,6 +58,7 @@ class SubmitForm extends Component {
         previewStyle :  {display: 'none'},
         imageUpdateSpan : {display: 'none'},
         addRecipeStyle : {display: 'block',height: '250px',width: '250px'},
+        confirmationStyle: {display: 'none'},
         title: '',prepTime: '', numOfServings: '',description: '',ingredients:'',procedure:'', imageCaptured: null,
         imageFileType: null,
         columns: [{ title: 'Ingredient', field: 'ingredient' },{ title: 'Quantity', field: 'quantity' }],
@@ -62,7 +66,8 @@ class SubmitForm extends Component {
         pendingid: [],
         ingids:[],
         selectedFile:null,
-        measurements: []
+        measurements: [],
+        testid: 574
         }
     } 
 
@@ -89,6 +94,8 @@ class SubmitForm extends Component {
                 previewImageStyle :{height: 'inherit',width: 'inherit',fontFamily: 'Gentium Basic'},
                 selectedFile:event.target.files[0]
               })
+              formData = new FormData();
+              formData.append("uploadImage",this.state.selectedFile);
         }
       }
 
@@ -98,11 +105,31 @@ class SubmitForm extends Component {
             imageUpdateSpan : {display: 'none'},
             addRecipeStyle : {display: 'block',height: '250px',width: '250px'},
             title: '',prepTime: '', numOfServings: '',description: '',ingredients:'',procedure:'', imageCaptured: null,
-            imageFileType: null 
+            imageFileType: null,
+            data: []
         })
     }
 
+    post_image(){
+        console.log(this.state.selectedFile);
+        var filepath = "src\images\Recipes";
+        const fd = new FormData();
+        fd.append('image',this.state.selectedFile, "test image")
+        axios.post({
+            url: "http://localhost:8080/api/pending/postimage",
+            data: fd
+        })
+        .then(res=>{
+            console.log(res);
+        })
+        .then(err => {
+            console.log(err);
+        })
+    }
     post_get_recipeid(){
+        console.log(this.state.selectedFile);
+        //var str =  new String(this.state.selectedFile);
+        //console.log(str);
         fetch("http://localhost:8080/api/pending/insert", {
             method: "POST", 
             headers: { 'Content-Type': 'application/json' },
@@ -112,16 +139,19 @@ class SubmitForm extends Component {
                 "servings" : this.state.numOfServings,
                 //description: this.state.description,
                 //ingredients: this.state.data,
-                "userId" : 4,
                 "instructions": this.state.procedure,
-                "pictureLink": this.state.imageCaptured})
+                //"pictureLink": str
+            })
+           
           })
-          .then(res => {console.log(res);return res.json()})
+          .then(res => {console.log(res);
+            return res.json()
+          })
           .then((data) => {
             this.setState({
                 ingids: data
             })
-            this.post_get_ingid();
+            this.post_get_ingid(); 
             console.log("Request complete! response:", this.state.ingids+"    "+data);
           })
           .catch(error => {
@@ -179,17 +209,23 @@ class SubmitForm extends Component {
 
 
     }
-
+    closeconfirmation = e => {
+        this.setState({
+            confirmationStyle: {display: 'none'}
+        })
+    }
     post_recipe = e => {
         e.preventDefault();
-        this.post_get_recipeid();
-        console.log(this.state.pendingid);
+        //this.post_get_recipeid();
+        this.post_image();
+        this.cancel_recipe();
+        console.log(this.state.imageCaptured);
         console.log(this.state.ingids);
         console.log(this.state.measurements);
-        this.setState9({
+        this.setState({
             pendingid: [],
-            ingids:[],
-            measurements: []
+            confirmationStyle: {display: 'flex'},
+            measurements: [],
         })
         // console.log(this.state.imageCaptured);  
         // console.log(e.target);
@@ -198,6 +234,15 @@ class SubmitForm extends Component {
 
     render(){
         return(
+            <div>
+            <div className="submittedconfirmation" style={this.state.confirmationStyle}> 
+                <div className = "innerconfirm"> 
+                    Your recipe is submitted: {this.state.ingids}. Let us see what else you got bud! 
+                    <Button className="close">  <Close onClick={this.closeconfirmation}></Close>  </Button>
+                    
+                </div>
+            </div>
+            
             <form className="createRecipe">
             <div className="overallDiv">
             <div className="generic"> 
@@ -321,7 +366,8 @@ class SubmitForm extends Component {
                 
             </div>
             </div>
-        </form>
+            </form>
+        </div>
         )
     }
 }
