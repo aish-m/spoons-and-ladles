@@ -112,7 +112,7 @@ class SubmitForm extends Component {
 
     post_image(){
         console.log(this.state.selectedFile);
-        var filepath = "src\images\Recipes";
+        var filepath = "src/images/Recipes";
         const fd = new FormData();
         fd.append('image',this.state.selectedFile, "test image")
         axios.post({
@@ -137,10 +137,11 @@ class SubmitForm extends Component {
                 "recipeName": this.state.title,
                 "prepTime": this.state.prepTime,
                 "servings" : this.state.numOfServings,
+                "userId" : 2,
                 //description: this.state.description,
-                //ingredients: this.state.data,
+                "ingredients": this.state.data,
                 "instructions": this.state.procedure,
-                //"pictureLink": str
+                "pictureLink": "gyro-salad.jpg"
             })
            
           })
@@ -161,6 +162,7 @@ class SubmitForm extends Component {
     
     post_get_ingid(){
         const ingnames=[];
+        console.log(this.state.data+"table");
         for(var i=0;i<this.state.data.length;i++){
             ingnames.push(this.state.data[i].ingredient);
         }
@@ -202,6 +204,7 @@ class SubmitForm extends Component {
           .then(res => {console.log(res);return res.json()})
           .then((data) => {
             console.log("Request complete! response:", data);
+            this.cancel_recipe();
           })
           .catch(error => {
             console.log("error    "+error);
@@ -216,16 +219,13 @@ class SubmitForm extends Component {
     }
     post_recipe = e => {
         e.preventDefault();
-        //this.post_get_recipeid();
-        this.post_image();
-        this.cancel_recipe();
-        console.log(this.state.imageCaptured);
-        console.log(this.state.ingids);
-        console.log(this.state.measurements);
+        this.post_get_recipeid();
+        //this.post_image();
+        console.log(this.state.data);
         this.setState({
-            pendingid: [],
+            ingid: [],
             confirmationStyle: {display: 'flex'},
-            measurements: [],
+            measurements: []
         })
         // console.log(this.state.imageCaptured);  
         // console.log(e.target);
@@ -321,6 +321,7 @@ class SubmitForm extends Component {
                                         return { ...prevState, data };
                                     });
                                     }, 600);
+                                    console.log("Here"+this.state.data);
                                 }),
                                 onRowUpdate: (newData, oldData) =>
                                 new Promise((resolve) => {
@@ -373,6 +374,7 @@ class SubmitForm extends Component {
 }
 
 function SubmitRecipe(props) {
+    
     useEffect(() => {
         props.changeTabValue(2);
     });
