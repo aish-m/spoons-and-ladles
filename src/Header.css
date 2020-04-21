@@ -308,6 +308,10 @@ input[type=search]:focus {
     font-size: 1.2em;
 }
 
+.nav-links:hover {
+    color: inherit;
+}
+
 .active-nav-links {
     color: #b6e64f;
 }

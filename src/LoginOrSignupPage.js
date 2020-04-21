@@ -61,6 +61,7 @@ class LoginOrSignupPage extends React.Component {
         document.getElementById("errorMessage").innerHTML = '';
         document.getElementById("pageHeader").classList.remove("loginMode");
         document.getElementById("pageFooter").classList.remove("loginMode");
+        window.location.pathname = this.props.redirectUrl;
     }
 
     contentChange = event => this.setState({[event.target.name]: event.target.value});

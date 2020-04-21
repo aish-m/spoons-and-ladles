@@ -30,33 +30,32 @@ function RecipeCard(props) {
     const classes = useStyles();
     return (
         <Card className = {classes.root}>
-            <CardActionArea>
-                <img className = 'card-img'
-                    src = {require("./images/Recipes/" + props.recipe.pictureLink)}
-                    alt = {props.recipe.recipeName}
-                />
-                <CardContent className = "content">
-                    <Typography className = "content-head" gutterBottom variant = "h5" component = "h2">
-                        {props.recipe.recipeName}
-                    </Typography>
-                    <Typography className = "content-text" variant="body2" color="textSecondary" component="p">
-                        {props.recipe.instructions}
-                    </Typography>
-                </CardContent>               
-            </CardActionArea>
-            <CardActions className = "card-bottom">
-                <NavLink to={"/recipe/" + props.recipe.recipeId} className="nav-links">
+            <NavLink to={"/recipe/" + props.recipe.recipeId} className="nav-links">
+                <CardActionArea>
+                    <img className = 'card-img'
+                        src = {require("./images/Recipes/" + props.recipe.pictureLink)}
+                        alt = {props.recipe.recipeName}
+                    />
+                    <CardContent className = "content">
+                        <Typography className = "content-head" gutterBottom variant = "h5" component = "h2">
+                            {props.recipe.recipeName}
+                        </Typography>
+                        <Typography className = "content-text" variant="body2" color="textSecondary" component="p">
+                            {props.recipe.instructions}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+                <CardActions className = "card-bottom">
                     <Button size = "small" color = "primary"
                     >
                         Open
                     </Button>
-                </NavLink>
-                
-                <ScheduleIcon className = "clock-icon"></ScheduleIcon>
-                <Typography className = "content-text" variant="body2" color="textSecondary" component="p">
-                    {props.recipe.prepTime}
-                </Typography>
-            </CardActions>
+                    <ScheduleIcon className = "clock-icon"></ScheduleIcon>
+                    <Typography className = "content-text" variant="body2" color="textSecondary" component="p">
+                        {props.recipe.prepTime}
+                    </Typography>
+                </CardActions>
+            </NavLink>
         </Card>
     );
 }

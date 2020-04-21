@@ -13,9 +13,7 @@ function mapStateToProps(state) {
     };
 }
 
-
 class RecipesGrid extends React.Component {
-    
         
     constructor(props) {
         super(props);
