@@ -9,6 +9,21 @@
     padding-right: 2.5%;
 }
 
+.close{
+    padding: 0px !important;
+    float: right;
+}
+.innerconfirm{
+    width: -webkit-fill-available;
+}
+.submittedconfirmation{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: antiquewhite;
+    text-align: center;
+    justify-content: center;
+}
 .MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
     width: 75%;
     border-color: rgba(0, 0, 0, 0.23) !important;
