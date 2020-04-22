@@ -5,7 +5,7 @@ import {
 import TimerIcon from '@material-ui/icons/Timer';
 import { Rating } from '@material-ui/lab';
 import servings from './images/servings.png';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import bulletPoint from './images/bullet-point.png';
 
 function RecipesPage() {
     const [recipe, setRecipe] = useState({pictureLink: "picture.png"});
@@ -58,35 +58,32 @@ function RecipesPage() {
                     className="recipe-image"
                 />
                 <div className="recipe-intro">
-                    <div className="recipe-title"> { recipe.recipeName } </div>
-                    <div className="recipe-user"> { 'Submitted by: ' + recipe.userId } </div>
-                    <div className="recipe-prep-time">
-                        <TimerIcon fontSize="large" className="prep-time-clock"/>
-                        {recipe.prepTime}
+                    <div className="recipe-title"> { recipe.recipeName !== undefined ? recipe.recipeName.toUpperCase() : "" } </div>
+                    <div className="recipe-user">
+                        { (recipe.userId === 1) ? 'A Spoons & Ladles original recipe' : 'by user ' + recipe.userId }
                     </div>
-                    <div className="recipe-rating">
-                        <Rating name="half-rating"
-                                value={recipe.rating/recipe.numberOfReviewers}
-                                defaultValue={0}
-                                precision={0.1}
-                            id="recipeStars"
-                        />
-                        {(recipe.numberOfReviewers === 0 ? 0 : recipe.rating/recipe.numberOfReviewers).toFixed(1) + ' (From ' + recipe.numberOfReviewers + ' ratings)'}
+                    <div className="intro-flexbox">
+                        <div className="recipe-prep-time">
+                            <TimerIcon className="prep-time-clock"/>
+                            {recipe.prepTime}
+                        </div>
+                        <div className="recipe-rating">
+                            <Rating name="half-rating"
+                                    value={recipe.rating/recipe.numberOfReviewers}
+                                    defaultValue={0}
+                                    precision={0.1}
+                                    id="recipeStars"
+                            />
+                            {(recipe.numberOfReviewers === 0 ? 0 : recipe.rating/recipe.numberOfReviewers).toFixed(1) + ' (From ' + recipe.numberOfReviewers + ' ratings)'}
+                        </div>
                     </div>
-                    <div className="recipe-servings">
-                        <img
-                            src={servings}
-                            alt="Serving size"
-                        />
-                        {recipe.servings}
-                    </div>
+                    <div className="intro-flexbox">
                     {
                         (recipe.keywords !== undefined) ?
                            <div className="recipe-keywords">
                                 {
                                     recipe.keywords.split(',').map(function (keyword) {
                                         return <div className="keyword">
-                                                    <LocalOfferIcon fontSize="small" className="keyword-icon"/>
                                                     { keyword }
                                                 </div>;
                                         })
@@ -94,19 +91,31 @@ function RecipesPage() {
                             </div> :
                             null
                     }
+                        <div className="recipe-servings">
+                            <img
+                                src={servings}
+                                alt="Serving size"
+                            />
+                            {recipe.servings}
+                        </div>
+                    </div>
                 </div>
+
                 <div className="recipe-details">
                     {
                         ingredients !== undefined ?
                             <div className="recipe-ingredients">
-                                INGREDIENTS:
+                                <span className="recipe-detail-title"> INGREDIENTS </span>
                                 {
                                     ingredients.map(function(ingredient) {
                                         return <div className="ingredient">
-                                                    <div className="ingredient-name">
-                                                        { ingredient.ingredientName }
-                                                    </div>
-                                                    <div className="ingredient-measurement">
+                                                    <img
+                                                        src = {bulletPoint}
+                                                        className="ingredient-bullet-point"
+                                                        alt="Bullet Point"
+                                                    />
+                                                    <div>
+                                                        <span className="ingredient-name">{ ingredient.ingredientName } </span>
                                                         { '(' + ingredient.pictureLink + ')'}
                                                     </div>
                                                 </div>
@@ -118,9 +127,13 @@ function RecipesPage() {
                     {
                         recipe.instructions !== undefined ?
                             <div className="recipe-instructions">
+                                <span className="recipe-detail-title"> INSTRUCTIONS </span>
                                 {
-                                    recipe.instructions.split('|').map(function(instruction) {
-                                        return <div className="instruction"> { instruction } </div>
+                                    recipe.instructions.split('|').map(function(instruction, i) {
+                                        return <div className="instruction" key={i}>
+                                            <span className="instruction-number"> {i + 1} </span>
+                                            <span className="instruction-text"> { instruction } </span>
+                                        </div>
                                     })
                                 }
                             </div> :
