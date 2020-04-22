@@ -24,7 +24,7 @@ const initialState = {
     loggedIn: false,
     loggedInUser: {
         firstName: 'User',
-        pictureLink: 'user-icon.png'
+        pictureLink: 'user-picture.jpg'
     },
     isUserExpert: false,
     selectedIngredients: [],
@@ -129,7 +129,7 @@ function reducers(state = initialState, action) {
             return Object.assign({}, state, {
                 loggedInUser: {
                     firstName: 'User',
-                    pictureLink: 'user-icon.png'
+                    pictureLink: 'user-picture.jpg'
                 }
             });
         }

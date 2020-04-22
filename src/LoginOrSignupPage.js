@@ -61,7 +61,6 @@ class LoginOrSignupPage extends React.Component {
         document.getElementById("errorMessage").innerHTML = '';
         document.getElementById("pageHeader").classList.remove("loginMode");
         document.getElementById("pageFooter").classList.remove("loginMode");
-        window.location.pathname = this.props.redirectUrl;
     }
 
     contentChange = event => this.setState({[event.target.name]: event.target.value});
@@ -100,7 +99,9 @@ class LoginOrSignupPage extends React.Component {
                 .then(res => res.json())
                 .then(
                     (result) => {
-                        result === 0 ? this.handleLoginFailure() : this.handleLoginSuccess(result);
+                        result === 0 ?
+                            this.handleLoginFailure() :
+                            this.handleLoginSuccess(result);
                     },
                     (error) => {
                         window.location.replace('/serverError');
@@ -115,7 +116,6 @@ class LoginOrSignupPage extends React.Component {
     handleLoginSuccess(loggedInUsersId) {
         this.closeComponent();
         this.props.toggleUserLogin();
-        this.props.history.push(this.props.redirectUrl);
 
         // fetch("http://localhost:8080/api/users/getInfo/" + loggedInUsersId)
         fetch("https://spoons-and-ladles-backend.herokuapp.com/api/users/getInfo/" + loggedInUsersId)
@@ -125,6 +125,7 @@ class LoginOrSignupPage extends React.Component {
                     console.log(result);
                     this.props.logUserIn(result);
                     this.props.setExpertChefFlag(result.expert);
+                    this.props.history.push(this.props.redirectUrl);
                 },
                 (error) => {
                     console.log("Error fetching user data!")
