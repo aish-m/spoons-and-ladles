@@ -44,7 +44,7 @@ class EvaluateRecipeComponent extends Component {
         }
     }
     componentDidMount(){
-    fetch("http://localhost:8080/api/pending/getRecipes/"+mapStateToProps.user)
+    fetch("http://localhost:8080/api/pending/getRecipes/2")
           .then(res => {console.log(res);
             return res.json()
           })
