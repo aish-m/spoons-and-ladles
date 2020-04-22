@@ -21,7 +21,19 @@ const useStyles = makeStyles(theme => ({
       display: 'inline',
     },
   }));
-  const url="/images/Recipes/"; //C:\Users\neera\Documents\ISDProject\spoons-and-ladles\src\images\Recipes\boba-tea.jpg
+
+const mapStateToProps = state => ({
+    currentTab: state.currentTab,
+    loggedIn: state.loggedIn,
+    isExpert: state.isUserExpert,
+    selectedIngredientsCount: state.selectedIngredients.length,
+    isMobileCartModalOpen: state.isMobileCartModalOpen,
+    ingredientsList: state.IngredientsList,
+    selectedIngredients: state.selectedIngredients,
+    showIngAlert: state.showIngAlert,
+    user: state.loggedInUser
+});
+
 class EvaluateRecipeComponent extends Component {
     
     constructor(props) {
@@ -32,7 +44,7 @@ class EvaluateRecipeComponent extends Component {
         }
     }
     componentDidMount(){
-    fetch("http://localhost:8080/api/pending/getRecipes/2")
+    fetch("http://localhost:8080/api/pending/getRecipes/"+mapStateToProps.user)
           .then(res => {console.log(res);
             return res.json()
           })
@@ -40,6 +52,7 @@ class EvaluateRecipeComponent extends Component {
             this.setState({
                 listedrecipes : data
             })
+            console.log(mapStateToProps.user);
             console.log("Request complete! response:", data);
           })
           .catch(error => {
@@ -47,10 +60,6 @@ class EvaluateRecipeComponent extends Component {
           }); 
     }
 
-    // openRecipe(recipeid){
-    //     console.log(recipeid);
-    //     onClick = {() => this.openRecipe(recipe.pendingRecipeId)}
-    // }
 
     render(){
        
@@ -59,11 +68,10 @@ class EvaluateRecipeComponent extends Component {
             <div>
                 <List> 
                     {this.state.listedrecipes.map(recipe=>
-                    <NavLink to={"/evaluate/recipe/" + recipe.pendingRecipeId} className="nav-links"> 
+                    <NavLink className= "evaluateLink" to={"/evaluate/recipe/" + recipe.pendingRecipeId} className="nav-links"> 
                         <ListItem alignItems="flex-start">
                         <ListItemAvatar>
                         <Avatar alt="Remy Sharp"  src= {require("./images/Recipes/" + recipe.pictureLink)} />
-                        {/* src= {require("./images/Recipes/" + props.recipe.pictureLink)} */}
                         </ListItemAvatar>
                         <ListItemText
                         primary= {recipe.recipeName}
@@ -72,14 +80,21 @@ class EvaluateRecipeComponent extends Component {
                             <Typography
                                 component="span"
                                 variant="body2"
-                                // className={classes.inline}
                                 color="textPrimary"
                             >
-                            Instructions
+                            Number of Servings: 
+                            
                             </Typography>
-                                {"     ---"+recipe.instructions.substring(0,200)+"..."}
-                                {/* {" — I'll be in your neighborhood doing errands this…"} */}
-                                
+                                {" "+recipe.servings}
+                                <Typography
+                                component="span"
+                                variant="body2"
+                                color="textPrimary"
+                            >
+                            <br></br>
+                            Instructions:  
+                            </Typography>
+                            {" "+recipe.instructions.substring(0,100)+"..."}    
                             </React.Fragment> 
                         
                         }

@@ -1,9 +1,15 @@
 .MuiListItem-gutters{
     border: ridge;
     /* border-top: ridge; */
-    margin-bottom: 2px !important;
-    margin-left: 2px !important;
-    margin-right: 2px !important;
-    border-width: 1px !important;
+    margin-bottom: 2px ;
+    margin-left: 2px ;
+    margin-right: 2px ;
+    border-width: 1px ;
+    border-color: black ;
     width: -webkit-fill-available !important;
+}
+
+div ul a.nav-links :hover{
+    border-color : sienna;
+    background: aliceblue;
 }
