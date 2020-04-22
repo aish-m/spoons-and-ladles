@@ -18,7 +18,8 @@ function RecipesPage() {
 
     useEffect(() => {
         console.log('useEffect called!');
-        fetch("http://localhost:8080/api/recipes/getDetails/" + id)
+        // fetch("http://localhost:8080/api/recipes/getDetails/" + id)
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/recipes/getDetails/" + id)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -31,7 +32,8 @@ function RecipesPage() {
                 }
             );
 
-        fetch("http://localhost:8080/api/ingredients/forRecipe/" + id)
+        // fetch("http://localhost:8080/api/ingredients/forRecipe/" + id)
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/ingredients/forRecipe/" + id)
             .then(res => res.json())
             .then(
                 (result) => {

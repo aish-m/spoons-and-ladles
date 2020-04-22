@@ -91,7 +91,8 @@ class LoginOrSignupPage extends React.Component {
     }
 
     validateUser(username, password) {
-            fetch("http://localhost:8080/api/users/login", {
+            // fetch("http://localhost:8080/api/users/login", {
+            fetch("https://spoons-and-ladles-backend.herokuapp.com/api/users/login", {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({username: username, password: password})
@@ -116,7 +117,8 @@ class LoginOrSignupPage extends React.Component {
         this.props.toggleUserLogin();
         this.props.history.push(this.props.redirectUrl);
 
-        fetch("http://localhost:8080/api/users/getInfo/" + loggedInUsersId)
+        // fetch("http://localhost:8080/api/users/getInfo/" + loggedInUsersId)
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/users/getInfo/" + loggedInUsersId)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -215,7 +217,8 @@ class LoginOrSignupPage extends React.Component {
             phone: this.state.phone
         };
 
-        fetch("http://localhost:8080/api/users/insert", {
+        // fetch("http://localhost:8080/api/users/insert", {
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/users/insert", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(postRequestBody)
