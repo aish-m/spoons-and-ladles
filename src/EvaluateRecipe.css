@@ -1,0 +1,9 @@
+.MuiListItem-gutters{
+    border: ridge;
+    /* border-top: ridge; */
+    margin-bottom: 2px !important;
+    margin-left: 2px !important;
+    margin-right: 2px !important;
+    border-width: 1px !important;
+    width: -webkit-fill-available !important;
+}
