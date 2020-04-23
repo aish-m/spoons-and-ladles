@@ -21,6 +21,7 @@ import {
 } from "react-router-dom";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import { withRouter } from 'react-router-dom';
 
 function toggleUserOptionsMenu() {
     if(document.getElementById("userOptionsDiv").classList.contains("open")) {
@@ -128,11 +129,14 @@ function Header(props) {
                             <NavLink to="/recipes" className="nav-links" activeClassName="active-nav-links">
                                 <Tab id="recipesTab" label="recipes" onClick={() => props.changeTabValue(1)} />
                             </NavLink>
-                            {(props.loggedIn) ?
-                                <NavLink to="/submitRecipe" className="nav-links" activeClassName="active-nav-links">
-                                    <Tab id="submitRecipeTab" label="Submit A Recipe" onClick={() => props.changeTabValue(2)}/>
-                                </NavLink>:
-                                null }
+                            <Tab id="submitRecipeTab"
+                                 label="Submit A Recipe"
+                                 onClick={() => {
+                                     props.changeTabValue(2);
+                                     props.setRedirectUrl('submitRecipe');
+                                     props.history.push('login');
+                                 }}
+                            />
                             {(props.loggedIn && props.isExpert) ?
                                 <NavLink to="/evaluateRecipes" className="nav-links" activeClassName="active-nav-links">
                                     <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(3)}/>
@@ -242,4 +246,4 @@ export default connect(mapStateToProps,
     { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert,
         stopIngAlert, recipesWithIng, recipesWithoutIng, setRedirectUrl,
         toggleUserLogin, resetUser, setExpertChefFlag
-    })(Header);
+    })(withRouter(Header));
