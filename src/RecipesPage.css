@@ -72,6 +72,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .recipe-detail-title {
@@ -134,6 +135,50 @@
 
 .instruction-text {
     margin-top: 10px;
+}
+
+.recipe-evaluation-options {
+    width: 60%;
+    margin: 10px 0;
+    padding: 15px 0;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#evaluationDivTitle {
+    font-size: 32px;
+    font-family: 'Source Serif Pro', serif;
+    font-family: 'Montserrat', sans-serif;
+    padding-bottom: 10px;
+}
+
+#evaluatorRemark {
+    width: 60%;
+}
+
+#acceptDenyButtons {
+    width: 35%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#acceptButton {
+    background-color: limegreen;
+    color: white;
+    font-size: 1em;
+    width: 45%;
+}
+
+#denyButton {
+    background-color: #dc2a27;
+    color: white;
+    font-size: 1em;
+    width: 45%;
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {

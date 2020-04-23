@@ -128,9 +128,11 @@ function Header(props) {
                             <NavLink to="/recipes" className="nav-links" activeClassName="active-nav-links">
                                 <Tab id="recipesTab" label="recipes" onClick={() => props.changeTabValue(1)} />
                             </NavLink>
-                            <NavLink to="/submitRecipe" className="nav-links" activeClassName="active-nav-links">
-                                <Tab id="submitRecipeTab" label="Submit A Recipe" onClick={() => props.changeTabValue(2)}/>
-                            </NavLink>
+                            {(props.loggedIn) ?
+                                <NavLink to="/submitRecipe" className="nav-links" activeClassName="active-nav-links">
+                                    <Tab id="submitRecipeTab" label="Submit A Recipe" onClick={() => props.changeTabValue(2)}/>
+                                </NavLink>:
+                                null }
                             {(props.loggedIn && props.isExpert) ?
                                 <NavLink to="/evaluateRecipes" className="nav-links" activeClassName="active-nav-links">
                                     <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(3)}/>

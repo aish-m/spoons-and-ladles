@@ -6,20 +6,39 @@ import TimerIcon from '@material-ui/icons/Timer';
 import { Rating } from '@material-ui/lab';
 import servings from './images/servings.png';
 import bulletPoint from './images/bullet-point.png';
+import Button from "@material-ui/core/Button";
+import { TextareaAutosize } from '@material-ui/core';
+import { connect } from 'react-redux';
 
-function RecipesPage() {
+const mapStateToProps = state => ({
+    loggedIn: state.loggedInUser,
+    isExpert: state.isUserExpert
+});
+
+function RecipesPage(props) {
     const [recipe, setRecipe] = useState({pictureLink: "picture.png"});
     const [ingredients, setIngredients] = useState([]);
     const [isRecipeLoaded, setIsRecipeLoaded] = useState(false);
     const [areIngredientsLoaded, setAreIngredientsLoaded] = useState(false);
     const [error, setError] = useState(null);
+    const [isValid, setIsValid] = useState(true);
 
     let { id } = useParams();
 
     useEffect(() => {
-        console.log('useEffect called!');
-        // fetch("http://localhost:8080/api/recipes/getDetails/" + id)
-        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/recipes/getDetails/" + id)
+
+        if(window.location.pathname.includes("evaluate")) {
+            setIsValid(props.loggedIn && props.isExpert);
+        }
+
+        // const url = (window.location.pathname.includes("evaluate")) ? "http://localhost:8080/api/pending/getDetails/" :
+        //     "http://localhost:8080/api/recipes/getDetails/";
+
+        const url = (window.location.pathname.includes("evaluate")) ?
+            "https://spoons-and-ladles-backend.herokuapp.com/api/pending/getDetails/" :
+            "https://spoons-and-ladles-backend.herokuapp.com/api/recipes/getDetails/";
+
+        fetch(url + id)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -52,6 +71,8 @@ function RecipesPage() {
     }
 
     return(
+        isValid
+            ?
         !isRecipeLoaded && !areIngredientsLoaded ? <div> Loading recipe... </div> :
             <div className="one-recipe">
                 <img
@@ -142,8 +163,41 @@ function RecipesPage() {
                             null
                     }
                 </div>
+
+                {
+                    window.location.pathname.includes("evaluate") ?
+                        <div className="recipe-evaluation-options">
+                            <div id="evaluationDivTitle"> EVALUATION </div>
+                            <TextareaAutosize
+                                id="evaluatorRemark"
+                                rowsMin={3}
+                                placeholder="Enter remarks"
+                            />
+                            <div id="acceptDenyButtons">
+                                <Button
+                                    variant="contained"
+                                    id="acceptButton"
+                                    size="large"
+                                >
+                                    Accept
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    id="denyButton"
+                                    size="large"
+                                >
+                                    Deny
+                                </Button>
+                            </div>
+                        </div>
+                        : null
+                }
+            </div>
+            :
+            <div>
+                You must be logged in as an expert chef to evaluate recipes!
             </div>
     )
 }
 
-export default RecipesPage;
+export default connect(mapStateToProps, {})(RecipesPage);

@@ -9,7 +9,6 @@ import Footer from "./Footer";
 import LoginOrSignupPage from './LoginOrSignupPage';
 import RecipesPage from "./RecipesPage";
 import ServerDownErrorPage from './ServerDownErrorPage';
-import EvaluatingARecipe from './EvaluatingARecipe'
 import {
     Route
 } from "react-router-dom";
@@ -28,7 +27,7 @@ function App() {
               <Route path="/signup" component={LoginOrSignupPage} />
               <Route path={"/recipe/:id"} component={RecipesPage} />
               <Route path={"/serverError"} component={ServerDownErrorPage} />
-              <Route path={"/evaluate/recipe/:id"} component={EvaluatingARecipe} />
+              <Route path={"/evaluate/recipe/:id"} component={RecipesPage} />
               {/*<Route path="*" component={Error404Page} />*/}
               {/* TODO: Create a component for 404 page */}
               <Footer />
