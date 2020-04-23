@@ -186,7 +186,7 @@ class LoginOrSignupPage extends React.Component {
             return;
         }
 
-        const phonePattern = /[0-9]{10}/;
+        const phonePattern = /^\d{10}$/;
         if(this.state.phone !== null && !phonePattern.test(this.state.phone)) {
             document.getElementById("phoneField").classList.add("error");
             document.getElementById("errorMessage").innerHTML = "Phone number should be exactly 10 digits without special characters!";
