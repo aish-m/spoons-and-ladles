@@ -59,7 +59,7 @@ class SubmitForm extends Component {
         imageUpdateSpan : {display: 'none'},
         addRecipeStyle : {display: 'block',height: '250px',width: '250px'},
         confirmationStyle: {display: 'none'},
-        title: '',prepTime: '', numOfServings: '',description: '',ingredients:'',procedure:'', imageCaptured: null,
+        title: '',prepTime: '', numOfServings: '',keywords: '',ingredients:'',procedure:'', imageCaptured: null,
         imageFileType: null,
         columns: [{ title: 'Ingredient', field: 'ingredient' },{ title: 'Quantity', field: 'quantity' }],
         data: [],
@@ -104,7 +104,7 @@ class SubmitForm extends Component {
             previewStyle :  {display: 'none'},
             imageUpdateSpan : {display: 'none'},
             addRecipeStyle : {display: 'block',height: '250px',width: '250px'},
-            title: '',prepTime: '', numOfServings: '',description: '',ingredients:'',procedure:'', imageCaptured: null,
+            title: '',prepTime: '', numOfServings: '',keywords: '',ingredients:'',procedure:'', imageCaptured: null,
             imageFileType: null,
             data: []
         })
@@ -138,12 +138,11 @@ class SubmitForm extends Component {
                 "prepTime": this.state.prepTime,
                 "servings" : this.state.numOfServings,
                 "userId" : 2,
-                //description: this.state.description,
+                "keywords": this.state.keywords,
                 "ingredients": this.state.data,
                 "instructions": this.state.procedure,
-                "pictureLink": "gyro-salad.jpg"
+                "pictureLink": "recipe-picture.png"
             })
-           
           })
           .then(res => {console.log(res);
             return res.json()
@@ -272,7 +271,14 @@ class SubmitForm extends Component {
                         <TextField className="recipeTitle" value={this.state.title} name="title" onChange={this.contentChange} label="Recipe Title" required variant="outlined" />
                     </div>
                     <div className="getRecipeDataDesc">
-                        <TextField className="recipeDesc" value={this.state.description} name="description" label="Description" required variant="outlined" multiline rows="2"  onChange={this.contentChange} />
+                        <TextField
+                            className="recipeDesc"
+                            value={this.state.keywords}
+                            name="keywords"
+                            label="Enter a comma separated list of keywords for the recipe"
+                            required variant="outlined"
+                            multiline rows="2"
+                            onChange={this.contentChange} />
                     </div>
                     
                     <div className="getRecipeDataIngredients">

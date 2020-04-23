@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
 });
 
 function RecipesPage(props) {
-    const [recipe, setRecipe] = useState({pictureLink: "picture.png"});
+    const [recipe, setRecipe] = useState({pictureLink: "recipe-picture.png"});
     const [ingredients, setIngredients] = useState([]);
     const [isRecipeLoaded, setIsRecipeLoaded] = useState(false);
     const [areIngredientsLoaded, setAreIngredientsLoaded] = useState(false);
