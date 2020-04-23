@@ -7,6 +7,7 @@ import EvaluateRecipe from "./EvaluateRecipe";
 import ImageCarousel from './Carousel';
 import Footer from "./Footer";
 import LoginOrSignupPage from './LoginOrSignupPage';
+import AboutUs from './AboutUs';
 import RecipesPage from "./RecipesPage";
 import ServerDownErrorPage from './ServerDownErrorPage';
 import AdminPage from './AdminPage'
@@ -26,6 +27,7 @@ function App() {
               <Route path="/evaluateRecipes" component={EvaluateRecipe} />
               <Route path="/login" component={LoginOrSignupPage} />
               <Route path="/signup" component={LoginOrSignupPage} />
+              <Route path="/aboutus" component={AboutUs} />
               <Route path={"/recipe/:id"} component={RecipesPage} />
               <Route path={"/serverError"} component={ServerDownErrorPage} />
               <Route path={"/evaluate/recipe/:id"} component={RecipesPage} />
