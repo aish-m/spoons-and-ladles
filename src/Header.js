@@ -133,8 +133,11 @@ function Header(props) {
                                  label="Submit A Recipe"
                                  onClick={() => {
                                      props.changeTabValue(2);
-                                     props.setRedirectUrl('submitRecipe');
-                                     props.history.push('login');
+                                     if(!props.loggedIn) {
+                                         props.setRedirectUrl('submitRecipe');
+                                         props.history.push('login');
+                                     }
+                                     else window.location.pathname='/submitRecipe';
                                  }}
                             />
                             {(props.loggedIn && props.isExpert) ?

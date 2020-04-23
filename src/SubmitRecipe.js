@@ -141,7 +141,7 @@ class SubmitForm extends Component {
                 //description: this.state.description,
                 "ingredients": this.state.data,
                 "instructions": this.state.procedure,
-                "pictureLink": "gyro-salad.jpg"
+                "pictureLink": "recipe-picture.png"
             })
            
           })
