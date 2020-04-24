@@ -22,6 +22,9 @@ function RecipesPage(props) {
     const [areIngredientsLoaded, setAreIngredientsLoaded] = useState(false);
     const [error, setError] = useState(null);
     const [isValid, setIsValid] = useState(true);
+    const [evaluatorRemarks, setEvaluatorRemarks] = useState("");
+
+    const contentChange = event => setEvaluatorRemarks(event.target.value)
 
     let { id } = useParams();
 
@@ -68,6 +71,43 @@ function RecipesPage(props) {
 
     if(error !== null) {
         return <div> Oops! Try back again! </div>
+    }
+
+    function evaluateRecipe(isAccepted) {
+        let postRequestBody = {
+            pendingRecipeId: id,
+            accepted: isAccepted
+        };
+
+        if(evaluatorRemarks !== '')
+            postRequestBody.evaluationRemarks = evaluatorRemarks;
+
+        // fetch("https://spoons-and-ladles-backend.herokuapp.com/api/users/login", {
+        fetch("http://localhost:8080/api/pending/evaluate", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(postRequestBody)
+        })
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    result ?
+                        handleEvaluationSuccess() :
+                        handleEvaluationFailure();
+                },
+                (error) => {
+                    window.location.replace('/serverError');
+                }
+            );
+    }
+
+    function handleEvaluationSuccess() {
+        alert('Entry successful! Head back to Evaluate Recipes page?');
+        window.location.replace("/evaluateRecipes");
+    }
+
+    function handleEvaluationFailure() {
+        window.location.replace('/serverError');
     }
 
     return(
@@ -172,12 +212,14 @@ function RecipesPage(props) {
                                 id="evaluatorRemark"
                                 rowsMin={3}
                                 placeholder="Enter remarks"
+                                onChange={contentChange}
                             />
                             <div id="acceptDenyButtons">
                                 <Button
                                     variant="contained"
                                     id="acceptButton"
                                     size="large"
+                                    onClick={ () => evaluateRecipe(true) }
                                 >
                                     Accept
                                 </Button>
@@ -185,6 +227,7 @@ function RecipesPage(props) {
                                     variant="contained"
                                     id="denyButton"
                                     size="large"
+                                    onClick={ () => evaluateRecipe(false) }
                                 >
                                     Deny
                                 </Button>

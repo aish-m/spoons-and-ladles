@@ -137,7 +137,7 @@ function Header(props) {
                                          props.setRedirectUrl('submitRecipe');
                                          props.history.push('login');
                                      }
-                                     else window.location.pathname='/submitRecipe';
+                                     else window.location.replace('/submitRecipe');
                                  }}
                             />
                             {(props.loggedIn && props.isExpert) ?
