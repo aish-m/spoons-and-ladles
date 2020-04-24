@@ -206,6 +206,9 @@ function Header(props) {
                         <li>
                             <NavLink to="/submitRecipe" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> SUBMIT A RECIPE </NavLink>
                         </li>
+                        <li>
+                            <NavLink to="/aboutus" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> ABOUT US </NavLink>
+                        </li>
                         {(props.loggedIn && props.isExpert) ?
                             <li>
                                 <NavLink to="/evaluateRecipes" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> EVALUATE RECIPES </NavLink>
