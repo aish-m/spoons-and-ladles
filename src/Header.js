@@ -145,6 +145,9 @@ function Header(props) {
                                     <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(3)}/>
                                 </NavLink>:
                                 null }
+                            <NavLink to="/aboutus" className="nav-links" activeClassName="active-nav-links">
+                                <Tab id="aboutUs" label="about us" onClick={() => props.changeTabValue(6)} />
+                            </NavLink>
                         </Tabs>
                     </div>
                     <MenuIcon id="hamburgerIcon" htmlColor="white" fontSize="large" onClick={() => toggleHamburgerIcon()}/>

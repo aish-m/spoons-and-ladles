@@ -1,0 +1,6 @@
+.grid-cont{
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #dfe5d0;
+    width: 100%;
+}
