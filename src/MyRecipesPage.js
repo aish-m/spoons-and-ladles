@@ -42,10 +42,6 @@ const useStyles = makeStyles((theme) => ({
 class MyRecipesPageComponent extends Component {
     constructor(props) {
         super(props);
-        this.renderSwitch = this.renderSwitch.bind(this);
-        this.formatSwitch = this.formatSwitch.bind(this);
-        this.handleChangePage = this.handleChangePage.bind(this);
-        this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
         
         //this.makelist = this.makelist.bind(this);
         this.state={
