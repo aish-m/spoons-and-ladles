@@ -25,6 +25,12 @@ import { changeTabValue } from "./redux/actionCreators";
 import { connect } from 'react-redux';
 import axios from 'axios';
 
+const mapStateToProps = state => ({
+    loggedIn: state.loggedInUser,
+    isExpert: state.isUserExpert,
+    user: state.loggedInUser
+});
+
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -66,8 +72,7 @@ class SubmitForm extends Component {
         pendingid: [],
         ingids:[],
         selectedFile:null,
-        measurements: [],
-        testid: 574
+        measurements: []
         }
     } 
 
@@ -137,7 +142,7 @@ class SubmitForm extends Component {
                 "recipeName": this.state.title,
                 "prepTime": this.state.prepTime,
                 "servings" : this.state.numOfServings,
-                "userId" : 2,
+                "userId" : this.props.user.userId,
                 "keywords": this.state.keywords,
                 "ingredients": this.state.data,
                 "instructions": this.state.procedure,
@@ -152,7 +157,6 @@ class SubmitForm extends Component {
                 ingids: data
             })
             this.post_get_ingid(); 
-            console.log("Request complete! response:", this.state.ingids+"    "+data);
           })
           .catch(error => {
             console.log("error    "+error);
@@ -161,11 +165,9 @@ class SubmitForm extends Component {
     
     post_get_ingid(){
         const ingnames=[];
-        console.log(this.state.data+"table");
         for(var i=0;i<this.state.data.length;i++){
             ingnames.push(this.state.data[i].ingredient);
         }
-        console.log(ingnames);
         fetch("http://localhost:8080/api/ingredients/insert", {
             method: "POST", 
             headers: { 'Content-Type': 'application/json' },
@@ -173,13 +175,12 @@ class SubmitForm extends Component {
                 ingredients: ingnames
                 })
           })
-          .then(res => {console.log(res);return res.json()})
+          .then(res => {return res.json()})
           .then((data) => {
             this.setState({
                 pendingid: data
             }) 
             this.post_recipe_ingredient_mapper();
-            console.log("Request complete! response:", data);
           })
           .catch(error => {
             console.log("error    "+error);
@@ -200,35 +201,30 @@ class SubmitForm extends Component {
                     measurements :  this.state.measurements
                 })
           })
-          .then(res => {console.log(res);return res.json()})
+          .then(res => {return res.json()})
           .then((data) => {
-            console.log("Request complete! response:", data);
             this.cancel_recipe();
           })
           .catch(error => {
             console.log("error    "+error);
           }); 
-
-
     }
+
     closeconfirmation = e => {
         this.setState({
             confirmationStyle: {display: 'none'}
         })
     }
+
     post_recipe = e => {
         e.preventDefault();
         this.post_get_recipeid();
         //this.post_image();
-        console.log(this.state.data);
         this.setState({
             ingid: [],
             confirmationStyle: {display: 'flex'},
             measurements: []
         })
-        // console.log(this.state.imageCaptured);  
-        // console.log(e.target);
-        // console.log(this.state.selectedFile); 
     }
 
     render(){

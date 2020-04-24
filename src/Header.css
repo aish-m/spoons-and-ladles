@@ -108,7 +108,11 @@ input[type=search]:focus {
 
 }
 
-#headerLoginButton, #headerSignupButton {
+#adminButton .MuiButton-label{
+    color: black
+}
+
+#headerLoginButton, #headerSignupButton, #adminButton {
     background-color: #8bcf32;
 }
 

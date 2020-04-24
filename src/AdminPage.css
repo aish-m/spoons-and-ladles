@@ -1,0 +1,18 @@
+.adminContent{
+    text-align: center;
+}
+
+.dropdown{
+    height: 75px;
+}
+
+.adminContent .selectForm {
+    padding-bottom: 50px;
+}
+
+.MuiTableCell-stickyHeader {
+
+    font-weight: bold !important;
+    background-color: #8bcf32 !important;
+
+}

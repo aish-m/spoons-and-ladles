@@ -4,6 +4,7 @@ import text from "./images/snl-text.png";
 import HomeIcon from '@material-ui/icons/Home';
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+
 import './Header.css';
 import { connect } from 'react-redux';
 import { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert,
@@ -104,6 +105,11 @@ function Header(props) {
                             <SearchIcon fontSize="large"/>
                             <input type="search" placeholder="Search..."/>
                         </div>
+                        <div>
+                            <NavLink className= "evaluateLink" to={"/admin"} className="nav-links">
+                                <Button className="admin" id="adminButton" variant="contained" color="primary"> ADMIN </Button>
+                            </NavLink>
+                        </div>
                     </div>
                 </div>
                 <div className="sticky-nav-bar">
@@ -150,6 +156,9 @@ function Header(props) {
                                      onClick={
                                          () => props.loggedIn && props.isExpert ? props.changeTabValue(4) : props.changeTabValue(3)
                                      } />
+                            </NavLink>
+                            <NavLink to="/admin" className="nav-links" activeClassName="active-nav-links">
+                                <Tab id="adminTab" label="ADMIN" onClick={() => props.changeTabValue(4)} />
                             </NavLink>
                         </Tabs>
                     </div>
@@ -214,6 +223,11 @@ function Header(props) {
                                 <NavLink to="/evaluateRecipes" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> EVALUATE RECIPES </NavLink>
                             </li> : null
                         }
+                        <li>
+                            <NavLink to="/admin" className="nav-links-mobile" activeClassName="active-nav-links-mobile">
+                                ADMIN
+                            </NavLink>
+                        </li>
                     </ul>
                 </div>
                 <Modal

@@ -1,9 +1,8 @@
 import React, {Component} from "react";
 import './AdminPage.css';
-
+import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -20,23 +19,44 @@ class AdminPageComponent extends Component {
         this.handleChangePage = this.handleChangePage.bind(this);
         this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
         this.renderSwitch = this.renderSwitch.bind(this);
-        // this. = this..bind(this);
+        this.formatSwitch = this.formatSwitch.bind(this);
 
         this.state = {
-            tabletoshow: 100,
+            tabletoshow: 0,
             objectsToDisplay: [], 
             columns : [],
             page:0,
-            rowsPerPage:10
+            rowsPerPage:10,
+            tableStyle : {display:'unset'},
+            paginationStyel: {display : "none"}
         }
     }
+
+    hideTable(){
+        this.setState({
+            tableStyle : {display: "none"},
+            paginationStyel: {display : "none"}
+        })
+    }
+
+    showTable(){
+        this.setState({
+            tableStyle : {display: "unset"},
+            paginationStyel: {display : "unset"}
+        })
+    }
+
+    
+
      handleChange = (event) => {
         this.setState({
             tabletoshow : event.target.value
         })
        console.log(this.state.tabletoshow + "  "+event.target.value);
        var temp = ""; 
-       if(event.target.value===1){temp = "users"}
+       if(this.tabletoshow === 0 ){console.log("Hide");}
+       if(event.target.value===0){this.hideTable();}
+       else if(event.target.value===1){temp = "users"}
        else if(event.target.value===2){temp="ingredients"}
        else if(event.target.value===3){temp="pending_recipes"}
        else if(event.target.value===4){temp="recipes"}
@@ -55,7 +75,7 @@ class AdminPageComponent extends Component {
                     objectsToDisplay : Object.assign(this.state.objectsToDisplay,data),
                     columns : Object.keys(data[0])
                 })
-            console.log("Request complete! response:", tablename+"      "+data[0]+"  "+this.state.columns);
+            this.showTable();
           })
           .catch(error => {
             console.log("error    "+error);
@@ -126,23 +146,41 @@ class AdminPageComponent extends Component {
         }
       }
 
-
+      formatSwitch(value,column){
+        switch(column){
+            case 'submissionDate':
+                var date = new Date(value);
+                return date.toString();
+            case 'expert':
+                if(value===true){return "YES"}
+                else{return "NO"}
+            default:
+                if(value===null){return "No Data";}
+                return value;
+        }
+      }
     render(){
        
         return(
            
-            <div>
+            <div className="adminContent">
+              <FormControl className = "selectForm" variant="outlined" > 
+                <p>I want to view the contents of : </p>
                 <Select
-                    labelId="demo-controlled-open-select-label"
-                    id="demo-controlled-open-select"
+                     className = "dropdown"
+                    //  labelId="demo-controlled-open-select-label"
+                    //  id="demo-controlled-open-select"
+                     labelId="demo-simple-select-outlined-label"
+                     id="demo-simple-select-outlined"
+                     
                      open={this.open}
                      onClose={this.handleClose}
                      onOpen={this.handleOpen}
                      value={this.state.tabletoshow}
                      onChange={this.handleChange}
                     >
-                    <MenuItem value="">
-                        <em>Select a table</em>
+                    <MenuItem value={0}>
+                        <em>Nothing?</em>
                     </MenuItem>
                     <MenuItem value={1}>Users</MenuItem>
                     <MenuItem value={2}>Ingredients</MenuItem>
@@ -151,9 +189,10 @@ class AdminPageComponent extends Component {
                     <MenuItem value={5}>Recipe Ingredient Associative Entity</MenuItem>
                     
                 </Select>
+              </FormControl>
                 {this.state.objectsToDisplay}
 
-                <Paper >
+                <Paper className = "Table" style={this.state.tableStyle}>
       <TableContainer >
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -174,7 +213,7 @@ class AdminPageComponent extends Component {
                   {this.state.columns.map((column) => {
                     return (
                       <TableCell key={column} >
-                        {row[column]}
+                        {this.formatSwitch(row[column],column)}
                       </TableCell>
                     );
                   })}
@@ -183,8 +222,8 @@ class AdminPageComponent extends Component {
             })}
           </TableBody>
         </Table>
-        <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
+        <TablePagination style={this.state.paginationStyel}
+            rowsPerPageOptions={[10, 25, 50]}
             component="div"
             count={this.state.objectsToDisplay.length}
             rowsPerPage={this.state.rowsPerPage}
