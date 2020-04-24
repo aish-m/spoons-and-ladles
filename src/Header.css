@@ -349,5 +349,9 @@ input[type=search]:focus {
     .sticky-nav-bar {
         padding: 0 20px;
     }
+
+    #headerSignupButton {
+        display: none;
+    }
 }
 
