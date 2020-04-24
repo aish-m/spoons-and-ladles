@@ -65,7 +65,8 @@ class AdminPageComponent extends Component {
 
       loadDatafromtable(tablename){
         console.log(tablename);
-        fetch("http://localhost:8080/api/getTable/"+tablename)
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/getTable/" + tablename)
+        // fetch("http://localhost:8080/api/getTable/"+tablename)
           .then(res => {console.log(res);
             return res.json()
           })

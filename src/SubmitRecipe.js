@@ -121,7 +121,8 @@ class SubmitForm extends Component {
         const fd = new FormData();
         fd.append('image',this.state.selectedFile, "test image")
         axios.post({
-            url: "http://localhost:8080/api/pending/postimage",
+            url: "https://spoons-and-ladles-backend.herokuapp.com/api/pending/postimage",
+            // url: "http://localhost:8080/api/pending/postimage",
             data: fd
         })
         .then(res=>{
@@ -135,8 +136,9 @@ class SubmitForm extends Component {
         console.log(this.state.selectedFile);
         //var str =  new String(this.state.selectedFile);
         //console.log(str);
-        fetch("http://localhost:8080/api/pending/insert", {
-            method: "POST", 
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/pending/insert", {
+        // fetch("http://localhost:8080/api/pending/insert", {
+            method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 "recipeName": this.state.title,
@@ -168,8 +170,9 @@ class SubmitForm extends Component {
         for(var i=0;i<this.state.data.length;i++){
             ingnames.push(this.state.data[i].ingredient);
         }
-        fetch("http://localhost:8080/api/ingredients/insert", {
-            method: "POST", 
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/ingredients/insert", {
+        // fetch("http://localhost:8080/api/ingredients/insert", {
+            method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 ingredients: ingnames
@@ -192,8 +195,9 @@ class SubmitForm extends Component {
             this.state.measurements.push(this.state.data[i].quantity);
         }
         console.log(this.state.measurements);
-        fetch("http://localhost:8080/api/recipeingredient/insert", {
-            method: "POST", 
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/recipeingredient/insert", {
+        // fetch("http://localhost:8080/api/recipeingredient/insert", {
+            method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                     pendingRecipeId : this.state.ingids,
