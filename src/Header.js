@@ -87,7 +87,7 @@ function Header(props) {
         props.resetUser();
         props.setExpertChefFlag(false);
         document.getElementById("userOptionsDiv").classList.remove("open");
-
+        window.location.replace('/');
     }
 
     return (
@@ -146,7 +146,10 @@ function Header(props) {
                                 </NavLink>:
                                 null }
                             <NavLink to="/aboutus" className="nav-links" activeClassName="active-nav-links">
-                                <Tab id="aboutUs" label="about us" onClick={() => props.changeTabValue(6)} />
+                                <Tab id="aboutUs" label="about us"
+                                     onClick={
+                                         () => props.loggedIn && props.isExpert ? props.changeTabValue(4) : props.changeTabValue(3)
+                                     } />
                             </NavLink>
                         </Tabs>
                     </div>

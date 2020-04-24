@@ -236,6 +236,7 @@ class LoginOrSignupPage extends React.Component {
     }
 
     handleSignupSuccess() {
+        alert("Account created successfully! Click OK to go to log in page.");
         window.location.pathname = './login';
     }
 
