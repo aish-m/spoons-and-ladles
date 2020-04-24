@@ -16,10 +16,11 @@
 .content-head{
     height: 32%;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: wrap;
     white-space: nowrap;
 }
 
+/*
 .content-head:hover{
     overflow: visible;
     white-space: normal;
@@ -28,10 +29,11 @@
     position: absolute;
     background-color:#FFF;
 }
+*/
 
-.card-bottom{
+.card-actions.MuiCardActions-root.MuiCardActions-spacing{
+    padding: 0px;
     justify-content: space-around;
-    align-items: center;
-    background-color: pink;
 }
+
 

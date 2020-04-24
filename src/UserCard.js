@@ -28,39 +28,39 @@ function UserCard(props) {
             <CardActionArea>
                 <img className = 'card-img'
                     src = {require("./images/Team/placholder.png")}
-                    alt = {props.memberName}
+                    alt = {props.member.memberName}
                 />
                 <CardContent className = "content">
                     <Typography className = "content-head" gutterBottom variant = "h5" component = "h2">
-                        {props.memberName}
+                        {props.member.memberName}
                     </Typography>
-                    <Typography className = "content-text" variant="body2" color="textSecondary" component="p">
-                        {props.memberDesc}
+                    <Typography className = "content-text" variant="h6" color="textSecondary" component="p">
+                        {props.member.memberDesc}
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions className = "card-bottom">
-                <a target = "_blank" href = {props.memberLinkedin}>
+            <CardActions className = "card-actions">
+                <a target = "_blank" href = {props.member.memberLinkedin}>
                     <IconButton component="span">
                         <LinkedInIcon />
                     </IconButton>
                 </a>
-                <a target = "_blank" href = {props.memberGithub}>
+                <a target = "_blank" href = {props.member.memberGithub}>
                     <IconButton component="span">
                         <GitHubIcon />
                     </IconButton>
                 </a>
-                <a target = "_blank" href = {props.memberEmail}>
+                <a target = "_blank" href = {props.member.memberEmail}>
                     <IconButton component="span">
                         <EmailIcon />
                     </IconButton>
                 </a>
-                <a target = "_blank" href = {props.memberFacebook}>
+                <a target = "_blank" href = {props.member.memberFacebook}>
                     <IconButton component="span">
                         <FacebookIcon />
                     </IconButton>
                 </a>
-                <a target = "_blank" href = {props.memberInstagram}>
+                <a target = "_blank" href = {props.member.memberInstagram}>
                     <IconButton component="span">
                         <InstagramIcon />
                     </IconButton>
