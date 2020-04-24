@@ -162,6 +162,7 @@
         background-image: url("./images/login-background-vertical.jpg");
         background-position: center;
         background-attachment: fixed;
+        background-size: auto;
     }
 
     #createAccountButton, #goToLoginButton {

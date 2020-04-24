@@ -145,14 +145,15 @@ function Header(props) {
                                      else window.location.replace('/submitRecipe');
                                  }}
                             />
-                            <NavLink to="/aboutus" className="nav-links" activeClassName="active-nav-links">
-                                <Tab id="aboutUs" label="about us" />
-                            </NavLink>
-
+                            {(!props.isExpert) ?
+                                <NavLink to="/aboutus" className="nav-links" activeClassName="active-nav-links">
+                                    <Tab id="aboutUs" label="about us" />
+                                </NavLink> :
+                                null }
                             {(props.loggedIn && props.isExpert) ?
                                 <NavLink to="/evaluateRecipes" className="nav-links" activeClassName="active-nav-links">
                                     <Tab id="evaluateRecipesTab" label="Evaluate Recipes" />
-                                </NavLink>:
+                                </NavLink> :
                                 null }
                             
                         </Tabs>

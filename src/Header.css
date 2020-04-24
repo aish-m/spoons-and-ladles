@@ -361,5 +361,13 @@ input[type=search]:focus {
     #headerSignupButton {
         display: none;
     }
+
+    #helloUserText {
+        display: none;
+    }
+
+    .MuiButtonBase-root.MuiTab-root.MuiTab-textColorInherit {
+        padding: 6px 20px;
+    }
 }
 
