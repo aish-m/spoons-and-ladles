@@ -256,7 +256,11 @@ function Header(props) {
                 <div id="userOptionsDiv" className="user-options-div" style={styles()}>
                     <ul>
                         <li> My account </li>
-                        <li> My recipes </li>
+                        <li>
+                        <NavLink to={"/myRecipes"} className="nav-links">
+                             My recipes
+                        </NavLink>
+                        </li>
                         <li onClick={logUserOut}> Logout </li>
                     </ul>
                 </div>
