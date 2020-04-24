@@ -106,8 +106,9 @@ function Header(props) {
                             <input type="search" placeholder="Search..."/>
                         </div>
                         <div>
-                            <NavLink className= "evaluateLink" to={"/admin"} className="nav-links">
-                                <Button className="admin" id="adminButton" variant="contained" color="primary"> ADMIN </Button>
+                            <NavLink className= "evaluateLink" to={"/admin"} className="nav-links" >
+                                <Button className="admin" id="adminButton" variant="contained" color="primary"
+                                onClick={() => props.changeTabValue(-1)}> ADMIN </Button>
                             </NavLink>
                         </div>
                     </div>
@@ -146,20 +147,19 @@ function Header(props) {
                                      else window.location.replace('/submitRecipe');
                                  }}
                             />
-                            {(props.loggedIn && props.isExpert) ?
-                                <NavLink to="/evaluateRecipes" className="nav-links" activeClassName="active-nav-links">
-                                    <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(3)}/>
-                                </NavLink>:
-                                null }
                             <NavLink to="/aboutus" className="nav-links" activeClassName="active-nav-links">
                                 <Tab id="aboutUs" label="about us"
                                      onClick={
-                                         () => props.loggedIn && props.isExpert ? props.changeTabValue(4) : props.changeTabValue(3)
+                                         () =>props.changeTabValue(3)
                                      } />
                             </NavLink>
-                            <NavLink to="/admin" className="nav-links" activeClassName="active-nav-links">
-                                <Tab id="adminTab" label="ADMIN" onClick={() => props.changeTabValue(4)} />
-                            </NavLink>
+
+                            {(props.loggedIn && props.isExpert) ?
+                                <NavLink to="/evaluateRecipes" className="nav-links" activeClassName="active-nav-links">
+                                    <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(4)}/>
+                                </NavLink>:
+                                null }
+                            
                         </Tabs>
                     </div>
                     <MenuIcon id="hamburgerIcon" htmlColor="white" fontSize="large" onClick={() => toggleHamburgerIcon()}/>
@@ -224,7 +224,8 @@ function Header(props) {
                             </li> : null
                         }
                         <li>
-                            <NavLink to="/admin" className="nav-links-mobile" activeClassName="active-nav-links-mobile">
+                            <NavLink to="/admin" className="nav-links-mobile" activeClassName="active-nav-links-mobile"
+                            onClick={() => props.changeTabValue(-1)}>
                                 ADMIN
                             </NavLink>
                         </li>

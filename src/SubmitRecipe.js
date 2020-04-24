@@ -379,7 +379,7 @@ function SubmitRecipe(props) {
     
     useEffect(() => {
         props.changeTabValue(2);
-    });
+    },[]);
 
     return (    
         <div>
