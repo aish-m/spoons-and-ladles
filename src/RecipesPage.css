@@ -186,6 +186,15 @@
         font-size: 26px;
         align-self: flex-end;
     }
+
+    .recipe-evaluation-options {
+        width: 80%;
+        padding: 10px 20px;
+    }
+
+    #evaluatorRemark, #acceptDenyButtons {
+        width: 70%;
+    }
 }
 
 @media (max-width: 768px) {
@@ -227,5 +236,14 @@
 
     .ingredient img {
         display: none;
+    }
+
+    .recipe-evaluation-options {
+        width: 100%;
+        padding: 10px 20px;
+    }
+
+    #evaluatorRemark, #acceptDenyButtons {
+        width: 90%;
     }
 }
