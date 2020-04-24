@@ -4,9 +4,9 @@ import './AboutUs.css';
 import { withRouter } from 'react-router-dom';
 import UserCard from './UserCard';
 import Grid from '@material-ui/core/Grid';
+import { changeTabValue } from "./redux/actionCreators";
 
 class AboutUs extends React.Component {
-        
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +16,7 @@ class AboutUs extends React.Component {
     }
 
     componentDidMount(){
-        
+        this.props.changeTabValue(3);
     }
 
     render(){
@@ -77,4 +77,4 @@ class AboutUs extends React.Component {
     }
 }
 
-export default withRouter(AboutUs);
+export default connect(null, { changeTabValue }) (withRouter(AboutUs));

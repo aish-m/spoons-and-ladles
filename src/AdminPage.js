@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useEffect} from "react";
 import './AdminPage.css';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
@@ -11,9 +11,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import { connect } from 'react-redux';
+import { changeTabValue } from "./redux/actionCreators";
 
 class AdminPageComponent extends Component {
-    
     constructor(props) {
         super(props);
         this.handleChangePage = this.handleChangePage.bind(this);
@@ -45,8 +46,6 @@ class AdminPageComponent extends Component {
             paginationStyel: {display : "unset"}
         })
     }
-
-    
 
      handleChange = (event) => {
         this.setState({
@@ -103,8 +102,7 @@ class AdminPageComponent extends Component {
         })
       };
 
-    componentDidMount(){
-
+    componentDidMount() {
     }
 
     renderSwitch(param) {
@@ -240,7 +238,12 @@ class AdminPageComponent extends Component {
     }
 }
 
-function AdminPage() {
+function AdminPage(props) {
+
+    useEffect(() => {
+        props.changeTabValue(-1);
+    },[]);
+
     return (
         <AdminPageComponent>
         </AdminPageComponent>
@@ -248,4 +251,4 @@ function AdminPage() {
     )
 }
 
-export default AdminPage;
+export default connect(null, { changeTabValue })(AdminPage);

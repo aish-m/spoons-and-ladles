@@ -7,7 +7,7 @@ import Tab from "@material-ui/core/Tab";
 
 import './Header.css';
 import { connect } from 'react-redux';
-import { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert,
+import { openMobileCartModal, closeMobileCartModal, showIngAlert,
     stopIngAlert, recipesWithIng, recipesWithoutIng, setRedirectUrl,
     toggleUserLogin, resetUser, setExpertChefFlag } from './redux/actionCreators';
 import SearchIcon from '@material-ui/icons/Search';
@@ -94,7 +94,7 @@ function Header(props) {
     return (
         <header id="pageHeader">
                 <div className="non-sticky-header">
-                    <div onClick={() => props.changeTabValue(-1)} className="header-left">
+                    <div className="header-left">
                         <NavLink to="/">
                             <img id="mascot" src={mascot} alt="Spoons & Ladles mascot"/>
                             <img id="companyName" src={text} alt="Spoons & Ladles text" />
@@ -107,14 +107,13 @@ function Header(props) {
                         </div>
                         <div>
                             <NavLink className= "evaluateLink" to={"/admin"} className="nav-links" >
-                                <Button className="admin" id="adminButton" variant="contained" color="primary"
-                                onClick={() => props.changeTabValue(-1)}> ADMIN </Button>
+                                <Button className="admin" id="adminButton" variant="contained" color="primary"> ADMIN </Button>
                             </NavLink>
                         </div>
                     </div>
                 </div>
                 <div className="sticky-nav-bar">
-                    <div onClick={() => props.changeTabValue(-1)} id="homeIcon">
+                    <div id="homeIcon">
                         <NavLink to="/">
                             <HomeIcon htmlColor="white" fontSize="large"/>
                         </NavLink>
@@ -131,15 +130,14 @@ function Header(props) {
                             }}
                         >
                             <NavLink to="/addIngredients" className="nav-links" activeClassName="active-nav-links">
-                                <Tab id="addIngredientsTab" label="add ingredients" onClick={() => props.changeTabValue(0)}/>
+                                <Tab id="addIngredientsTab" label="add ingredients" />
                             </NavLink>
                             <NavLink to="/recipes" className="nav-links" activeClassName="active-nav-links">
-                                <Tab id="recipesTab" label="recipes" onClick={() => props.changeTabValue(1)} />
+                                <Tab id="recipesTab" label="recipes" />
                             </NavLink>
                             <Tab id="submitRecipeTab"
                                  label="Submit A Recipe"
                                  onClick={() => {
-                                     props.changeTabValue(2);
                                      if(!props.loggedIn) {
                                          props.setRedirectUrl('submitRecipe');
                                          props.history.push('login');
@@ -148,15 +146,12 @@ function Header(props) {
                                  }}
                             />
                             <NavLink to="/aboutus" className="nav-links" activeClassName="active-nav-links">
-                                <Tab id="aboutUs" label="about us"
-                                     onClick={
-                                         () =>props.changeTabValue(3)
-                                     } />
+                                <Tab id="aboutUs" label="about us" />
                             </NavLink>
 
                             {(props.loggedIn && props.isExpert) ?
                                 <NavLink to="/evaluateRecipes" className="nav-links" activeClassName="active-nav-links">
-                                    <Tab id="evaluateRecipesTab" label="Evaluate Recipes" onClick={() => props.changeTabValue(4)}/>
+                                    <Tab id="evaluateRecipesTab" label="Evaluate Recipes" />
                                 </NavLink>:
                                 null }
                             
@@ -224,8 +219,7 @@ function Header(props) {
                             </li> : null
                         }
                         <li>
-                            <NavLink to="/admin" className="nav-links-mobile" activeClassName="active-nav-links-mobile"
-                            onClick={() => props.changeTabValue(-1)}>
+                            <NavLink to="/admin" className="nav-links-mobile" activeClassName="active-nav-links-mobile">
                                 ADMIN
                             </NavLink>
                         </li>
@@ -270,7 +264,7 @@ function Header(props) {
 }
 
 export default connect(mapStateToProps,
-    { changeTabValue, openMobileCartModal, closeMobileCartModal, showIngAlert,
+    { openMobileCartModal, closeMobileCartModal, showIngAlert,
         stopIngAlert, recipesWithIng, recipesWithoutIng, setRedirectUrl,
         toggleUserLogin, resetUser, setExpertChefFlag
     })(withRouter(Header));

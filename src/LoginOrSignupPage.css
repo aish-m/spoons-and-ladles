@@ -4,6 +4,12 @@
     align-items: center;
     font-family: "Roboto", sans-serif;
     position: relative;
+
+    background-image: url("./images/login-background.jpg");
+    background-size: cover;
+    background-position: center bottom;
+    background-position-y: 90%;
+    height: 100vh;
 }
 
 .login-component {
@@ -150,5 +156,20 @@
 
     .MuiFormControl-root.MuiTextField-root {
         width: 85%;
+    }
+
+    #loginPageMascotImage, {
+        display: none;
+    }
+
+    .login-signup-component {
+        background-image: url("./images/login-background-vertical.jpg");
+        background-size: inherit;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
+    #goToLoginButton {
+        margin-bottom: 20px;
     }
 }

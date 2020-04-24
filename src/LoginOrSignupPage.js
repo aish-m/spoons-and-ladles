@@ -12,14 +12,6 @@ import { toggleUserLogin, setUser, setExpertChefFlag } from './redux/actionCreat
 import {NavLink} from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 
-const styles = {
-    backgroundImage: `url(${background})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center bottom',
-    backgroundPositionY: '90%',
-    height: '100vh'
-};
-
 const mapStateToProps = state => ({
     redirectUrl: state.redirectUrl
 });
@@ -246,7 +238,7 @@ class LoginOrSignupPage extends React.Component {
 
     render() {
         return (
-            <div className="login-signup-component" style={styles}>
+            <div className="login-signup-component">
                 {window.location.pathname === '/login' ?
                     <div className="login-component">
                         <div className="header-logo">

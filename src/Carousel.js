@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import one from './images/carousel/1.png';
 import two from './images/carousel/2.png';
 import three from './images/carousel/3.png';
@@ -13,8 +13,15 @@ import './Carousel.css';
 import {
     Link
 } from "react-router-dom";
+import { connect } from 'react-redux';
+import { changeTabValue } from "./redux/actionCreators";
 
 function ImageCarousel(props) {
+
+    useEffect(()=> {
+        props.changeTabValue(-1);
+    }, []);
+
     return(
         <div className="carousel-div">
             <Carousel
@@ -63,4 +70,4 @@ function ImageCarousel(props) {
     )
 }
 
-export default ImageCarousel;
+export default connect(null, { changeTabValue })(ImageCarousel);

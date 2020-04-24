@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import {NavLink} from "react-router-dom";
 import { connect } from 'react-redux';
+import { changeTabValue } from "./redux/actionCreators";
 
 const mapStateToProps = state => ({
     loggedIn: state.loggedInUser,
@@ -26,6 +27,8 @@ class EvaluateRecipe extends Component {
     }
 
     componentDidMount(){
+        this.props.changeTabValue(4);
+
         if(this.props.loggedIn && this.props.isExpert) {
             this.setState({ isValid : true });
 
@@ -102,4 +105,4 @@ class EvaluateRecipe extends Component {
     }
 }
 
-export default connect(mapStateToProps, null)(EvaluateRecipe);
+export default connect(mapStateToProps, { changeTabValue })(EvaluateRecipe);
