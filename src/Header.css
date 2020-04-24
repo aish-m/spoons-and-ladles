@@ -89,6 +89,10 @@ input[type=search]:focus {
     color: #b6e64f;
 }
 
+.MuiTab-wrapper:hover {
+    color: #b6e64f;
+}
+
 .MuiButtonBase-root.MuiTab-root.MuiTab-textColorInherit {
     opacity: 1;
     min-width: auto;

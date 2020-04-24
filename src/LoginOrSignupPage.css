@@ -158,18 +158,13 @@
         width: 85%;
     }
 
-    #loginPageMascotImage, {
-        display: none;
-    }
-
     .login-signup-component {
         background-image: url("./images/login-background-vertical.jpg");
-        background-size: inherit;
         background-position: center;
         background-attachment: fixed;
     }
 
-    #goToLoginButton {
-        margin-bottom: 20px;
+    #createAccountButton, #goToLoginButton {
+        margin-bottom: 30px;
     }
 }
