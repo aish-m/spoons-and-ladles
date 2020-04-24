@@ -20,52 +20,57 @@ class AboutUs extends React.Component {
     }
 
     render(){
+
+        const membersList = [
+            {
+                memberName: "Patrick",
+                memberImg: "placeholder.png",
+                memberDesc: "lorem ipsum calcium sulphate is gypsum",
+                memberLinkedin: "https://google.com",
+                memberGithub: "https://google.com",
+                memeberEmail: "https://google.com",
+                memeberFacebook: "https://google.com",
+                memeberInstagram: "https://google.com",
+            },
+            {
+                memberName: "Patrick",
+                memberImg: "placeholder.png",
+                memberDesc: "lorem ipsum calcium sulphate is gypsum",
+                memberLinkedin: "https://google.com",
+                memberGithub: "https://google.com",
+                memeberEmail: "https://google.com",
+                memeberFacebook: "https://google.com",
+                memeberInstagram: "https://google.com",
+            },
+            {
+                memberName: "Patrick",
+                memberImg: "placeholder.png",
+                memberDesc: "lorem ipsum calcium sulphate is gypsum",
+                memberLinkedin: "https://google.com",
+                memberGithub: "https://google.com",
+                memeberEmail: "https://google.com",
+                memeberFacebook: "https://google.com",
+                memeberInstagram: "https://google.com",
+            },
+            {
+                memberName: "Patrick",
+                memberImg: "placeholder.png",
+                memberDesc: "lorem ipsum calcium sulphate is gypsum",
+                memberLinkedin: "https://google.com",
+                memberGithub: "https://google.com",
+                memeberEmail: "https://google.com",
+                memeberFacebook: "https://google.com",
+                memeberInstagram: "https://google.com",
+            },
+        ]
+
         return(
-            <Grid container classsName = "gid-cont" spacing = {0}>
-                <UserCard
-                    memberName = "Patrick"
-                    memberImg = "placeholder.png"
-                    memberDesc = "lorem ipsum calcium sulphate is gypsum"
-                    memberLinkedin = "https://google.com"
-                    memberGithub = "https://google.com"
-                    memeberEmail = "https://google.com"
-                    memeberFacebook = "https://google.com"
-                    memeberInstagram = "https://google.com"
-                >
-                </UserCard>
-                <UserCard
-                    memberName = "Patrick"
-                    memberImg = "placeholder.png"
-                    memberDesc = "lorem ipsum calcium sulphate is gypsum"
-                    memberLinkedin = "https://google.com"
-                    memberGithub = "https://google.com"
-                    memeberEmail = "https://google.com"
-                    memeberFacebook = "https://google.com"
-                    memeberInstagram = "https://google.com"
-                >
-                </UserCard>
-                <UserCard
-                    memberName = "Patrick"
-                    memberImg = "placeholder.png"
-                    memberDesc = "lorem ipsum calcium sulphate is gypsum"
-                    memberLinkedin = "https://google.com"
-                    memberGithub = "https://google.com"
-                    memeberEmail = "https://google.com"
-                    memeberFacebook = "https://google.com"
-                    memeberInstagram = "https://google.com"
-                >
-                </UserCard>
-                <UserCard
-                    memberName = "Patrick"
-                    memberImg = "placeholder.png"
-                    memberDesc = "lorem ipsum calcium sulphate is gypsum"
-                    memberLinkedin = "https://google.com"
-                    memberGithub = "https://google.com"
-                    memeberEmail = "https://google.com"
-                    memeberFacebook = "https://google.com"
-                    memeberInstagram = "https://google.com"
-                >
-                </UserCard>
+            <Grid container className = "grid-cont" spacing = {0}>
+                {membersList.map(member =>
+                    <UserCard
+                        member = {member}
+                    />
+                )}
             </Grid>
 
         );
