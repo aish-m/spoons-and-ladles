@@ -141,8 +141,9 @@ function RecipesPage(props) {
                         </div>
                     </div>
                     <div className="intro-flexbox">
-                    {
-                        (recipe.keywords !== undefined) ?
+                    {console.log(recipe.keywords)}
+                    {   
+                        (recipe.keywords !== undefined && recipe.keywords !== null) ?
                            <div className="recipe-keywords">
                                 {
                                     recipe.keywords.split(',').map(function (keyword) {
