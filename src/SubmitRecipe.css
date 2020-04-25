@@ -103,6 +103,15 @@
   width: 70%;
   right: 0;
   display: inline-block;
+  text-align: center;
+}
+
+.MuiTableCell-paddingCheckbox {
+    padding: 0 0 0 20px !important;
+}
+
+.MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
+    display: inline-block;
 }
 
 .recipeProcedure{
