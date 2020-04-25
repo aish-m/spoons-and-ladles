@@ -53,5 +53,9 @@
 .about-us-entire-div .MuiTypography-root.content-text.MuiTypography-h6.MuiTypography-colorTextSecondary {
     font-family: "Source Serif Pro", serif !important;
     text-align: center;
-;
+    font-size: 1.9em;
+}
+
+.about-us-entire-div .MuiTypography-root.content-text.MuiTypography-h6.MuiTypography-colorTextSecondary {
+    font-size: 1.6em;
 }
