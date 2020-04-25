@@ -1,30 +1,19 @@
 import React, {Component} from "react";
 import './MyRecipesPage.css';
-import FormControl from '@material-ui/core/FormControl';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
 import { makeStyles } from '@material-ui/core/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +26,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
+const mapStateToProps = state => ({
+    loggedIn: state.loggedInUser,
+    isExpert: state.isUserExpert,
+    user: state.loggedInUser
+});
 
 class MyRecipesPageComponent extends Component {
     constructor(props) {
@@ -57,7 +50,8 @@ class MyRecipesPageComponent extends Component {
     }
 
     componentDidMount(){
-        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/pending/forUser/2")
+        console.log(this.props.user.userId);
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/pending/forUser/"+ this.props.user.userId)
           .then(res => {console.log(res);
             return res.json()   
           })
@@ -193,10 +187,10 @@ class MyRecipesPageComponent extends Component {
     }
 }
 
-function AdminPage(props) {
-    return(
-        <MyRecipesPageComponent></MyRecipesPageComponent>
-    )
-}
+// function AdminPage(props) {
+//     return(
+//         <MyRecipesPageComponent></MyRecipesPageComponent>
+//     )
+// }
 
-export default AdminPage;
+export default connect(mapStateToProps) (MyRecipesPageComponent);

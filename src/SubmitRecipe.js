@@ -144,7 +144,7 @@ class SubmitForm extends Component {
                 "recipeName": this.state.title,
                 "prepTime": this.state.prepTime,
                 "servings" : this.state.numOfServings,
-                "userId" : this.props.user.userId,
+                "userId" : this.props.user.userId,   /// console.log of this values gives an error, I didnt map props correctly, pls check 
                 "keywords": this.state.keywords,
                 "ingredients": this.state.data,
                 "instructions": this.state.procedure,
