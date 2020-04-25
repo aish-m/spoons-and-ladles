@@ -1,5 +1,5 @@
 header {
-    font-family: 'Gentium Basic', serif;
+    font-family: "Source Serif Pro", serif;
 }
 
 header.loginMode {
@@ -130,6 +130,7 @@ input[type=search]:focus {
 
 #helloUserText {
     color: #b6e64f;
+    font-family: "Source Serif Pro", serif;
 }
 
 #hamburgerIcon, #mobileSearchIcon, #cartDiv, .mobile-nav-bar {
@@ -172,10 +173,19 @@ input[type=search]:focus {
     padding: 10px 0;
     text-align: center;
     cursor: pointer;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
 }
 
 .user-options-div li:hover {
     background-color: white;
+}
+
+.user-options-div .nav-links {
+    font-family: "Roboto", serif;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
 #expandMoreIcon, #expandLessIcon {

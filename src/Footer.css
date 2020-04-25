@@ -1,7 +1,7 @@
 .footer {
      background-color: black;
      text-align: center;
-     font-family: 'Gentium Basic', serif;
+    font-family: "Source Serif Pro", serif;
      border-top: 3px solid black;
      color: #b6e64f;
  }
@@ -16,16 +16,16 @@
 
 #snl {
     padding-top: 10px;
-    font-size: 22px;
+    font-size: 1.5em;
 }
 
 #blue-mango {
-    font-size: 12px;
+    font-size: 0.9em;
     margin-bottom: 20px;
     color: white;
 }
 
 #team8 {
-    font-size: 16px;
+    font-size: 1em;
     padding-bottom: 15px;
 }

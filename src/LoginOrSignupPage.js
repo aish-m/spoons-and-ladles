@@ -114,7 +114,6 @@ class LoginOrSignupPage extends React.Component {
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result);
                     this.props.logUserIn(result);
                     this.props.setExpertChefFlag(result.expert);
                     this.props.history.push(this.props.redirectUrl);

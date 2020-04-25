@@ -47,7 +47,7 @@ class EvaluateRecipe extends Component {
     render(){
        
         return(
-            <div>
+            <div className="evaluate-recipe-entire-div">
                 {
                     this.state.isValid ?
                         <List>

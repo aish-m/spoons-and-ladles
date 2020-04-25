@@ -25,7 +25,7 @@ function IngredientCartDetails(props) {
                 <ArrowForwardIosIcon fontSize="small" id="forward-arrow"/>
                 <p> Cart </p>
             </div>
-            <div>
+            <div className="flexbox-with-ingredients">
                 {props.ingredients.map(function(ingredient, i) {
                     return <div key={i} className="cart-details-item">
                         <p> { ingredient.name } </p>
@@ -40,10 +40,7 @@ function IngredientCartDetails(props) {
                     </div>;
                 })}
                 <div className="clear-cart" onClick={clearCart}>
-                    <Tooltip title="Clear all cart items">
-                        <DeleteIcon fontSize="large"/>
-                    </Tooltip>
-                    Clear cart
+                    CLEAR CART
                 </div>
             </div>
         </div>

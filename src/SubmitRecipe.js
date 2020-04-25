@@ -233,7 +233,7 @@ class SubmitForm extends Component {
 
     render(){
         return(
-            <div>
+            <div className="submit-recipe-entire-div">
             <div className="submittedconfirmation" style={this.state.confirmationStyle}> 
                 <div className = "innerconfirm"> 
                     Your recipe is submitted: {this.state.ingids}. Let us see what else you got bud! 

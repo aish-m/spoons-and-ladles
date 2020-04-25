@@ -1,3 +1,7 @@
+.evaluate-recipe-entire-div {
+    z-index: -1;
+}
+
 .MuiListItem-gutters{
     border: ridge;
     /* border-top: ridge; */

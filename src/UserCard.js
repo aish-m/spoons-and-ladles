@@ -27,7 +27,7 @@ function UserCard(props) {
         <Card className = {classes.root}>
             <CardActionArea>
                 <img className = 'card-img'
-                    src = {require("./images/Team/placholder.png")}
+                    src = {require("./images/Users/" + props.member.memberImg)}
                     alt = {props.member.memberName}
                 />
                 <CardContent className = "content">
@@ -42,7 +42,7 @@ function UserCard(props) {
             <CardActions className = "card-actions">
                 <a target = "_blank" href = {props.member.memberLinkedin}>
                     <IconButton component="span">
-                        <LinkedInIcon />
+                        <LinkedInIcon style={{color: '0072b1'}}/>
                     </IconButton>
                 </a>
                 <a target = "_blank" href = {props.member.memberGithub}>
@@ -52,17 +52,17 @@ function UserCard(props) {
                 </a>
                 <a target = "_blank" href = {props.member.memberEmail}>
                     <IconButton component="span">
-                        <EmailIcon />
+                        <EmailIcon style={{color: 'd44638'}}/>
                     </IconButton>
                 </a>
                 <a target = "_blank" href = {props.member.memberFacebook}>
                     <IconButton component="span">
-                        <FacebookIcon />
+                        <FacebookIcon style={{color: '3b5998'}} />
                     </IconButton>
                 </a>
                 <a target = "_blank" href = {props.member.memberInstagram}>
                     <IconButton component="span">
-                        <InstagramIcon />
+                        <InstagramIcon style={{color: '#8134af'}}/>
                     </IconButton>
                 </a>
             </CardActions>

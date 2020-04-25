@@ -9,6 +9,11 @@
 
 div.MuiAutocomplete-root.MuiAutocomplete-hasClearIcon {
     display: inline-block;
+    margin-right: 20px;
+}
+
+.autocomplete-ingredients .MuiButtonBase-root.MuiIconButton-root.MuiAutocomplete-clearIndicator {
+    color: white;
 }
 
 div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBase-formControl.MuiInputBase-adornedEnd.MuiOutlinedInput-adornedEnd {

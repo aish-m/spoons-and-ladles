@@ -32,7 +32,7 @@ function IngredientPicker(props) {
 
     return (
         <div className="picker-div">
-            <div className="picker-title"> Pick Ingredients </div>
+            <div className="picker-title"> PICK INGREDIENTS </div>
             <AutocompleteTextbox ingredients={props.ingredients}/>
             <div className="image-picker">
                 { props.topIngredients === undefined ?

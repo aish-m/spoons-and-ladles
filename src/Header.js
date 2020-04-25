@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import mascot from "./images/mascot.png";
 import text from "./images/snl-text.png";
 import HomeIcon from '@material-ui/icons/Home';
@@ -49,28 +49,51 @@ const mapStateToProps = state => ({
     user: state.loggedInUser
 });
 
-function styles() {
-    let top = 0;
-    let left = 0;
-    let width = '15%';
-
-    if(document.getElementById("userProfileRectangle") !== null) {
-        const rectangle = document.getElementById("userProfileRectangle").getBoundingClientRect();
-        top = rectangle.bottom;
-        left = rectangle.left;
-        width = document.getElementById("userProfileRectangle").offsetWidth + 40;
-        console.log('width: ' + width);
-    }
-
-    return {
-        position: 'absolute',
-        top: top + 'px',
-        left: left + 'px',
-        width: width
-    }
-}
+// function styles() {
+//     let top = 0;
+//     let left = 0;
+//     let width = '15%';
+//
+//     if(document.getElementById("userProfileRectangle") !== null) {
+//         const rectangle = document.getElementById("userProfileRectangle").getBoundingClientRect();
+//         top = rectangle.bottom;
+//         left = rectangle.left;
+//         width = document.getElementById("userProfileRectangle").offsetWidth + 40;
+//     }
+//
+//     console.log('Top: ' + top);
+//     console.log('Left: ' + left);
+//
+//     return {
+//         position: 'absolute',
+//         top: top + 'px',
+//         left: left + 'px',
+//         width: width
+//     }
+// }
 
 function Header(props) {
+    const [styles, setStyles] = useState({
+        position: 'absolute',
+        top: 0 + 'px',
+        left: 0 + 'px',
+        width: '15%'
+    });
+
+    useEffect(() => {
+        if(document.getElementById("userProfileRectangle") !== null) {
+            const rectangle = document.getElementById("userProfileRectangle").getBoundingClientRect();
+            setStyles({
+                position: 'absolute',
+                top: rectangle.bottom + 'px',
+                left: rectangle.left + 'px',
+                width: document.getElementById("userProfileRectangle").offsetWidth + 40
+            })
+        }
+
+        console.log('Top: ' + styles.top);
+        console.log('Left: ' + styles.left);
+    }, []);
 
     function toggleHamburgerIcon() {
         if(document.getElementById("mobileMenu").classList.contains("desktop")) {
@@ -88,7 +111,7 @@ function Header(props) {
         props.resetUser();
         props.setExpertChefFlag(false);
         document.getElementById("userOptionsDiv").classList.remove("open");
-        window.location.replace('/');
+        // window.location.replace('/');
     }
 
     return (
@@ -253,15 +276,14 @@ function Header(props) {
                             </div>
                     }
                 </Modal>
-                <div id="userOptionsDiv" className="user-options-div" style={styles()}>
+                <div id="userOptionsDiv" className="user-options-div" style={styles}>
                     <ul>
-                        <li> My account </li>
                         <li>
-                        <NavLink to={"/myRecipes"} className="nav-links">
-                             My recipes
-                        </NavLink>
+                            <NavLink to="/myRecipes" className="nav-links"> MY RECIPES </NavLink>
                         </li>
-                        <li onClick={logUserOut}> Logout </li>
+                        <li onClick={logUserOut}>
+                            <NavLink to="/" className="nav-links"> LOGOUT </NavLink>
+                        </li>
                     </ul>
                 </div>
         </header>

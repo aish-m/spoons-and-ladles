@@ -1,6 +1,27 @@
+.about-us-entire-div {
+    z-index: -1;
+    background-color: #dfe5d0;
+}
+
+#meet-the-team-title {
+    font-family: 'Source Serif Pro', serif;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5em;
+    padding: 20px 0;
+    text-align: center;
+}
+
 .grid-cont{
     flex-direction: row;
     justify-content: space-around;
     background-color: #dfe5d0;
     width: 100%;
+}
+
+.about-us-entire-div .MuiCardContent-root.content {
+    height: auto;
+}
+
+.about-us-entire-div .MuiSvgIcon-root {
+    color: black;
 }
