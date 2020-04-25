@@ -1,9 +1,10 @@
 .about-us-entire-div {
     z-index: -1;
     background-color: #dfe5d0;
+    font-family: "Source Serif Pro", serif !important;
 }
 
-#meet-the-team-title {
+#meet-the-team-title, #about-us-title {
     font-family: 'Source Serif Pro', serif;
     font-family: 'Montserrat', sans-serif;
     font-size: 2.5em;
@@ -11,11 +12,33 @@
     text-align: center;
 }
 
+.about-us-deets {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-us-deets img {
+    width: 30%;
+    padding: 0 5%;
+}
+
+#about-us-details {
+    width: 50%;
+    padding-right: 10%;
+    line-height: 2;
+    text-align: justify;
+    font-size: 1.1em;
+}
+
 .grid-cont{
     flex-direction: row;
     justify-content: space-around;
     background-color: #dfe5d0;
     width: 100%;
+    padding-bottom: 30px;
 }
 
 .about-us-entire-div .MuiCardContent-root.content {
@@ -24,4 +47,11 @@
 
 .about-us-entire-div .MuiSvgIcon-root {
     color: black;
+}
+
+.about-us-entire-div .MuiTypography-root.content-head.MuiTypography-h5.MuiTypography-gutterBottom,
+.about-us-entire-div .MuiTypography-root.content-text.MuiTypography-h6.MuiTypography-colorTextSecondary {
+    font-family: "Source Serif Pro", serif !important;
+    text-align: center;
+;
 }

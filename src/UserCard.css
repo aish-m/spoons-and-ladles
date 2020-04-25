@@ -36,4 +36,12 @@
     justify-content: space-around;
 }
 
+.social-media-icon {
+    width: 23px;
+    height: 23px;
+    padding: 8px 15px 0 10px;
+    cursor: pointer;
+}
+
+
 

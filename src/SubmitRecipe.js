@@ -261,7 +261,7 @@ class SubmitForm extends Component {
                         <TextField id="prepTime" value={this.state.prepTime} name="prepTime" required label="Prep Time" variant="outlined"  onChange={this.contentChange} />
                     </div>
                     <div className="forServings">
-                        <TextField id="numServings" value={this.state.numOfServings} name="numOfServings" required label="Number of Servings" variant="outlined"  onChange={this.contentChange} />
+                        <TextField id="numServings" value={this.state.numOfServings} name="numOfServings" required label="No. of Servings" variant="outlined"  onChange={this.contentChange} />
                     </div>     
                 </div>
             </div>
@@ -314,7 +314,7 @@ class SubmitForm extends Component {
                             stickyHeader aria-label="sticky table"
                             className="recipeIngredients"
                             icons={tableIcons}
-                            title="Ingredients"
+                            title="Ingredients *"
                             columns={this.state.columns}
                             data={this.state.data}
                             editable={{

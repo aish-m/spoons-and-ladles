@@ -8,9 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import FacebookIcon from '@material-ui/icons/Facebook';
-import InstagramIcon from '@material-ui/icons/Instagram';
+import instagramIcon from './images/instagram-icon.png';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import EmailIcon from '@material-ui/icons/Email';
+import emailIcon from './images/gmail-icon.jpg';
 import './UserCard.css';
 
 const useStyles = makeStyles({
@@ -27,7 +27,7 @@ function UserCard(props) {
         <Card className = {classes.root}>
             <CardActionArea>
                 <img className = 'card-img'
-                    src = {require("./images/Users/" + props.member.memberImg)}
+                    src = {require("./images/Team/" + props.member.memberImg)}
                     alt = {props.member.memberName}
                 />
                 <CardContent className = "content">
@@ -51,9 +51,11 @@ function UserCard(props) {
                     </IconButton>
                 </a>
                 <a target = "_blank" href = {props.member.memberEmail}>
-                    <IconButton component="span">
-                        <EmailIcon style={{color: 'd44638'}}/>
-                    </IconButton>
+                    <img
+                        src={emailIcon}
+                        alt="icon for email"
+                        className="social-media-icon"
+                    />
                 </a>
                 <a target = "_blank" href = {props.member.memberFacebook}>
                     <IconButton component="span">
@@ -61,9 +63,11 @@ function UserCard(props) {
                     </IconButton>
                 </a>
                 <a target = "_blank" href = {props.member.memberInstagram}>
-                    <IconButton component="span">
-                        <InstagramIcon style={{color: '#8134af'}}/>
-                    </IconButton>
+                    <img
+                    src={instagramIcon}
+                    alt="icon for instagram"
+                    className="social-media-icon"
+                    />
                 </a>
             </CardActions>
         </Card>
