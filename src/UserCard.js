@@ -31,7 +31,7 @@ function UserCard(props) {
                     alt = {props.member.memberName}
                 />
                 <CardContent className = "content">
-                    <Typography className = "content-head" gutterBottom variant = "h5" component = "h2">
+                    <Typography className = "content-headuc" gutterBottom variant = "h5" component = "h2">
                         {props.member.memberName}
                     </Typography>
                     <Typography className = "content-text" variant="h6" color="textSecondary" component="p">

@@ -13,23 +13,15 @@
     overflow: hidden;
 }
 
-.content-head{
+.content-headuc{
     height: 32%;
     overflow: hidden;
     text-overflow: wrap;
     white-space: nowrap;
+    text-align: center;
+    font-family: "Source Serif Pro", serif !important
 }
 
-/*
-.content-head:hover{
-    overflow: visible;
-    white-space: normal;
-    width: 100%;
-    height: 20%;
-    position: absolute;
-    background-color:#FFF;
-}
-*/
 
 .card-actions.MuiCardActions-root.MuiCardActions-spacing{
     padding: 0px;

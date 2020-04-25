@@ -98,7 +98,7 @@ class RecipesGrid extends React.Component {
                 </div>
                 <Grid container className = "grid-container" spacing = {0}>
                     {recipesList.map(recipe =>
-                        <Grid item md = {3}>
+                        <Grid item md = {0}>
                             <RecipeCard
                                 recipe = {recipe}
                             />

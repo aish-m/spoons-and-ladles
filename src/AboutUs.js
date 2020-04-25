@@ -34,7 +34,7 @@ class AboutUs extends React.Component {
             },
             {
                 memberName: "Jathin Dhulipalla",
-                memberImg: "user-picture.jpg",
+                memberImg: "jathin-dhulipalla.jpg",
                 memberDesc: "Web Developer",
                 memberLinkedin: "https://www.linkedin.com/in/jathin-dhulipalla/",
                 memberGithub: "https://github.com/jathinjd",
