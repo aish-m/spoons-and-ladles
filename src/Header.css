@@ -151,6 +151,10 @@ input[type=search]:focus {
     display: none;
 }
 
+div ul li a.nav-links{
+    font-size: 1em !important;
+}
+
 .user-options-div.open {
     display: block;
     background-color: #b6e64f;

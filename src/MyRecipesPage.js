@@ -4,19 +4,46 @@ import FormControl from '@material-ui/core/FormControl';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
+
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import { makeStyles } from '@material-ui/core/styles';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Collapse from '@material-ui/core/Collapse';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+  nested: {
+    paddingLeft: theme.spacing(4),
+  },
+}));
+
+
 
 class MyRecipesPageComponent extends Component {
     constructor(props) {
         super(props);
-        this.renderSwitch = this.renderSwitch.bind(this);
-        this.formatSwitch = this.formatSwitch.bind(this);
-        this.handleChangePage = this.handleChangePage.bind(this);
-        this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
+        
+        //this.makelist = this.makelist.bind(this);
         this.state={
             recipesData: [],
             columns: [],
@@ -24,167 +51,143 @@ class MyRecipesPageComponent extends Component {
             rowsPerPage:10,
             tableStyle : {display:'unset'},
             imageStyle: {height: "250px"},
-            temp: null
+            openlist: null,
+            options : { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
         }
     }
 
     componentDidMount(){
-        fetch("http://localhost:8080/api/pending/forUser/2")
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/pending/forUser/2")
           .then(res => {console.log(res);
             return res.json()   
           })
           .then((data) => {
                 this.setState({
-                    recipesData : Object.assign(this.state.recipesData,data),
-                     columns : Object.keys(data[0])
+                     recipesData : Object.assign(this.state.recipesData,data),
+                     columns : Object.keys(data[0]),
+                     openlist :  new Array(data.length).fill(false)
+                
                 })
-          })
-          .then(()=>{
-            var datacols=this.state.columns;
-            let temporary = datacols[3];
-            datacols.splice(3,1);
-            datacols.unshift(temporary);
-            
-            this.setState({
-                columns: datacols
-            })
-            console.log(this.state.columns);
           })
           .catch(error => {
             console.log("error    "+error);
           });
     }
 
-    handleChangePage = (event, newPage) => {
-        this.setState({
-            page: newPage
-        })
-      };
 
-      handleChangeRowsPerPage = (event) => {
-        this.setState({
-            page: 0,
-            rowsPerPage : event.target.value
-        })
-      };
-
-      renderSwitch(param) {
-        switch(param) {
-            case 'userId':
-                return 'USER ID';
-            case 'firstName':
-                return 'FIRST NAME';
-            case 'lastName':
-                return 'LAST NAME';
-            case 'pictureLink':
-                return 'PICTURE LINK';
-            case 'expert':
-                return 'IS EXPERT?';
-            case 'ingredientId':
-                return 'INGREDIENT ID';
-            case 'ingredientName':
-                return 'INGREDIENT NAME';
-            case 'pendingRecipeId':
-                return 'PENDING RECIPE ID';
-            case 'recipeName':
-                return 'RECIPE NAME';
-            case 'evaluatorId':
-                return 'EVALUATOR ID';
-            case 'evaluatorRemarks':
-                return 'REMARKS';
-            case 'recipeId':
-                return 'RECIPE ID';
-            case 'prepTime':
-                return 'PREPARATION TIME';
-            case 'numberOfReviewers':
-                return 'NO OF REVIEWERS';
-            case 'ingredientIds':
-                return 'INGREDIENT ID'; 
-            case 'submissionDate':
-                return 'SUBMISSION DATE';    
-            default:
-                return param.toUpperCase();
-        }
-      }
-
-      formatSwitch(value,column){
-        switch(column){
-            case 'submissionDate':
-                var date = new Date(value);
-                return date.toString();
-            case 'expert':
-                if(value===true){return "YES"}
-                else{return "NO"}
-            // case 'pictureLink':
-            //     var image = src= {require("./images/Recipes/" + recipe.pictureLink)}
-            //     return 
-            default:
-                if(value===null){return "No Data";}
-                return value;
-        }
-      }
-
+     handleClick = (index)  => {
+        let temp = this.state.openlist;
+        temp[index] = !temp[index];
+        this.setState({ openlist: temp });
+    }
     render(){
        
         return(
             <div>
-                <Paper className = "Table" style={this.state.tableStyle}>
-                <TableContainer >
-                    <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                        <TableRow>
-                        {this.state.columns.map((column) => (
-                            column==="userId" || column==="evaluatorId"? null : 
-                            
-                            <TableCell
-                            key={column}
-                            >
-                            {this.renderSwitch(column)}
-                            </TableCell>
-                            
-                        ))}
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.recipesData.slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage).map((row) => {
-                        return (
-                            <TableRow hover role="checkbox" tabIndex={-1} >
-                            {this.state.columns.map((column) => {
-                                return (
-                                column==="userId" || column==="evaluatorId"? null : 
-                                    column==="pictureLink" ? 
-                                        <TableCell key={column} >
-                                            <img style={this.state.imageStyle} src= {require("./images/Recipes/" + row[column])} ></img>
-                                        </TableCell>
-                                        :
-                                        column==="status" ? 
-                                        <TableCell key={column} >
-                                            {this.formatSwitch(row[column],column)}
-                                        </TableCell>
-                                        :
-                                        <TableCell key={column} >
-                                            {this.formatSwitch(row[column],column)}
-                                        </TableCell>
-                                
-                                );
-                            })}
-                            </TableRow>
-                        );
-                        })}
-                    </TableBody>
-                    </Table>
-                    <TablePagination style={this.state.paginationStyel}
-                        rowsPerPageOptions={[10, 25, 50]}
-                        component="div"
-                        count={this.state.recipesData.length}
-                        rowsPerPage={this.state.rowsPerPage}
-                        page={this.state.page}
-                        onChangePage={this.handleChangePage}
-                        onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                        />
-                </TableContainer>
-                
-                </Paper>
+                <List
+                    component="nav"
+                    aria-labelledby="nested-list-subheader"
+                    subheader={
+                        <ListSubheader component="div" id="nested-list-subheader">
+                            MY RECIPES
+                        </ListSubheader>
+                    }
+                    className={useStyles.root}
+                    >  
+                    {this.state.recipesData.map((row, index) => {
+                        return(
+                            <div>
+                            <ListItem button onClick={()=> {this.handleClick(index)}}>
+                            <ListItemAvatar>
+                                <Avatar alt="Remy Sharp" src= {require("./images/Recipes/" + row["pictureLink"])} />
+                                </ListItemAvatar>
+                                <ListItemText primary={row["recipeName"]} />
+                                <br></br>
+                                <ListItemText primary={ 
+                                    <React.Fragment>
+                                    <Typography
+                                        component="span"
+                                        variant="body2"
+                                        color="textPrimary"
+                                    >
+                                        Number of Servings:
+
+                                    </Typography>
+                                    {" "+row["servings"]}
+                                    <Typography
+                                        component="span"
+                                        variant="body2"
+                                        color="textPrimary"
+                                    >
+                                        <br></br>
+                                        Preparation Time:
+                                    </Typography>
+                                    {"  "+row["prepTime"]}
+                                    <br></br>
+                                    <Typography
+                                        component="span"
+                                        variant="body2"
+                                        color="textPrimary"
+                                    >
+                                       Date of submission:
+
+                                    </Typography>
+                                    {" "+new Date(row["submissionDate"]).toLocaleDateString("en-US", this.state.options)}
+                                    
+                                </React.Fragment>
+                                 }/>
+
+                                <ListItemText primary={ 
+                                    <React.Fragment>
+                                    <Typography
+                                        component="span"
+                                        variant="body2"
+                                        color="textPrimary"
+                                    >
+                                        Recipe Status:
+
+                                    </Typography>
+                                    {" "+row["status"]}
+                                    <Typography
+                                        component="span"
+                                        variant="body2"
+                                        color="textPrimary"
+                                    >
+                                        <br></br>
+                                        Remarks:
+                                    </Typography>
+                                    {"  "+row["evaluatorRemarks"]}
+                                </React.Fragment>
+                                 }/>
+
+                                {this.state.openlist[index] ? <ExpandLess /> : <ExpandMore />}
+                            </ListItem>
+                            <Collapse in={this.state.openlist[index]} timeout="auto" unmountOnExit>
+                                <List component="div" disablePadding>
+                                <ListItem button className={useStyles.nested}>
+                                    <ListItemText secondary={
+                                    <React.Fragment>
+                                    <Typography
+                                        component="span"
+                                        variant="body2"
+                                    >
+                                        Instructions:
+
+                                    </Typography>
+                                    {"  "+row["instructions"]}
+                                    </React.Fragment>
+                                       
+                                    }>
+
+                                    </ListItemText>
+                                </ListItem>
+                                </List>
+                            </Collapse>
+                            <Divider variant="inset" component="li" />
+                        </div>
+                        )
+                    })}
+                </List>
             </div>
         )
     }
