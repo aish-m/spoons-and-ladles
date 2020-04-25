@@ -13,29 +13,31 @@ import ServerDownErrorPage from './ServerDownErrorPage';
 import AdminPage from './AdminPage'
 import MyRecipesPage from './MyRecipesPage'
 import {
-    Route
+    Route, Switch
 } from "react-router-dom";
 import RecipesGrid from "./RecipesGrid";
+import Error404Page from "./Error404Page";
 
 function App() {
       return (
           <div className="app">
               <Header/>
-              <Route exact path="/" component={ImageCarousel} />
-              <Route path="/addIngredients" component={IngredientSelection} />
-              <Route path="/recipes" component={RecipesGrid} />
-              <Route path="/submitRecipe" component={SubmitRecipe} />
-              <Route path="/evaluateRecipes" component={EvaluateRecipe} />
-              <Route path="/login" component={LoginOrSignupPage} />
-              <Route path="/signup" component={LoginOrSignupPage} />
-              <Route path="/aboutus" component={AboutUs} />
-              <Route path={"/recipe/:id"} component={RecipesPage} />
-              <Route path={"/serverError"} component={ServerDownErrorPage} />
-              <Route path={"/evaluate/recipe/:id"} component={RecipesPage} />
-              <Route path={"/admin"} component={AdminPage} />
-              <Route path={"/myRecipes"} component={MyRecipesPage} />
-              {/*<Route path="*" component={Error404Page} />*/}
-              {/* TODO: Create a component for 404 page */}
+              <Switch>
+                  <Route exact path="/" component={ImageCarousel} />
+                  <Route exact path="/addIngredients" component={IngredientSelection} />
+                  <Route exact path="/recipes" component={RecipesGrid} />
+                  <Route exact path="/submitRecipe" component={SubmitRecipe} />
+                  <Route exact path="/evaluateRecipes" component={EvaluateRecipe} />
+                  <Route exact path="/login" component={LoginOrSignupPage} />
+                  <Route exact path="/signup" component={LoginOrSignupPage} />
+                  <Route exact path="/aboutus" component={AboutUs} />
+                  <Route exact path={"/recipe/:id"} component={RecipesPage} />
+                  <Route exact path={"/serverError"} component={ServerDownErrorPage} />
+                  <Route exact path={"/evaluate/recipe/:id"} component={RecipesPage} />
+                  <Route exact path={"/admin"} component={AdminPage} />
+                  <Route exact path={"/myRecipes"} component={MyRecipesPage} />
+                  <Route exact path="*" component={Error404Page} />
+              </Switch>
               <Footer />
           </div>
       );

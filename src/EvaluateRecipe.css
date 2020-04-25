@@ -17,3 +17,7 @@ div ul a.nav-links :hover{
     border-color : sienna;
     background: aliceblue;
 }
+
+.forbidden-access-div {
+    text-align: center;
+}

@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import { TextareaAutosize } from '@material-ui/core';
 import { connect } from 'react-redux';
 import './RecipesPage.css';
+import forbiddenImage from "./images/403-Forbidden.gif";
 
 const mapStateToProps = state => ({
     loggedIn: state.loggedInUser,
@@ -239,8 +240,11 @@ function RecipesPage(props) {
                 }
             </div>
             :
-            <div>
-                You must be logged in as an expert chef to evaluate recipes!
+            <div className="forbidden-access-div">
+                <img
+                    src={forbiddenImage}
+                    alt="403 Forbidden access image"
+                />
             </div>
     )
 }

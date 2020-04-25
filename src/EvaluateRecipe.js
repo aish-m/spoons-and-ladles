@@ -10,6 +10,7 @@ import ScheduleIcon from '@material-ui/icons/Schedule';
 import {NavLink} from "react-router-dom";
 import { connect } from 'react-redux';
 import { changeTabValue } from "./redux/actionCreators";
+import forbiddenImage from './images/403-Forbidden.gif';
 
 const mapStateToProps = state => ({
     loggedIn: state.loggedInUser,
@@ -96,8 +97,11 @@ class EvaluateRecipe extends Component {
                             }
                         </List>
                         :
-                        <div>
-                            You must be logged in as an expert chef to evaluate recipes!
+                        <div className="forbidden-access-div">
+                            <img
+                                src={forbiddenImage}
+                                alt="403 Forbidden access image"
+                            />
                         </div>
                 }
             </div>

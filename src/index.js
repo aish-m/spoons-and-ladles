@@ -8,6 +8,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {
     BrowserRouter as Router,
+    Switch
 } from "react-router-dom";
 
 function saveToLocalStorage(state) {

@@ -1,6 +1,8 @@
 .recipe-grid-div {
     margin: 0 auto;
     z-index: -1;
+    padding-bottom: 20px;
+    background-color: #dfe5d0;
 }
 .MuiPaper-root.MuiCard-root.makeStyles-root-815.MuiPaper-elevation1.MuiPaper-rounded {
      margin: 20px auto;
