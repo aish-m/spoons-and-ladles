@@ -278,7 +278,8 @@ class SubmitForm extends Component {
                             label="Enter a comma separated list of keywords for the recipe"
                             required variant="outlined"
                             multiline rows="2"
-                            onChange={this.contentChange} />
+                            onChange={this.contentChange}
+                        />
                     </div>
                     
                     <div className="getRecipeDataIngredients">
@@ -286,7 +287,6 @@ class SubmitForm extends Component {
                         placeholder="Put each ingredient on its own line." variant="outlined" /> */}
 
                         <MaterialTable
-                            
                             options={{
                                 rowStyle: {
                                 //backgroundColor: '#EEE',
@@ -299,7 +299,8 @@ class SubmitForm extends Component {
                                 },
                                 searchFieldStyle: {
                                 //backgroundColor: '#AAA',
-                                fontFamily: 'Source Serif Pro'
+                                fontFamily: 'Source Serif Pro',
+                                    display: 'none'
                                 }
                             }}
 

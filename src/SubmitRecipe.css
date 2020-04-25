@@ -130,6 +130,7 @@
 
 #submit-recipe, #cancel-recipe{
     background-color: #8bcf32;
+    color: black;
 }
 
 .forButtons{
