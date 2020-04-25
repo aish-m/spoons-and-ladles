@@ -92,8 +92,8 @@ class RecipesGrid extends React.Component {
                 <div className="recipes-grid-title">
                     {
                         this.props.ingredientsListLength === 0 ?
-                            "All Recipes" :
-                            "Recipes for selected ingredients"
+                            "ALL RECIPES" :
+                            "RECIPES FOR SELECTED INGREDIENTS"
                     }
                 </div>
                 <Grid container className = "grid-container" spacing = {0}>

@@ -4,32 +4,32 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from'@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import ScheduleIcon from '@material-ui/icons/Schedule';
-import './RecipesPage.css';
 import {
     NavLink
 } from "react-router-dom";
+import './RecipeCard.css';
+import servings from "./images/servings-blue.png";
 
 const useStyles = makeStyles({
     root: {
         margin: 10,
         maxHeight: 480,
-        maxWidth: 280,
+        maxWidth: 280
     },
     content: {
         
     },
     text: {
 
-    },
+    }
 });
 
 function RecipeCard(props) {
     const classes = useStyles();
     return (
-        <Card className = {classes.root}>
+        <Card className = {classes.root} id="card-for-each-recipe">
             <NavLink to={"/recipe/" + props.recipe.recipeId} className="nav-links">
                 <CardActionArea>
                     <img className = 'card-img'
@@ -46,14 +46,19 @@ function RecipeCard(props) {
                     </CardContent>
                 </CardActionArea>
                 <CardActions className = "card-bottom">
-                    <Button size = "small" color = "primary"
-                    >
-                        Open
-                    </Button>
-                    <ScheduleIcon className = "clock-icon"></ScheduleIcon>
-                    <Typography className = "content-text" variant="body2" color="textSecondary" component="p">
-                        {props.recipe.prepTime}
-                    </Typography>
+                    <div className="recipe-servings" id="recipe-servings-card-bottom">
+                        <img
+                            src={servings}
+                            alt="Serving size"
+                        />
+                        {props.recipe.servings}
+                    </div>
+                    <div className="card-bottom-preptime">
+                        <ScheduleIcon className = "clock-icon"></ScheduleIcon>
+                        <Typography className = "content-text" variant="body2" color="textSecondary" component="p">
+                            {props.recipe.prepTime}
+                        </Typography>
+                    </div>
                 </CardActions>
             </NavLink>
         </Card>

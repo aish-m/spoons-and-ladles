@@ -9,6 +9,7 @@ import bulletPoint from './images/bullet-point.png';
 import Button from "@material-ui/core/Button";
 import { TextareaAutosize } from '@material-ui/core';
 import { connect } from 'react-redux';
+import './RecipesPage.css';
 
 const mapStateToProps = state => ({
     loggedIn: state.loggedInUser,

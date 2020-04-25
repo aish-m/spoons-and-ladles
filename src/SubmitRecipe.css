@@ -40,14 +40,14 @@
 
 .MuiOutlinedInput-input
 {
-    font-family: Gentium Basic !important;
+    font-family: "Source Serif Pro", serif !important
 }
 .forImage{
     text-align: center;
     padding: 2% 0;
 }
 .MuiInputLabel-outlined {
-    font-family: Gentium Basic  !important;
+    font-family: "Source Serif Pro", serif !important
 }
 
 .overallDiv .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined {
@@ -59,7 +59,7 @@
     color: blue;
     padding-top: 2%;
     padding-bottom: 2%;
-    font-family: Gentium Basic  !important;
+    font-family: "Source Serif Pro", serif !important
 }
 
 .forPrepTime,.forServings{
@@ -120,8 +120,8 @@
     cursor: pointer;
 }
 
-.MuiTableCell-root, .MuiTypography-root, .MuiTablePagination-select{
-    font-family: Gentium Basic !important;
+.MuiTableCell-root, .submit-recipe-entire-div .MuiTypography-root, .MuiTablePagination-select{
+    font-family: 'Source Serif Pro', serif !important
 }
 
 .MuiButton-label{

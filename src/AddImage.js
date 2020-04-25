@@ -34,9 +34,9 @@ class AddImageComp extends Component{
             this.setState({
                 file: URL.createObjectURL(event.target.files[0]),
                  addRecipeStyle: {display: 'none'},
-                imageUpdateSpan : {display: 'block',fontFamily: 'Gentium Basic'},
+                imageUpdateSpan : {display: 'block',fontFamily: 'Source Serif Pro'},
                 previewStyle : {display: 'block',height: '250px',width: '250px'},
-                previewImageStyle :{height: 'inherit',width: 'inherit',fontFamily: 'Gentium Basic'}
+                previewImageStyle :{height: 'inherit',width: 'inherit',fontFamily: 'Source Serif Pro'}
               })
         }
         this.props.onCallingMyCallback(event.target.files[0]);

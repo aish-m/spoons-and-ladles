@@ -94,9 +94,9 @@ class SubmitForm extends Component {
                 imageCaptured: URL.createObjectURL(event.target.files[0]),
                 imageFileType: event.target.files[0].type,
                 addRecipeStyle: {display: 'none'},
-                imageUpdateSpan : {display: 'block',fontFamily: 'Gentium Basic'},
+                imageUpdateSpan : {display: 'block',fontFamily: 'Source Serif Pro'},
                 previewStyle : {display: 'block',height: '250px',width: '250px'},
-                previewImageStyle :{height: 'inherit',width: 'inherit',fontFamily: 'Gentium Basic'},
+                previewImageStyle :{height: 'inherit',width: 'inherit',fontFamily: 'Source Serif Pro'},
                 selectedFile:event.target.files[0]
               })
               formData = new FormData();
@@ -290,23 +290,23 @@ class SubmitForm extends Component {
                             options={{
                                 rowStyle: {
                                 //backgroundColor: '#EEE',
-                                fontFamily: 'Gentium Basic !important'
+                                fontFamily: 'Source Serif Pro'
                                 },
                                 headerStyle: {
                                 //backgroundColor: '#01579b',
                                 //color: '#FFF',
-                                fontFamily: 'Gentium Basic'
+                                fontFamily: 'Source Serif Pro'
                                 },
                                 searchFieldStyle: {
                                 //backgroundColor: '#AAA',
-                                fontFamily: 'Gentium Basic'
+                                fontFamily: 'Source Serif Pro'
                                 }
                             }}
 
                             column={{
                                 cellStyle: {
                                 backgroundColor: '#EEE',
-                                fontFamily: 'Gentium Basic'
+                                fontFamily: 'Source Serif Pro'
                                 }
                             }}
 
