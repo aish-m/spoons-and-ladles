@@ -4,6 +4,7 @@ import RecipeCard from './RecipeCard';
 import { connect } from 'react-redux';
 import { updateRecipes, changeTabValue } from './redux/actionCreators.js';
 import './RecipeGrid.css';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 function mapStateToProps(state) {
     return { ingredientsList: state.selectedIngredients,
@@ -84,7 +85,7 @@ class RecipesGrid extends React.Component {
             return <h1>{error.message}</h1>
         }
         if(isLoading){
-            return <h1>Working, hold on...</h1>
+            return <div className="spinner-div"> <CircularProgress className="spinner"/> </div>;
         }
 
         return (

@@ -140,11 +140,6 @@ class LoginOrSignupPage extends React.Component {
             document.getElementById("errorMessage").innerHTML = "Email cannot be left blank!";
             return;
         }
-        if(this.state.phone === null || this.state.phone === '') {
-            document.getElementById("phoneField").classList.add("error");
-            document.getElementById("errorMessage").innerHTML = "Phone number cannot be left blank!";
-            return;
-        }
         if(this.state.enteredPassword === null || this.state.enteredPassword === '') {
             document.getElementById("enteredPasswordField").classList.add("error");
             document.getElementById("errorMessage").innerHTML = "Password field cannot be left blank!";
@@ -249,11 +244,11 @@ class LoginOrSignupPage extends React.Component {
                                 <h1> Welcome back! </h1>
                                 <p> Log in with your email and password </p>
                             </div>
-                            <TextField id="emailField" label="Email" variant="outlined" name="username" required
+                            <TextField id="emailField" label="Email" variant="outlined" name="username"
                                        onChange={this.contentChange}
                                        onFocus={(event) => event.target.classList.remove("error")}
                             />
-                            <TextField id="passwordField" label="Password" variant="outlined" name="password" required
+                            <TextField id="passwordField" label="Password" variant="outlined" name="password"
                                        type="password"
                                        onChange={this.contentChange}
                                        onFocus={(event) => event.target.classList.remove("error")}
@@ -308,7 +303,7 @@ class LoginOrSignupPage extends React.Component {
                                            onChange={this.contentChange}
                                            onFocus={(event) => event.target.classList.remove("error")}
                                 />
-                                <TextField required id="phoneField" label="Phone" variant="outlined"
+                                <TextField id="phoneField" label="Phone" variant="outlined"
                                            placeholder="Just 10 digits"
                                            name="phone"
                                            onChange={this.contentChange}

@@ -49,3 +49,13 @@
     background-color: #dfe5d0;
     font-family: 'Montserrat', sans-serif;
 }
+
+.spinner-div {
+    margin: 50px 0;
+    text-align: center;
+}
+
+.spinner {
+    color: #43b02a;
+    text-align: center;
+}

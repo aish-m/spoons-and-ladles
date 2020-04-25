@@ -138,6 +138,10 @@
     margin: 0 20px;
 }
 
+.login-signup-component .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined {
+    margin-left: 20px;
+}
+
 #emailField.error, #passwordField.error, .MuiInputBase-input.MuiOutlinedInput-input.error {
     border: 2px solid red;
 }
