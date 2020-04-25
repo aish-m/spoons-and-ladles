@@ -157,8 +157,8 @@ div ul li a.nav-links{
 
 .user-options-div.open {
     display: block;
-    background-color: #b6e64f;
-    color: black;
+    background-color: black;
+    color: white;
     z-index: 999;
 }
 
@@ -177,13 +177,11 @@ div ul li a.nav-links{
     padding: 10px 0;
     text-align: center;
     cursor: pointer;
-    border-right: 1px solid black;
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
+    border: 2px solid white;
 }
 
 .user-options-div li:hover {
-    background-color: white;
+    background-color: #43b02a;
 }
 
 .user-options-div .nav-links {
@@ -200,6 +198,35 @@ div ul li a.nav-links{
 #expandMoreIcon.close, #expandLessIcon.close {
     display: none;
 }
+
+.nav-links {
+    text-decoration: none;
+    color: inherit;
+    font-size: 1.2em;
+}
+
+.nav-links:hover {
+    color: inherit;
+}
+
+.active-nav-links {
+    color: #b6e64f;
+}
+
+.nav-links-mobile {
+    text-decoration: none;
+    font-size: 1.2em;
+    color: black;
+}
+
+.nav-links-mobile:hover {
+    color: black;
+}
+
+.active-nav-links-mobile {
+     color: white;
+     text-shadow: black 1px 2px;
+ }
 
 @media (max-width: 768px) {
     .header-left {
@@ -323,35 +350,6 @@ div ul li a.nav-links{
         margin-left: auto;
     }
 }
-
-.nav-links {
-    text-decoration: none;
-    color: inherit;
-    font-size: 1.2em;
-}
-
-.nav-links:hover {
-    color: inherit;
-}
-
-.active-nav-links {
-    color: #b6e64f;
-}
-
-.nav-links-mobile {
-    text-decoration: none;
-    font-size: 1.2em;
-    color: black;
-}
-
-.nav-links-mobile:hover {
-    color: black;
-}
-
-.active-nav-links-mobile {
-     color: white;
-     text-shadow: black 1px 2px;
- }
 
 @media (max-width: 480px) {
     #mascot {

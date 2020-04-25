@@ -107,6 +107,7 @@ function Header(props) {
     }
 
     function logUserOut() {
+        alert("You will now be logged out!");
         props.toggleUserLogin();
         props.resetUser();
         props.setExpertChefFlag(false);
