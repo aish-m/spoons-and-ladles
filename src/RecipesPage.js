@@ -27,8 +27,7 @@ function RecipesPage(props) {
     const [error, setError] = useState(null);
     const [isValid, setIsValid] = useState(true);
     const [evaluatorRemarks, setEvaluatorRemarks] = useState("");
-    let [userid, setUserId] = useState(0);
-    let [username, setUserName] = useState("");
+    const [userFullname, setUserFullname] = useState("");
     const contentChange = event => setEvaluatorRemarks(event.target.value)
 
     let { id } = useParams();
@@ -52,7 +51,6 @@ function RecipesPage(props) {
                 (result) => {
                     setRecipe(result);
                     setIsRecipeLoaded(true);
-                    setUserId(result.userId);
                     getUserName(result.userId);
                 },
                 (error) => {
@@ -60,7 +58,7 @@ function RecipesPage(props) {
                         setIsRecipeLoaded(true);
                 }
             );
-        
+
 
         // fetch("http://localhost:8080/api/ingredients/forRecipe/" + id)
         fetch("https://spoons-and-ladles-backend.herokuapp.com/api/ingredients/forRecipe/" + id)
@@ -77,16 +75,18 @@ function RecipesPage(props) {
             );
     }, []);
 
-    function getUserName(idofuser){
-        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/users/getInfo/"+idofuser)
+    function getUserName(userId){
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/users/getInfo/" + userId)
+        // fetch("http://localhost:8080/api/users/getInfo/" + userId)
                 .then(res => res.json())
                 .then((result)=>{
-                    setUserName(result.firstName+" "+result.lastName);
+                    setUserFullname(result.firstName + " " + result.lastName);
                 },
                 (error) => {
                     setError(error);
                 })
     }
+
     if(error !== null) {
         return <div> Oops! Try back again! </div>
     }
@@ -168,9 +168,9 @@ function RecipesPage(props) {
                 <div className="recipe-intro">
                     <div className="recipe-title"> { recipe.recipeName !== undefined ? recipe.recipeName.toUpperCase() : "" } </div>
                     <div className="recipe-user">
-                        { (recipe.userId === 1) ? 'A Spoons & Ladles original recipe' : 'by user ' + username }
+                        { (recipe.userId === 1) ? 'A Spoons & Ladles original recipe' : 'By - ' + userFullname }
                     </div>
-                    <div className="intro-flexbox">
+                    <div className="intro-flexbox">:
                         <div className="recipe-prep-time">
                             <TimerIcon className="prep-time-clock"/>
                             {recipe.prepTime}
