@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import one from './images/carousel/1.png';
-import two from './images/carousel/2.png';
-import three from './images/carousel/3.png';
-import four from './images/carousel/4.png';
+import one from './images/carousel/1.jpg';
+import two from './images/carousel/2.jpg';
+import three from './images/carousel/3.jpg';
+import four from './images/carousel/4.jpg';
 import oneMobile from './images/mobile-carousel/1.png';
 import twoMobile from './images/mobile-carousel/2.png';
 import threeMobile from './images/mobile-carousel/3.png';
