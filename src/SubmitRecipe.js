@@ -26,8 +26,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 const mapStateToProps = state => ({
-    loggedIn: state.loggedInUser,
-    isExpert: state.isUserExpert,
     user: state.loggedInUser
 });
 
@@ -67,14 +65,18 @@ class SubmitForm extends Component {
         confirmationStyle: {display: 'none'},
         title: '',prepTime: '', numOfServings: '',keywords: '',ingredients:'',procedure:'', imageCaptured: null,
         imageFileType: null,
-        columns: [{ title: 'Ingredient', field: 'ingredient' },{ title: 'Quantity', field: 'quantity' }],
+        columns: [{ title: 'Ingredient', field: 'ingredient' },{ title: 'Quantity or preparation', field: 'quantity' }],
         data: [],
         pendingid: [],
         ingids:[],
         selectedFile:null,
         measurements: []
         }
-    } 
+    }
+
+    componentDidMount() {
+        this.props.changeTabValue(2);
+    }
 
     contentChange = event => this.setState({ [event.target.name]: event.target.value })
 
@@ -144,7 +146,7 @@ class SubmitForm extends Component {
                 "recipeName": this.state.title,
                 "prepTime": this.state.prepTime,
                 "servings" : this.state.numOfServings,
-                "userId" : this.props.user.userId,   /// console.log of this values gives an error, I didnt map props correctly, pls check 
+                "userId" : this.props.user.userId,
                 "keywords": this.state.keywords,
                 "ingredients": this.state.data,
                 "instructions": this.state.procedure,
@@ -207,7 +209,9 @@ class SubmitForm extends Component {
           })
           .then(res => {return res.json()})
           .then((data) => {
-            this.cancel_recipe();
+              this.cancel_recipe();
+              alert("Thanks for submitting! Click OK to navigate to 'My Recipes' page!");
+              window.location.replace("/myRecipes");
           })
           .catch(error => {
             console.log("error    "+error);
@@ -224,12 +228,12 @@ class SubmitForm extends Component {
         e.preventDefault();
         this.post_get_recipeid();
         //this.post_image();
-        this.setState({
-            ingid: [],
-            confirmationStyle: {display: 'flex'},
-            measurements: []
-        })
-    }
+        // this.setState({
+        //     ingid: [],
+        //     confirmationStyle: {display: 'flex'},
+        //     measurements: []
+        // })
+    };
 
     render(){
         return(
@@ -328,7 +332,6 @@ class SubmitForm extends Component {
                                         return { ...prevState, data };
                                     });
                                     }, 600);
-                                    console.log("Here"+this.state.data);
                                 }),
                                 onRowUpdate: (newData, oldData) =>
                                 new Promise((resolve) => {
@@ -380,17 +383,4 @@ class SubmitForm extends Component {
     }
 }
 
-function SubmitRecipe(props) {
-    
-    useEffect(() => {
-        props.changeTabValue(2);
-    },[]);
-
-    return (    
-        <div>
-            <SubmitForm />
-        </div>
-    )
-}
-
-export default connect(null, { changeTabValue })(SubmitRecipe);
+export default connect(mapStateToProps, { changeTabValue })(SubmitForm);

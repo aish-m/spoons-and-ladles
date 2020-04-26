@@ -14,6 +14,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { connect } from "react-redux";
+import { changeTabValue } from "./redux/actionCreators";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +49,8 @@ class MyRecipesPageComponent extends Component {
     }
 
     componentDidMount(){
+        this.props.changeTabValue(-1);
+
         fetch("https://spoons-and-ladles-backend.herokuapp.com/api/pending/forUser/"+ this.props.user.userId)
         // fetch("http://localhost:8080/api/pending/forUser/"+ this.props.user.userId)
           .then(res => {
@@ -186,4 +189,4 @@ class MyRecipesPageComponent extends Component {
     }
 }
 
-export default connect(mapStateToProps, {}) (MyRecipesPageComponent);
+export default connect(mapStateToProps, { changeTabValue }) (MyRecipesPageComponent);
