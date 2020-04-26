@@ -11,6 +11,7 @@ import {NavLink} from "react-router-dom";
 import { connect } from 'react-redux';
 import { changeTabValue } from "./redux/actionCreators";
 import forbiddenImage from './images/403-Forbidden.gif';
+import backlogEmpty from './images/backlog-empty.gif';
 
 const mapStateToProps = state => ({
     loggedIn: state.loggedInUser,
@@ -23,7 +24,8 @@ class EvaluateRecipe extends Component {
         super(props);
         this.state = {
             assignedRecipes:[],
-            isValid: false
+            isValid: false,
+            isQueueEmpty: false
         }
     }
 
@@ -38,6 +40,8 @@ class EvaluateRecipe extends Component {
                   .then(res => res.json())
                   .then((data) => {
                     this.setState({ assignedRecipes : data });
+                    if(this.state.assignedRecipes.length === 0)
+                        this.setState({ isQueueEmpty : true });
                   })
                   .catch(error => {
                     console.log("error: " + error);
@@ -51,7 +55,9 @@ class EvaluateRecipe extends Component {
             <div className="evaluate-recipe-entire-div">
                 {
                     this.state.isValid ?
+                        !this.state.isQueueEmpty ?
                         <List>
+                            <div id="evaluate-recipes-title"> RECIPES PENDING EVALUATION </div>
                             {
                                 this.state.assignedRecipes.map(recipe=>
                                     <NavLink className= "evaluateLink" to={"/evaluate/recipe/" + recipe.pendingRecipeId} className="nav-links">
@@ -96,6 +102,13 @@ class EvaluateRecipe extends Component {
                                 )
                             }
                         </List>
+                            : <div style = {{ textAlign: 'center' }}>
+                                <img
+                                    src={backlogEmpty}
+                                    alt="No recipes to evaluate for you today!"
+                                    style={{ padding: '20px 0' }}
+                                />
+                            </div>
                         :
                         <div className="forbidden-access-div">
                             <img
