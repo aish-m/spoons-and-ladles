@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { updateRecipes, changeTabValue } from './redux/actionCreators.js';
 import './RecipeGrid.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Fab from "@material-ui/core/Fab";
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ScrollTop from "./BackToTopScroll";
 
 function mapStateToProps(state) {
     return { ingredientsList: state.selectedIngredients,
@@ -109,6 +112,11 @@ class RecipesGrid extends React.Component {
                         </Grid>
                     )}
                 </Grid>
+                <ScrollTop {...this.props}>
+                    <Fab className="scroll-fab" size="large" aria-label="scroll back to top">
+                        <ExpandLessIcon style={{ color: 'white' }} fontSize="large"/>
+                    </Fab>
+                </ScrollTop>
             </div>
         );
     }

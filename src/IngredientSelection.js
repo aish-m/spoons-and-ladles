@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 import Button from "@material-ui/core/Button";
 import {NavLink} from "react-router-dom";
 import { changeTabValue } from './redux/actionCreators';
+import ScrollTop from "./BackToTopScroll";
+import Fab from "@material-ui/core/Fab";
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 
 class IngredientSelection extends React.Component {
 
@@ -117,6 +120,11 @@ class IngredientSelection extends React.Component {
                             null
                     }
                 </div>
+                <ScrollTop {...this.props}>
+                    <Fab style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }} size="large" aria-label="scroll back to top">
+                        <ExpandLessIcon style={{ color: 'black' }} fontSize="large"/>
+                    </Fab>
+                </ScrollTop>
             </div>
         )
     }

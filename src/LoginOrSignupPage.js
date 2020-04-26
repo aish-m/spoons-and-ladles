@@ -1,5 +1,4 @@
 import React from "react";
-import background from './images/login-background.jpg';
 import mascot from './images/mascot-no-bg.png';
 import snlText from './images/snl-text-no-bg.png';
 import './LoginOrSignupPage.css';
