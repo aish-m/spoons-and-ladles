@@ -107,6 +107,7 @@ class EvaluateRecipe extends Component {
                                     src={backlogEmpty}
                                     alt="No recipes to evaluate for you today!"
                                     style={{ padding: '20px 0' }}
+                                    id="noRecipesToEvaluate"
                                 />
                             </div>
                         :

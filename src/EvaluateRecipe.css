@@ -29,3 +29,10 @@ div ul a.nav-links :hover{
     font-family: 'Montserrat', sans-serif;
     padding: 20px 0;
 }
+
+@media (max-width: 768px) {
+    #noRecipesToEvaluate {
+        width: 80%;
+    }
+}
+

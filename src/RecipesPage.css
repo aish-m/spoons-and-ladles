@@ -215,8 +215,18 @@
         padding: 12px 0;
     }
 
+    .recipe-title {
+        margin: 0 0 20px 0;
+        font-size: 1.7em;
+    }
+
     .recipe-prep-time, .recipe-keywords {
         padding-bottom: 12px;
+    }
+
+    .keyword {
+        margin-top: 7px;
+        margin-bottom: 7px;
     }
 
     .recipe-ingredients, .recipe-instructions {

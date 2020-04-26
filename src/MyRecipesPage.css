@@ -52,3 +52,9 @@
     margin-bottom: 20px;
 }
 
+@media (max-width: 768px) {
+    #noSubmittedRecipesGif {
+        width: 80%;
+    }
+}
+

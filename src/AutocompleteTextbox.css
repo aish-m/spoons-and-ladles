@@ -89,7 +89,8 @@ div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBa
     }
 
     #select-ingredient-button {
-        margin-right: 0;
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
     .modal-div {

@@ -16,6 +16,7 @@ function ServerDownErrorPage() {
                 alt="Server Down"
             />
             <div className="server-down-text">
+                <div id="errorCodeText"> ERR: CONNECTION_REFUSED </div>
                 <div id="text">
                     Don't fret! <br/> <br/>
                     Ms. Sassy Hass' minions are at work to fix the problem and bring Spoons & Ladles back up! <br/>

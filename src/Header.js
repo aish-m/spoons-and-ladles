@@ -226,24 +226,24 @@ function Header(props) {
                 </div>
                 <div id="mobileMenu" className="mobile-nav-bar desktop">
                     <ul>
-                        <li>
+                        <li onClick={() => toggleHamburgerIcon() }>
                             <NavLink to="/addIngredients" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> ADD INGREDIENTS </NavLink>
                         </li>
-                        <li>
+                        <li onClick={() => toggleHamburgerIcon() }>
                             <NavLink to="/recipes" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> RECIPES </NavLink>
                         </li>
-                        <li>
+                        <li onClick={() => toggleHamburgerIcon() }>
                             <NavLink to="/submitRecipe" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> SUBMIT A RECIPE </NavLink>
                         </li>
-                        <li>
+                        <li onClick={() => toggleHamburgerIcon() }>
                             <NavLink to="/aboutus" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> ABOUT US </NavLink>
                         </li>
                         {(props.loggedIn && props.isExpert) ?
-                            <li>
+                            <li onClick={() => toggleHamburgerIcon() }>
                                 <NavLink to="/evaluateRecipes" className="nav-links-mobile" activeClassName="active-nav-links-mobile"> EVALUATE RECIPES </NavLink>
                             </li> : null
                         }
-                        <li>
+                        <li onClick={() => toggleHamburgerIcon() }>
                             <NavLink to="/admin" className="nav-links-mobile" activeClassName="active-nav-links-mobile">
                                 ADMIN
                             </NavLink>

@@ -28,18 +28,11 @@ function Error404Page() {
             </div>
             <div id="notFoundText"> Umm, are you sure you're on the right page? </div>
             <div id="notFoundTextSubtitle"> ERROR 404: Page Not found </div>
-            <div id="404pageImages">
-                {/*<img*/}
-                {/*    src={mascot404}*/}
-                {/*    alt="404 Error GIF"*/}
-                {/*    id="mascotError404"*/}
-                {/*/>*/}
-                <img
-                    src={error404}
-                    alt="404 Error GIF"
-                    className="error-404-gif"
-                />
-            </div>
+            <img
+                src={error404}
+                alt="404 Error GIF"
+                className="error-404-gif"
+            />
            <NavLink to="/" className="nav-links">
                 <Button variant="contained"
                         id="goBackToSnL"

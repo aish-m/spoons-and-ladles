@@ -21,6 +21,12 @@
     margin: 0 10% 0 0;
 }
 
+#errorCodeText {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8em;
+    color: #43b02a;
+}
+
 #text {
     margin: 50px auto;
     text-align: center;
@@ -39,4 +45,29 @@ a:hover {
 #goBackHomeButton {
     background-color: #8bcf32;
     font-size: 0.6em;
+}
+
+@media (max-width: 768px) {
+    .server-down img {
+        width: 90%;
+        margin: auto;
+    }
+
+    .server-down-text {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+
+    #text {
+        margin: 30px auto;
+        text-align: center;
+        font-size: 0.9em;
+    }
+    a {
+        margin-bottom: 30px;
+    }
 }

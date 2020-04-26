@@ -55,5 +55,26 @@
 }
 
 @media (max-width: 768px) {
+    .header-left-error-404-page {
+        align-self: center;
+    }
 
+    #notFoundText {
+        margin-top: 8vh;
+        margin-bottom: 5vh;
+        font-size: 2em;
+        text-align: center;
+    }
+
+    .error-404-gif {
+        width: 90%;
+        align-self: center;
+        height: auto;
+        margin: 2vh 0;
+        border: 7px solid white;
+    }
+
+    #goBackToSnL {
+        margin-top: 4vh;
+    }
 }
