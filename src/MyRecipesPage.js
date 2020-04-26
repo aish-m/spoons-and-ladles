@@ -27,8 +27,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const mapStateToProps = state => ({
-    loggedIn: state.loggedInUser,
-    isExpert: state.isUserExpert,
     user: state.loggedInUser
 });
 
@@ -50,9 +48,9 @@ class MyRecipesPageComponent extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props.user.userId);
         fetch("https://spoons-and-ladles-backend.herokuapp.com/api/pending/forUser/"+ this.props.user.userId)
-          .then(res => {console.log(res);
+        // fetch("http://localhost:8080/api/pending/forUser/"+ this.props.user.userId)
+          .then(res => {
             return res.json()   
           })
           .then((data) => {
@@ -73,8 +71,9 @@ class MyRecipesPageComponent extends Component {
         let temp = this.state.openlist;
         temp[index] = !temp[index];
         this.setState({ openlist: temp });
-    }
-    render(){
+    };
+
+    render (){
        
         return(
             <div>
@@ -187,10 +186,4 @@ class MyRecipesPageComponent extends Component {
     }
 }
 
-// function AdminPage(props) {
-//     return(
-//         <MyRecipesPageComponent></MyRecipesPageComponent>
-//     )
-// }
-
-export default connect(mapStateToProps) (MyRecipesPageComponent);
+export default connect(mapStateToProps, {}) (MyRecipesPageComponent);

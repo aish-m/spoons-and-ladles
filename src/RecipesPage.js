@@ -84,7 +84,7 @@ function RecipesPage(props) {
         if(evaluatorRemarks !== '')
             postRequestBody.evaluationRemarks = evaluatorRemarks;
 
-        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/users/login", {
+        fetch("https://spoons-and-ladles-backend.herokuapp.com/api/pending/evaluate", {
         // fetch("http://localhost:8080/api/pending/evaluate", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
