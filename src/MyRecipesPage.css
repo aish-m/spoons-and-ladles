@@ -10,6 +10,33 @@
     padding: 20px 0;
 }
 
+.myrecipe-desktop{
+    display: block;
+}
+
+.myrecipe-mobile{
+    display: none;
+}
+
+.myrecipe-mobile-nonstatus{
+    display: none;
+}
+
+
+@media (max-width: 850px) {
+    .myrecipe-desktop{
+        display: none;
+    }
+    
+    .myrecipe-mobile{
+        display: block;
+    }
+    .myrecipe-mobile-nonstatus{
+        display: block;
+        text-align: center;
+    }
+}
+
 .recipe-evaluation-status {
     padding: 5px 10px;
     margin: 0 10px;
