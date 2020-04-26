@@ -11,9 +11,11 @@ import { TextareaAutosize } from '@material-ui/core';
 import { connect } from 'react-redux';
 import './RecipesPage.css';
 import forbiddenImage from "./images/403-Forbidden.gif";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const mapStateToProps = state => ({
-    loggedIn: state.loggedInUser,
+
+    loggedIn: state.loggedIn,
     isExpert: state.isUserExpert
 });
 
@@ -112,10 +114,37 @@ function RecipesPage(props) {
         window.location.replace('/serverError');
     }
 
+    function rateThisRecipe (event, value) {
+        if(!props.loggedIn) {
+            alert("Users must be logged in to rate recipes!");
+        }
+        else {
+            fetch("https://spoons-and-ladles-backend.herokuapp.com/api/recipes/rate", {
+                // fetch("http://localhost:8080/api/recipes/rate", {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({recipeId: id, rating: value})
+            })
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                        if (result) {
+                            alert('Recipe rated successfully!');
+                            window.location.reload();
+                        } else alert('Oops! Something went wrong! Try again later!');
+                    },
+                    (error) => {
+                        window.location.replace('/serverError');
+                    }
+                );
+        }
+    }
+
+
     return(
         isValid
             ?
-        !isRecipeLoaded && !areIngredientsLoaded ? <div> Loading recipe... </div> :
+        !isRecipeLoaded && !areIngredientsLoaded ? <div className="spinner-div"> <CircularProgress className="spinner"/> </div> :
             <div className="one-recipe">
                 <img
                     src={require("./images/Recipes/" + recipe.pictureLink)}
@@ -133,11 +162,12 @@ function RecipesPage(props) {
                             {recipe.prepTime}
                         </div>
                         <div className="recipe-rating">
-                            <Rating name="half-rating"
+                            <Rating name="rating-stars"
                                     value={recipe.rating/recipe.numberOfReviewers}
                                     defaultValue={0}
                                     precision={0.1}
                                     id="recipeStars"
+                                    onChange={rateThisRecipe}
                             />
                             {(recipe.numberOfReviewers === 0 ? 0 : recipe.rating/recipe.numberOfReviewers).toFixed(1) + ' (From ' + recipe.numberOfReviewers + ' ratings)'}
                         </div>
