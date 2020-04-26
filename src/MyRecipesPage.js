@@ -73,7 +73,8 @@ class MyRecipesPageComponent extends Component {
                 })
           })
           .catch(error => {
-            console.log("error    "+error);
+                console.log("error    "+error);
+                window.location.replace('/serverError');
           });
     }
 

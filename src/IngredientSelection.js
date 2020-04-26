@@ -36,6 +36,7 @@ class IngredientSelection extends React.Component {
                         ingredientsIsLoaded: true,
                         error
                     });
+                    window.location.replace('/serverError');
                 }
             );
 
@@ -54,6 +55,7 @@ class IngredientSelection extends React.Component {
                         areTop12Loaded: true,
                         error
                     });
+                    window.location.replace('/serverError');
                 }
             );
 

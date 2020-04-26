@@ -82,7 +82,8 @@ class AdminPageComponent extends Component {
             this.showTable();
           })
           .catch(error => {
-            console.log("error    "+error);
+              console.log("error    "+error);
+              window.location.replace('/serverError');
           });
       }
     

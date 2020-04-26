@@ -44,7 +44,8 @@ class EvaluateRecipe extends Component {
                         this.setState({ isQueueEmpty : true });
                   })
                   .catch(error => {
-                    console.log("error: " + error);
+                      console.log("error: " + error);
+                      window.location.replace('/serverError');
                   });
         }
     }

@@ -1,4 +1,4 @@
-import React, {Component, useEffect} from "react";
+import React, { Component } from "react";
 import './SubmitRecipe.css';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -148,6 +148,7 @@ class SubmitForm extends Component {
         })
         .then(err => {
             console.log(err);
+            window.location.replace('/serverError');
         })
     }
     post_get_recipeid(){
@@ -179,7 +180,8 @@ class SubmitForm extends Component {
             this.post_get_ingid(); 
           })
           .catch(error => {
-            console.log("error    "+error);
+                console.log("error    "+error);
+                window.location.replace('/serverError');
           });  
     }
     
@@ -204,7 +206,8 @@ class SubmitForm extends Component {
             this.post_recipe_ingredient_mapper();
           })
           .catch(error => {
-            console.log("error    "+error);
+                console.log("error    "+error);
+                window.location.replace('/serverError');
           });  
     }
 
@@ -230,7 +233,8 @@ class SubmitForm extends Component {
               window.location.replace("/myRecipes");
           })
           .catch(error => {
-            console.log("error    "+error);
+              console.log("error    "+error);
+              window.location.replace('/serverError');
           }); 
     }
 

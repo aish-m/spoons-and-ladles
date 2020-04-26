@@ -28,7 +28,7 @@ class RecipesGrid extends React.Component {
         
         if(!this.state.isLoading) this.setState({isLoading: true});
         
-        if(this.props.ingredientsListLength > 0){//!this.props.showAllRecipes){
+        if(this.props.ingredientsListLength > 0) {//!this.props.showAllRecipes){
             let ingSend = [];
             // eslint-disable-next-line array-callback-return
             this.props.ingredientsList.map(function(ing) {
@@ -49,7 +49,9 @@ class RecipesGrid extends React.Component {
                     if(this.state.isLoading) this.setState({ isLoading: false })
                 })
                 .catch((error) => {
-                    if(this.state.isLoading) this.setState({ isLoading: false, error });
+                    if(this.state.isLoading)
+                        this.setState({ isLoading: false, error });
+                    window.location.replace('/serverError');
                 });
         } else {//if (this.props.showAllRecipes){
             fetch("https://spoons-and-ladles-backend.herokuapp.com/api/recipes/getAll")
@@ -63,6 +65,7 @@ class RecipesGrid extends React.Component {
             })
             .catch((error) => {
                 if(this.state.isLoading) this.setState({ isLoading: false, error });
+                window.location.replace('/serverError');
             });
         }
     };

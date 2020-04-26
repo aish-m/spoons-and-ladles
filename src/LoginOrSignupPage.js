@@ -120,6 +120,7 @@ class LoginOrSignupPage extends React.Component {
                 },
                 (error) => {
                     console.log("Error fetching user data!")
+                    window.location.replace('/serverError');
                 }
             );
     }

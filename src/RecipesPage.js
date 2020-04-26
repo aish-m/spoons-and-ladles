@@ -56,6 +56,7 @@ function RecipesPage(props) {
                 (error) => {
                         setError(error);
                         setIsRecipeLoaded(true);
+                        window.location.replace('/serverError');
                 }
             );
 
@@ -71,6 +72,7 @@ function RecipesPage(props) {
                 (error) => {
                     setError(error);
                     setAreIngredientsLoaded(true);
+                    window.location.replace('/serverError');
                 }
             );
     }, []);
@@ -84,6 +86,7 @@ function RecipesPage(props) {
                 },
                 (error) => {
                     setError(error);
+                    window.location.replace('/serverError');
                 })
     }
 
