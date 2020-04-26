@@ -1,0 +1,59 @@
+.error-404-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #dfe5d0;
+}
+
+.header-left-error-404-page {
+    align-self: flex-start;
+    margin: 10px 0 0 10px;
+    padding-right: 10px;
+    background-color: white;
+}
+
+#error-page-mascot, #error-page-companyName {
+    height: 70px;
+}
+
+#notFoundText {
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5em;
+}
+
+#notFoundTextSubtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1em;
+    margin-bottom: 4vh;
+}
+
+#404pageImages {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 5vh;
+}
+
+.error-404-gif {
+    height: 40vh;
+    margin: 5vh 0;
+    border: 7px solid white;
+}
+
+#mascotError404 {
+    height: 45vh;
+}
+
+#goBackToSnL {
+    background-color: #8bcf32;
+    font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+
+}
