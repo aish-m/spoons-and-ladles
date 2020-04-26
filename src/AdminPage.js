@@ -23,7 +23,7 @@ class AdminPageComponent extends Component {
         this.formatSwitch = this.formatSwitch.bind(this);
 
         this.state = {
-            tabletoshow: 0,
+            tabletoshow: 1,
             objectsToDisplay: [], 
             columns : [],
             page:0,
@@ -49,7 +49,10 @@ class AdminPageComponent extends Component {
 
      handleChange = (event) => {
         this.setState({
-            tabletoshow : event.target.value
+            tabletoshow : event.target.value,
+            page: 0,
+            rowsPerPage : 10,
+            objectsToDisplay : []
         })
        console.log(this.state.tabletoshow + "  "+event.target.value);
        var temp = ""; 
@@ -71,6 +74,7 @@ class AdminPageComponent extends Component {
             return res.json()
           })
           .then((data) => {
+                
                 this.setState({
                     objectsToDisplay : Object.assign(this.state.objectsToDisplay,data),
                     columns : Object.keys(data[0])
@@ -104,6 +108,7 @@ class AdminPageComponent extends Component {
       };
 
     componentDidMount() {
+      this.loadDatafromtable("users")
     }
 
     renderSwitch(param) {
@@ -178,9 +183,9 @@ class AdminPageComponent extends Component {
                      value={this.state.tabletoshow}
                      onChange={this.handleChange}
                     >
-                    <MenuItem value={0}>
+                    {/* <MenuItem value={0}>
                         <em>Nothing?</em>
-                    </MenuItem>
+                    </MenuItem> */}
                     <MenuItem value={1}>Users</MenuItem>
                     <MenuItem value={2}>Ingredients</MenuItem>
                     <MenuItem value={3}>Pending Recipes</MenuItem>
