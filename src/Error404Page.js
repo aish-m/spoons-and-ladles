@@ -3,7 +3,6 @@ import error404 from './images/error-404.gif';
 import {NavLink} from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import './Error404Page.css';
-import mascot404 from './images/mascot-error-404.png';
 import mascot from "./images/mascot.png";
 import text from "./images/snl-text.png";
 

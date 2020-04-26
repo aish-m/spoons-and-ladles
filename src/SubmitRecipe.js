@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import './SubmitRecipe.css';
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import addRecipeImage from './images/add-recipe.png';
 import { forwardRef } from 'react';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
@@ -24,6 +23,7 @@ import MaterialTable from 'material-table';
 import { changeTabValue } from "./redux/actionCreators";
 import { connect } from 'react-redux';
 import axios from 'axios';
+import submitRecipeImage from './images/submit-a-recipe.png';
 
 const mapStateToProps = state => ({
     user: state.loggedInUser
@@ -88,7 +88,6 @@ class SubmitForm extends Component {
     contentChange = event => this.setState({ [event.target.name]: event.target.value })
 
     handleChange(event) {
-        console.log(event.target.files[0].name);
         if(event.target.files[0]===undefined){
             this.setState({
                 imageCaptured: null,
@@ -134,7 +133,6 @@ class SubmitForm extends Component {
     }
 
     post_image(){
-        console.log(this.state.selectedFile);
         var filepath = "src/images/Recipes";
         const fd = new FormData();
         fd.append('image',this.state.selectedFile, "test image")
@@ -152,9 +150,6 @@ class SubmitForm extends Component {
         })
     }
     post_get_recipeid(){
-        console.log(this.state.selectedFile);
-        //var str =  new String(this.state.selectedFile);
-        //console.log(str);
         fetch("https://spoons-and-ladles-backend.herokuapp.com/api/pending/insert", {
         // fetch("http://localhost:8080/api/pending/insert", {
             method: "POST",
@@ -215,7 +210,6 @@ class SubmitForm extends Component {
         for(var i=0;i<this.state.data.length;i++){
             this.state.measurements.push(this.state.data[i].quantity);
         }
-        console.log(this.state.measurements);
         fetch("https://spoons-and-ladles-backend.herokuapp.com/api/recipeingredient/insert", {
         // fetch("http://localhost:8080/api/recipeingredient/insert", {
             method: "POST",
@@ -312,141 +306,162 @@ class SubmitForm extends Component {
             </div>
             
             <form className="createRecipe">
-            <div className="overallDiv">
-            <div className="generic"> 
-                <div className="forImage">
-                    <label className="custom-file-upload">  
-                    <span style={this.state.imageUpdateSpan} > Click Here to change the image </span> 
-                    <input id="inp" type="file" name="imageCaptured" onChange={this.handleChange } /> 
-                    <img id="recipeImage" src={addRecipeImage} alt="Add a recipe" style={this.state.addRecipeStyle} />
-                </label>
-                </div>
-
-                <div className="forPreview" style={this.state.previewStyle}>
-                    <img id="preview" src={this.state.imageCaptured} alt="Add recipe final look" style={this.state.previewImageStyle} onChange={this.handleChange}/> 
-                </div>
-                <div className="getDishDetails">
-                    <div className="forPrepTime">
-                        <TextField id="prepTime" value={this.state.prepTime} name="prepTime" required label="Prep Time" variant="outlined"  onChange={this.contentChange} />
-                    </div>
-                    <div className="validation">{this.state.preptimeError}</div>
-                    <div className="forServings">
-                        <TextField id="numServings" value={this.state.numOfServings} name="numOfServings" required label="No. of Servings" variant="outlined"  onChange={this.contentChange} />
-                    </div> 
-                    <div className="validation">{this.state.servingError}</div>    
-                </div>
-            </div>
-            <div id="specific">
-                <ul className="recipeProcedure">  
-                    <div className="getRecipeDataTitle">
-                        <TextField className="recipeTitle" value={this.state.title} name="title" onChange={this.contentChange} label="Recipe Title" required variant="outlined" />
-                    </div>
-                    <div className="validation">{this.state.recipenameError}</div> 
-                    <div className="getRecipeDataDesc">
-                        <TextField
-                            className="recipeDesc"
-                            value={this.state.keywords}
-                            name="keywords"
-                            label="Enter a comma separated list of keywords for the recipe"
-                            required variant="outlined"
-                            multiline rows="2"
-                            onChange={this.contentChange}
+                <div className="generic">
+                    <img
+                        src={ submitRecipeImage }
+                        alt="Let's see what you've got"
+                        id="submitARecipeImage"
                         />
+                    {/*<div className="forImage">*/}
+                    {/*    <label className="custom-file-upload">  */}
+                    {/*        <span style={this.state.imageUpdateSpan} > Click Here to change the image </span>*/}
+                    {/*        <input id="inp" type="file" name="imageCaptured" onChange={this.handleChange } />*/}
+                    {/*        <img id="recipeImage" src={addRecipeImage} alt="Add a recipe" style={this.state.addRecipeStyle} />*/}
+                    {/*    </label>*/}
+                    {/*</div>*/}
+
+                    {/*<div className="forPreview" style={this.state.previewStyle}>*/}
+                    {/*    <img id="preview" src={this.state.imageCaptured} alt="Add recipe final look" style={this.state.previewImageStyle} onChange={this.handleChange}/> */}
+                    {/*</div>*/}
+
+                    <div className="getDishDetails">
+                        <div className="getRecipeDataTitle">
+                            <TextField className="recipeTitle"
+                                       value={this.state.title}
+                                       name="title"
+                                       onChange={this.contentChange}
+                                       label="Recipe Title"
+                                       required
+                                       variant="outlined"
+                            />
+                        </div>
+                        <div className="validation">{this.state.recipenameError}</div>
+
+                        <div className="getRecipeDataDesc">
+                            <TextField className="recipeDesc"
+                                       value={this.state.keywords}
+                                       name="keywords"
+                                       onChange={this.contentChange}
+                                       label="Recipe Keywords (comma separated list)"
+                                       required
+                                       variant="outlined"
+                            />
+                        </div>
+                        <div className="validation">{this.state.keywordsError}</div>
+
+                        <div className="forPrepTime">
+                            <TextField id="prepTime"
+                                       value={this.state.prepTime}
+                                       name="prepTime"
+                                       required
+                                       label="Prep Time"
+                                       variant="outlined"
+                                       onChange={this.contentChange}
+                            />
+                        </div>
+                        <div className="validation">{this.state.preptimeError}</div>
+
+                        <div className="forServings">
+                            <TextField id="numServings"
+                                       value={this.state.numOfServings}
+                                       name="numOfServings"
+                                       required
+                                       label="No. of Servings"
+                                       variant="outlined"
+                                       onChange={this.contentChange}
+                            />
+                        </div>
+                        <div className="validation">{this.state.servingError}</div>
                     </div>
-                    <div className="validation">{this.state.keywordsError}</div> 
-                    <div className="getRecipeDataIngredients">
-                        {/* <TextField className="recipeIngredients" value={this.state.ingredients} name="ingredients" required label="Ingredients" multiline rows="5"  onChange={this.contentChange}
-                        placeholder="Put each ingredient on its own line." variant="outlined" /> */}
-
-                        <MaterialTable
-                            options={{
-                                rowStyle: {
-                                //backgroundColor: '#EEE',
-                                fontFamily: 'Source Serif Pro'
-                                },
-                                headerStyle: {
-                                //backgroundColor: '#01579b',
-                                //color: '#FFF',
-                                fontFamily: 'Source Serif Pro'
-                                },
-                                searchFieldStyle: {
-                                //backgroundColor: '#AAA',
-                                fontFamily: 'Source Serif Pro',
-                                    display: 'none'
-                                }
-                            }}
-
-                            column={{
-                                cellStyle: {
-                                backgroundColor: '#EEE',
-                                fontFamily: 'Source Serif Pro'
-                                }
-                            }}
-
-                            stickyHeader aria-label="sticky table"
-                            className="recipeIngredients"
-                            icons={tableIcons}
-                            title="Ingredients *"
-                            columns={this.state.columns}
-                            data={this.state.data}
-                            editable={{
-                                onRowAdd: (newData) =>
-                                new Promise((resolve) => {
-                                    setTimeout(() => {
-                                    resolve();
-                                    this.setState((prevState) => {
-                                        const data = [...prevState.data];
-                                        data.push(newData);
-                                        return { ...prevState, data };
-                                    });
-                                    }, 600);
-                                }),
-                                onRowUpdate: (newData, oldData) =>
-                                new Promise((resolve) => {
-                                    setTimeout(() => {
-                                    resolve();
-                                    if (oldData) {
-                                        this.setState((prevState) => {
-                                        const data = [...prevState.data];
-                                        data[data.indexOf(oldData)] = newData;
-                                        return { ...prevState, data };
-                                        });
+                </div>
+                <div id="specific">
+                        <div className="getRecipeDataIngredients">
+                            <MaterialTable
+                                options={{
+                                    rowStyle: {
+                                    fontFamily: 'Source Serif Pro'
+                                    },
+                                    headerStyle: {
+                                    fontFamily: 'Source Serif Pro'
+                                    },
+                                    searchFieldStyle: {
+                                    fontFamily: 'Source Serif Pro',
+                                        display: 'none'
                                     }
-                                    }, 600);
-                                }),
-                                onRowDelete: (oldData) =>
-                                new Promise((resolve) => {
-                                    setTimeout(() => {
-                                    resolve();
-                                    this.setState((prevState) => {
-                                        const data = [...prevState.data];
-                                        data.splice(data.indexOf(oldData), 1);
-                                        return { ...prevState, data };
-                                    });
-                                    }, 600);
-                                }),
-                            }}
+                                }}
+
+                                column={{
+                                    cellStyle: {
+                                    backgroundColor: '#EEE',
+                                    fontFamily: 'Source Serif Pro'
+                                    }
+                                }}
+
+                                stickyHeader aria-label="sticky table"
+                                className="recipeIngredients"
+                                icons={tableIcons}
+                                title="Ingredients *"
+                                columns={this.state.columns}
+                                data={this.state.data}
+                                editable={{
+                                    onRowAdd: (newData) =>
+                                    new Promise((resolve) => {
+                                        setTimeout(() => {
+                                        resolve();
+                                        this.setState((prevState) => {
+                                            const data = [...prevState.data];
+                                            data.push(newData);
+                                            return { ...prevState, data };
+                                        });
+                                        }, 600);
+                                    }),
+                                    onRowUpdate: (newData, oldData) =>
+                                    new Promise((resolve) => {
+                                        setTimeout(() => {
+                                        resolve();
+                                        if (oldData) {
+                                            this.setState((prevState) => {
+                                            const data = [...prevState.data];
+                                            data[data.indexOf(oldData)] = newData;
+                                            return { ...prevState, data };
+                                            });
+                                        }
+                                        }, 600);
+                                    }),
+                                    onRowDelete: (oldData) =>
+                                    new Promise((resolve) => {
+                                        setTimeout(() => {
+                                        resolve();
+                                        this.setState((prevState) => {
+                                            const data = [...prevState.data];
+                                            data.splice(data.indexOf(oldData), 1);
+                                            return { ...prevState, data };
+                                        });
+                                        }, 600);
+                                    }),
+                                }}
                             />
 
-                    </div>
-                    <div className="validation">{this.state.ingredientsError}</div> 
-                    <div className="getRecipeDataProcedure">
-                        <TextField className="recipeProcedure" value={this.state.procedure} name="procedure"  required label="Procedure" multiline rows="5"  onChange={this.contentChange}
-                        placeholder="Give procedure as a series of steps." variant="outlined" />
-                    </div>
-                    <div className="validation">{this.state.procedureError}</div>
-                    <div className="forButtons">
-                    <div className="forSubmit">
-                        <Button id="submit-recipe"  onClick={this.post_recipe} variant="contained"  color="primary">Submit My Recipe</Button>
-                    </div>
-                    <div className="forCancel">
-                        <Button id="cancel-recipe" onClick={this.cancel_recipe} variant="contained" color="primary">Cancel</Button>
-                    </div>
+                        </div>
+                        <div className="validation">{this.state.ingredientsError}</div>
+
+                        <TextField className="recipeProcedure"
+                                   value={this.state.procedure}
+                                   name="procedure"
+                                   required
+                                   label="Procedure"
+                                   multiline rows="8"
+                                   onChange={this.contentChange}
+                                   placeholder="Give procedure as a series of steps"
+                                   variant="outlined"
+                        />
+                        <div className="validation">{this.state.procedureError}</div>
+
+                        <div className="submit-cancel-buttons">
+                            <Button id="submit-recipe" onClick={this.post_recipe} variant="contained" size="large">Submit My Recipe</Button>
+                            <Button id="cancel-recipe" onClick={this.cancel_recipe} variant="contained" size="large">Cancel</Button>
+                        </div>
                 </div>
-                </ul>   
-                
-            </div>
-            </div>
             </form>
         </div>
         )
