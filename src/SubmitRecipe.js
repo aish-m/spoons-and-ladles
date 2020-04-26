@@ -150,6 +150,13 @@ class SubmitForm extends Component {
         })
     }
     post_get_recipeid(){
+        let instructions = '';
+        for (let i = 0; i < this.state.procedure.length; i++) {
+            if(this.state.procedure.charAt(i) !== '.')
+                instructions += this.state.procedure.charAt(i);
+            else instructions += '.|';
+        }
+
         fetch("https://spoons-and-ladles-backend.herokuapp.com/api/pending/insert", {
         // fetch("http://localhost:8080/api/pending/insert", {
             method: "POST",
@@ -161,7 +168,7 @@ class SubmitForm extends Component {
                 "userId" : this.props.user.userId,
                 "keywords": this.state.keywords,
                 "ingredients": this.state.data,
-                "instructions": this.state.procedure,
+                "instructions": instructions,
                 "pictureLink": this.state.postingImageData
             })
           })

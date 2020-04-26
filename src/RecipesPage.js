@@ -242,10 +242,14 @@ function RecipesPage(props) {
                                 <span className="recipe-detail-title"> INSTRUCTIONS </span>
                                 {
                                     recipe.instructions.split('|').map(function(instruction, i) {
-                                        return <div className="instruction" key={i}>
+                                        return (
+                                        instruction !== '' ?
+                                            <div className="instruction" key={i}>
                                             <span className="instruction-number"> {i + 1} </span>
                                             <span className="instruction-text"> { instruction } </span>
-                                        </div>
+                                        </div> :
+                                        null
+                                        )
                                     })
                                 }
                             </div> :
