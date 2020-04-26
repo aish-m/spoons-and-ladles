@@ -76,7 +76,8 @@ class SubmitForm extends Component {
         recipenameError: "",
         keywordsError: "",
         ingredientsError: "",
-        procedureError: ""
+        procedureError: "",
+        postingImageData: null
         }
     }
 
@@ -87,6 +88,7 @@ class SubmitForm extends Component {
     contentChange = event => this.setState({ [event.target.name]: event.target.value })
 
     handleChange(event) {
+        console.log(event.target.files[0].name);
         if(event.target.files[0]===undefined){
             this.setState({
                 imageCaptured: null,
@@ -105,7 +107,8 @@ class SubmitForm extends Component {
                 imageUpdateSpan : {display: 'block',fontFamily: 'Source Serif Pro'},
                 previewStyle : {display: 'block',height: '250px',width: '250px'},
                 previewImageStyle :{height: 'inherit',width: 'inherit',fontFamily: 'Source Serif Pro'},
-                selectedFile:event.target.files[0]
+                selectedFile:event.target.files[0],
+                postingImageData : event.target.files[0].name
               })
               formData = new FormData();
               formData.append("uploadImage",this.state.selectedFile);
@@ -125,7 +128,8 @@ class SubmitForm extends Component {
             recipenameError: "",
             keywordsError: "",
             ingredientsError: "",
-            procedureError: ""
+            procedureError: "",
+            postingImageData : null
         })
     }
 
@@ -162,7 +166,7 @@ class SubmitForm extends Component {
                 "keywords": this.state.keywords,
                 "ingredients": this.state.data,
                 "instructions": this.state.procedure,
-                "pictureLink": "recipe-picture.png"
+                "pictureLink": this.state.postingImageData
             })
           })
           .then(res => {console.log(res);
@@ -279,8 +283,10 @@ class SubmitForm extends Component {
     }
 
     post_recipe = e => {
+        //console.log(this.state.imageCaptured);
         e.preventDefault();
         if(this.validateForm() === false){return;}
+        //console.log(this.state.postingImageData);
         this.post_get_recipeid();
         //this.post_image();
         // this.setState({
