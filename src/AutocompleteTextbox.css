@@ -35,6 +35,9 @@ div.MuiInputBase-root.MuiOutlinedInput-root.MuiAutocomplete-inputRoot.MuiInputBa
     margin: 0 20px;
     background-color: #8bcf32;
     color: black;
+    padding: 17px 0;
+    margin-top: 16px;
+    margin-bottom: 8px;
 }
 
 .modal-div {
