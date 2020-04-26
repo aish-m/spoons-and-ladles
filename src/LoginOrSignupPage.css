@@ -10,6 +10,7 @@
     background-position: center bottom;
     background-position-y: 90%;
     height: 100vh;
+    overflow: auto; /* PREE-fix */
 }
 
 .login-component {
