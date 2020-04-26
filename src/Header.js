@@ -80,7 +80,7 @@ function Header(props) {
                         </NavLink>
                     </div>
                     <div className="header-right">
-                        <div className="search-bar">
+                        <div className="search-bar" style={{ display: 'none' }}>
                             <SearchIcon fontSize="large"/>
                             <input type="search" placeholder="Search..."/>
                         </div>
@@ -138,7 +138,7 @@ function Header(props) {
                         </Tabs>
                     </div>
                     <MenuIcon id="hamburgerIcon" htmlColor="white" fontSize="large" onClick={() => toggleHamburgerIcon()}/>
-                    <SearchIcon fontSize="large" onClick={() => console.log("Search mobile..")} id="mobileSearchIcon" htmlColor="white"/>
+                    <SearchIcon fontSize="large" style={{ display: 'none' }} id="mobileSearchIcon" htmlColor="white"/>
                     {
                         props.loggedIn ?
                             <div className="user-profile"

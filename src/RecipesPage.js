@@ -170,7 +170,7 @@ function RecipesPage(props) {
                     <div className="recipe-user">
                         { (recipe.userId === 1) ? 'A Spoons & Ladles original recipe' : 'By - ' + userFullname }
                     </div>
-                    <div className="intro-flexbox">:
+                    <div className="intro-flexbox">
                         <div className="recipe-prep-time">
                             <TimerIcon className="prep-time-clock"/>
                             {recipe.prepTime}
