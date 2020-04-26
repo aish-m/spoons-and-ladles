@@ -59,3 +59,25 @@
 .about-us-entire-div .MuiTypography-root.content-text.MuiTypography-h6.MuiTypography-colorTextSecondary {
     font-size: 1.6em;
 }
+
+@media (max-width: 768px) {
+    .about-us-deets {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .about-us-deets img {
+        width: 90%;
+        padding-bottom: 10px;
+    }
+
+    #about-us-details {
+        width: 80%;
+        padding: 0;
+        margin: 0 5%;
+        line-height: 2;
+        text-align: justify;
+        font-size: 1em;
+    }
+}

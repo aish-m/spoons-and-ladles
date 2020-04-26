@@ -244,34 +244,35 @@ class SubmitForm extends Component {
         let ingredientsError = "";
         let procedureError = "";
         let ret = true;
+
         if(this.state.prepTime===''){preptimeError = "Please fill preparation time";
-            this.setState({preptimeError : preptimeError})
+            this.setState({preptimeError : preptimeError});
             ret = false;
         }else{this.setState({preptimeError : ""})}
 
         
-        if(this.state.title===''){recipenameError = "Please name this recipe dear Chef!";
-            this.setState({recipenameError : recipenameError})
+        if(this.state.title===''){recipenameError = "Please name this recipe, dear chef!";
+            this.setState({recipenameError : recipenameError});
             ret = false;
         }else{this.setState({recipenameError : ""})}
 
-        if(this.state.numOfServings===''){servingError = "Please fill preparation time";
-            this.setState({servingError : servingError})
+        if(this.state.numOfServings===''){servingError = "Please fill out the number of servings";
+            this.setState({servingError : servingError});
             ret = false;
         }else{this.setState({servingError : ""})}
 
         if(this.state.keywords===''){keywordsError = "Please fill some keywords about this recipe";
-            this.setState({keywordsError : keywordsError})
+            this.setState({keywordsError : keywordsError});
             ret = false;
         }else{this.setState({keywordsError : ""})}
 
-        if(this.state.data.length===0){ingredientsError = "!No dish comes out of thin air! So, add some ingredients ";
-            this.setState({ingredientsError : ingredientsError})
+        if(this.state.data.length===0){ingredientsError = "No dish comes out of thin air! So, add some ingredients!";
+            this.setState({ingredientsError : ingredientsError});
             ret = false;
         }else{this.setState({ingredientsError : ""})}
 
         if(this.state.procedure===''){procedureError = "Please give some instructions bruh!";
-            this.setState({procedureError : procedureError})
+            this.setState({procedureError : procedureError});
             ret = false;
         }else{this.setState({procedureError : ""})}
         return ret;
