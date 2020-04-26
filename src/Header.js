@@ -49,52 +49,7 @@ const mapStateToProps = state => ({
     user: state.loggedInUser
 });
 
-// function styles() {
-//     let top = 0;
-//     let left = 0;
-//     let width = '15%';
-//
-//     if(document.getElementById("userProfileRectangle") !== null) {
-//         const rectangle = document.getElementById("userProfileRectangle").getBoundingClientRect();
-//         top = rectangle.bottom;
-//         left = rectangle.left;
-//         width = document.getElementById("userProfileRectangle").offsetWidth + 40;
-//     }
-//
-//     console.log('Top: ' + top);
-//     console.log('Left: ' + left);
-//
-//     return {
-//         position: 'absolute',
-//         top: top + 'px',
-//         left: left + 'px',
-//         width: width
-//     }
-// }
-
 function Header(props) {
-    const [styles, setStyles] = useState({
-        position: 'absolute',
-        top: 0 + 'px',
-        left: 0 + 'px',
-        width: '15%'
-    });
-
-    useEffect(() => {
-        if(document.getElementById("userProfileRectangle") !== null) {
-            const rectangle = document.getElementById("userProfileRectangle").getBoundingClientRect();
-            setStyles({
-                position: 'absolute',
-                top: rectangle.bottom + 'px',
-                left: rectangle.left + 'px',
-                width: document.getElementById("userProfileRectangle").offsetWidth + 40
-            })
-        }
-
-        console.log('Top: ' + styles.top);
-        console.log('Left: ' + styles.left);
-    }, []);
-
     function toggleHamburgerIcon() {
         if(document.getElementById("mobileMenu").classList.contains("desktop")) {
             document.getElementById("mobileMenu").classList.remove("desktop");
@@ -198,6 +153,16 @@ function Header(props) {
                                     <p id="helloUserText"> { props.user.firstName } </p>
                                     <ExpandMoreIcon id="expandMoreIcon" fontSize="large"/>
                                     <ExpandLessIcon id="expandLessIcon" fontSize="large" className="close"/>
+                                    <div id="userOptionsDiv" className="user-options-div">
+                                        <ul>
+                                            <li>
+                                                <NavLink to="/myRecipes" className="nav-links"> MY RECIPES </NavLink>
+                                            </li>
+                                            <li onClick={logUserOut}>
+                                                <NavLink to="/" className="nav-links"> LOGOUT </NavLink>
+                                            </li>
+                                        </ul>
+                                    </div>
                             </div>
                             :
                             <div className="header-login-buttons">
@@ -277,16 +242,6 @@ function Header(props) {
                             </div>
                     }
                 </Modal>
-                <div id="userOptionsDiv" className="user-options-div" style={styles}>
-                    <ul>
-                        <li>
-                            <NavLink to="/myRecipes" className="nav-links"> MY RECIPES </NavLink>
-                        </li>
-                        <li onClick={logUserOut}>
-                            <NavLink to="/" className="nav-links"> LOGOUT </NavLink>
-                        </li>
-                    </ul>
-                </div>
         </header>
     )
 }

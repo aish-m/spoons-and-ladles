@@ -145,6 +145,8 @@ input[type=search]:focus {
     font-family: "Roboto", sans-serif;
     cursor: pointer;
     padding: 0 15px;
+
+    position: relative;
 }
 
 .user-options-div {
@@ -160,6 +162,11 @@ div ul li a.nav-links{
     background-color: black;
     color: white;
     z-index: 999;
+
+    width: 190px;
+    position: absolute;
+    top: 50px;
+    left: 0;
 }
 
 .user-options-div ul {
@@ -177,11 +184,11 @@ div ul li a.nav-links{
     padding: 10px 0;
     text-align: center;
     cursor: pointer;
-    border: 2px solid white;
+    border: 1px solid white;
 }
 
 .user-options-div li:hover {
-    background-color: #43b02a;
+    background-color: grey;
 }
 
 .user-options-div .nav-links {
@@ -376,6 +383,12 @@ div ul li a.nav-links{
 
     #helloUserText {
         display: none;
+    }
+
+    .user-options-div.open {
+        width: 120px;
+        top: 42px;
+        left: -10px;
     }
 
     .MuiButtonBase-root.MuiTab-root.MuiTab-textColorInherit {
