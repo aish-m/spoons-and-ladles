@@ -36,3 +36,19 @@
     font-weight: bold;
 }
 
+#no-recipes-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#noSubmittedRecipesGif {
+
+}
+
+#goToSubmitRecipesButton {
+    background-color: #8bcf32;
+    font-size: 1em;
+    margin-bottom: 20px;
+}
+

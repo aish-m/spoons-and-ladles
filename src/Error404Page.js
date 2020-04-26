@@ -13,6 +13,11 @@ function Error404Page() {
         document.getElementById("pageFooter").classList.add("loginMode");
     }, []);
 
+    function displayHeadersAndFooters() {
+        document.getElementById("pageHeader").classList.remove("loginMode");
+        document.getElementById("pageFooter").classList.remove("loginMode");
+    }
+
     return(
         <div className="error-404-div">
             <div className="header-left-error-404-page">
@@ -39,6 +44,7 @@ function Error404Page() {
                 <Button variant="contained"
                         id="goBackToSnL"
                         size="large"
+                        onClick={() => displayHeadersAndFooters()}
                 >
                     RETURN TO HOME PAGE
                 </Button>

@@ -15,6 +15,9 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { connect } from "react-redux";
 import { changeTabValue } from "./redux/actionCreators";
+import noRecipesImg from './images/no-submitted-recipes.gif';
+import Button from "@material-ui/core/Button";
+import {NavLink} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -93,7 +96,24 @@ class MyRecipesPageComponent extends Component {
                         </ListSubheader>
                     }
                     className={useStyles.root}
-                    >  
+                    >
+                    {
+                        this.state.recipesData.length === 0 ?
+                            <div id="no-recipes-div">
+                                <img
+                                    src={noRecipesImg}
+                                    alt="No submitted recipes GIF"
+                                    id="noSubmittedRecipesGif"
+                                />
+                                <Button variant="contained"
+                                        id="goToSubmitRecipesButton"
+                                        size="large"
+                                >
+                                    SUMBIT A RECIPE
+                                </Button>
+                            </div> :
+                            null
+                    }
                     {this.state.recipesData.map((row, index) => {
                         return(
                             <div>
