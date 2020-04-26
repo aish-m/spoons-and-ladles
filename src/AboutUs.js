@@ -54,7 +54,7 @@ class AboutUs extends React.Component {
             },
             {
                 memberName: "Neeraj Aduri",
-                memberImg: "user-picture.jpg",
+                memberImg: "Neeraj.jpg",
                 memberDesc: " Web Developer",
                 memberLinkedin: "https://www.linkedin.com/in/neeraj-aduri/",
                 memberGithub: "https://github.com/NeerajAduri",
