@@ -106,6 +106,10 @@
   text-align: center;
 }
 
+.validation{
+    color: red;
+}
+
 .MuiTableCell-paddingCheckbox {
     padding: 0 0 0 20px !important;
 }

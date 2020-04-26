@@ -63,14 +63,20 @@ class SubmitForm extends Component {
         imageUpdateSpan : {display: 'none'},
         addRecipeStyle : {display: 'block',height: '250px',width: '250px'},
         confirmationStyle: {display: 'none'},
-        title: '',prepTime: '', numOfServings: '',keywords: '',ingredients:'',procedure:'', imageCaptured: null,
+        title: '',prepTime: '', numOfServings: '',keywords: '',ingredients:null,procedure:'', imageCaptured: null,
         imageFileType: null,
         columns: [{ title: 'Ingredient', field: 'ingredient' },{ title: 'Quantity or preparation', field: 'quantity' }],
         data: [],
         pendingid: [],
         ingids:[],
         selectedFile:null,
-        measurements: []
+        measurements: [],
+        servingError: "",
+        preptimeError: "",
+        recipenameError: "",
+        keywordsError: "",
+        ingredientsError: "",
+        procedureError: ""
         }
     }
 
@@ -111,9 +117,15 @@ class SubmitForm extends Component {
             previewStyle :  {display: 'none'},
             imageUpdateSpan : {display: 'none'},
             addRecipeStyle : {display: 'block',height: '250px',width: '250px'},
-            title: '',prepTime: '', numOfServings: '',keywords: '',ingredients:'',procedure:'', imageCaptured: null,
+            title: '',prepTime: '', numOfServings: '',keywords: '',ingredients:null,procedure:'', imageCaptured: null,
             imageFileType: null,
-            data: []
+            data: [],
+            servingError: "",
+            preptimeError: "",
+            recipenameError: "",
+            keywordsError: "",
+            ingredientsError: "",
+            procedureError: ""
         })
     }
 
@@ -224,8 +236,50 @@ class SubmitForm extends Component {
         })
     }
 
+    validateForm(){
+        let servingError = "";
+        let preptimeError = "";
+        let recipenameError = "";
+        let keywordsError = "";
+        let ingredientsError = "";
+        let procedureError = "";
+        let ret = true;
+        if(this.state.prepTime===''){preptimeError = "Please fill preparation time";
+            this.setState({preptimeError : preptimeError})
+            ret = false;
+        }else{this.setState({preptimeError : ""})}
+
+        
+        if(this.state.title===''){recipenameError = "Please name this recipe dear Chef!";
+            this.setState({recipenameError : recipenameError})
+            ret = false;
+        }else{this.setState({recipenameError : ""})}
+
+        if(this.state.numOfServings===''){servingError = "Please fill preparation time";
+            this.setState({servingError : servingError})
+            ret = false;
+        }else{this.setState({servingError : ""})}
+
+        if(this.state.keywords===''){keywordsError = "Please fill some keywords about this recipe";
+            this.setState({keywordsError : keywordsError})
+            ret = false;
+        }else{this.setState({keywordsError : ""})}
+
+        if(this.state.data.length===0){ingredientsError = "!No dish comes out of thin air! So, add some ingredients ";
+            this.setState({ingredientsError : ingredientsError})
+            ret = false;
+        }else{this.setState({ingredientsError : ""})}
+
+        if(this.state.procedure===''){procedureError = "Please give some instructions bruh!";
+            this.setState({procedureError : procedureError})
+            ret = false;
+        }else{this.setState({procedureError : ""})}
+        return ret;
+    }
+
     post_recipe = e => {
         e.preventDefault();
+        if(this.validateForm() === false){return;}
         this.post_get_recipeid();
         //this.post_image();
         // this.setState({
@@ -240,7 +294,7 @@ class SubmitForm extends Component {
             <div className="submit-recipe-entire-div">
             <div className="submittedconfirmation" style={this.state.confirmationStyle}> 
                 <div className = "innerconfirm"> 
-                    Your recipe is submitted: {this.state.ingids}. Let us see what else you got bud! 
+                    Your recipe is submitted. Let us see what else you got bud! 
                     <Button className="close">  <Close onClick={this.closeconfirmation}></Close>  </Button>
                     
                 </div>
@@ -264,9 +318,11 @@ class SubmitForm extends Component {
                     <div className="forPrepTime">
                         <TextField id="prepTime" value={this.state.prepTime} name="prepTime" required label="Prep Time" variant="outlined"  onChange={this.contentChange} />
                     </div>
+                    <div className="validation">{this.state.preptimeError}</div>
                     <div className="forServings">
                         <TextField id="numServings" value={this.state.numOfServings} name="numOfServings" required label="No. of Servings" variant="outlined"  onChange={this.contentChange} />
-                    </div>     
+                    </div> 
+                    <div className="validation">{this.state.servingError}</div>    
                 </div>
             </div>
             <div id="specific">
@@ -274,6 +330,7 @@ class SubmitForm extends Component {
                     <div className="getRecipeDataTitle">
                         <TextField className="recipeTitle" value={this.state.title} name="title" onChange={this.contentChange} label="Recipe Title" required variant="outlined" />
                     </div>
+                    <div className="validation">{this.state.recipenameError}</div> 
                     <div className="getRecipeDataDesc">
                         <TextField
                             className="recipeDesc"
@@ -285,7 +342,7 @@ class SubmitForm extends Component {
                             onChange={this.contentChange}
                         />
                     </div>
-                    
+                    <div className="validation">{this.state.keywordsError}</div> 
                     <div className="getRecipeDataIngredients">
                         {/* <TextField className="recipeIngredients" value={this.state.ingredients} name="ingredients" required label="Ingredients" multiline rows="5"  onChange={this.contentChange}
                         placeholder="Put each ingredient on its own line." variant="outlined" /> */}
@@ -361,10 +418,12 @@ class SubmitForm extends Component {
                             />
 
                     </div>
+                    <div className="validation">{this.state.ingredientsError}</div> 
                     <div className="getRecipeDataProcedure">
                         <TextField className="recipeProcedure" value={this.state.procedure} name="procedure"  required label="Procedure" multiline rows="5"  onChange={this.contentChange}
                         placeholder="Give procedure as a series of steps." variant="outlined" />
                     </div>
+                    <div className="validation">{this.state.procedureError}</div>
                     <div className="forButtons">
                     <div className="forSubmit">
                         <Button id="submit-recipe"  onClick={this.post_recipe} variant="contained"  color="primary">Submit My Recipe</Button>
