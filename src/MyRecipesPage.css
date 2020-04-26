@@ -1,3 +1,38 @@
 .MuiListItemText-root {
     width: inherit !important;
 }
+
+#nested-list-subheader {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2em;
+    text-align: center;
+    color: black;
+    padding: 20px 0;
+}
+
+.recipe-evaluation-status {
+    padding: 5px 10px;
+    margin: 0 10px;
+    color: white;
+}
+
+.my-recipe-details {
+    color: darkblue;
+    margin-left: 10px;
+    font-family: "Source Serif Pro", serif !important;
+}
+
+#my-recipe-instructions {
+    text-align: center;
+    border-bottom: 2px solid black;
+    border-top: 1px solid darkgrey;
+}
+
+.my-recipes-div #my-recipe-title .MuiTypography-root.MuiListItemText-primary.MuiTypography-body1.MuiTypography-displayBlock {
+    color: darkblue;
+    font-family: "Source Serif Pro", serif !important;
+    font-size: 1.5em;
+    margin-left: 7%;
+    font-weight: bold;
+}
+

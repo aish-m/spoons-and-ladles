@@ -27,6 +27,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const spanStyle = {
+    'ACCEPTED' : 'forestgreen',
+    'DENIED' : '#dc2a27',
+    'PENDING APPROVAL' : '#4267B2'
+};
+
 const mapStateToProps = state => ({
     user: state.loggedInUser
 });
@@ -48,9 +54,8 @@ class MyRecipesPageComponent extends Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.changeTabValue(-1);
-
         fetch("https://spoons-and-ladles-backend.herokuapp.com/api/pending/forUser/"+ this.props.user.userId)
         // fetch("http://localhost:8080/api/pending/forUser/"+ this.props.user.userId)
           .then(res => {
@@ -76,10 +81,9 @@ class MyRecipesPageComponent extends Component {
         this.setState({ openlist: temp });
     };
 
-    render (){
-       
+    render () {
         return(
-            <div>
+            <div className="my-recipes-div">
                 <List
                     component="nav"
                     aria-labelledby="nested-list-subheader"
@@ -94,10 +98,10 @@ class MyRecipesPageComponent extends Component {
                         return(
                             <div>
                             <ListItem button onClick={()=> {this.handleClick(index)}}>
-                            <ListItemAvatar>
-                                <Avatar alt="Remy Sharp" src= {require("./images/Recipes/" + row["pictureLink"])} />
+                                <ListItemAvatar>
+                                    <Avatar alt="Remy Sharp" src= {require("./images/Recipes/" + row["pictureLink"])} />
                                 </ListItemAvatar>
-                                <ListItemText primary={row["recipeName"]} />
+                                <ListItemText id="my-recipe-title" primary={row["recipeName"]}/>
                                 <br></br>
                                 <ListItemText primary={ 
                                     <React.Fragment>
@@ -109,7 +113,7 @@ class MyRecipesPageComponent extends Component {
                                         Number of Servings:
 
                                     </Typography>
-                                    {" "+row["servings"]}
+                                        <span className="my-recipe-details"> {" "+row["servings"]} </span>
                                     <Typography
                                         component="span"
                                         variant="body2"
@@ -118,7 +122,7 @@ class MyRecipesPageComponent extends Component {
                                         <br></br>
                                         Preparation Time:
                                     </Typography>
-                                    {"  "+row["prepTime"]}
+                                        <span className="my-recipe-details"> {"  "+row["prepTime"]} </span>
                                     <br></br>
                                     <Typography
                                         component="span"
@@ -128,7 +132,9 @@ class MyRecipesPageComponent extends Component {
                                        Date of submission:
 
                                     </Typography>
-                                    {" "+new Date(row["submissionDate"]).toLocaleDateString("en-US", this.state.options)}
+                                        <span className="my-recipe-details">
+                                            {" "+new Date(row["submissionDate"]).toLocaleDateString("en-US", this.state.options)}
+                                        </span>
                                     
                                 </React.Fragment>
                                  }/>
@@ -143,16 +149,26 @@ class MyRecipesPageComponent extends Component {
                                         Recipe Status:
 
                                     </Typography>
-                                    {" "+row["status"]}
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        color="textPrimary"
-                                    >
-                                        <br></br>
-                                        Remarks:
-                                    </Typography>
-                                    {"  "+row["evaluatorRemarks"]}
+                                        <span
+                                            className="recipe-evaluation-status"
+                                            style = { { backgroundColor: spanStyle[row.status] } }
+                                        >
+                                            {" "+row["status"]}
+                                        </span>
+                                    {row.evaluatorRemarks !== null ?
+                                        <div>
+                                            <Typography
+                                                component="span"
+                                                variant="body2"
+                                                color="textPrimary"
+                                            >
+                                                <br></br>
+                                                Remarks:
+                                            </Typography>
+                                            {"  "+row["evaluatorRemarks"]}
+                                        </div>
+                                        : null
+                                    }
                                 </React.Fragment>
                                  }/>
 
@@ -160,7 +176,7 @@ class MyRecipesPageComponent extends Component {
                             </ListItem>
                             <Collapse in={this.state.openlist[index]} timeout="auto" unmountOnExit>
                                 <List component="div" disablePadding>
-                                <ListItem button className={useStyles.nested}>
+                                <ListItem button className={useStyles.nested} id="my-recipe-instructions">
                                     <ListItemText secondary={
                                     <React.Fragment>
                                     <Typography
@@ -170,11 +186,10 @@ class MyRecipesPageComponent extends Component {
                                         Instructions:
 
                                     </Typography>
-                                    {"  "+row["instructions"]}
+                                        <br/>
+                                        <span className="my-recipe-details"> {"  "+row["instructions"]} </span>
                                     </React.Fragment>
-                                       
                                     }>
-
                                     </ListItemText>
                                 </ListItem>
                                 </List>
