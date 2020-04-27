@@ -29,4 +29,8 @@
         width: 100%;
         height: auto;
     }
+
+    #mobile-image-grid a {
+        margin-bottom: 0;
+    }
 }
